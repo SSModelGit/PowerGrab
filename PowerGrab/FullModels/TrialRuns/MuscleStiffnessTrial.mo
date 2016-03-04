@@ -7,7 +7,7 @@ model MuscleStiffnessTrial
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-0.35, 0.1, 0}) annotation(Placement(visible = true, transformation(origin = {-72.523, 18.283}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-0.45, -0.05, 0}) annotation(Placement(visible = true, transformation(origin = {42.218, 23.331}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(animation = false, n = {0, 0, 1}, useAxisFlange = true, phi.fixed = false, phi.start = 1.5) annotation(Placement(visible = true, transformation(origin = {-25, 15}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PowerGrab.Components.RevoluteRestrained revoluteRestrained(phi_0_restrained = 1.45, theta_1 = -0.1, theta_2 = 1.6, useAxisFlange = true) annotation(Placement(visible = true, transformation(origin = {-10, -12.083}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PowerGrab.Components.RevoluteRestrained revoluteRestrained(phi_0_restrained = 1.05, theta_1 = -0.1, theta_2 = 1.6, useAxisFlange = true) annotation(Placement(visible = true, transformation(origin = {-10, -12.083}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(animation = false, n = {0, 0, 1}, phi.start = 1.5, useAxisFlange = true, phi.fixed = false) annotation(Placement(visible = true, transformation(origin = {-32.475, -30}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape1(m = 0.001, r = {0, 0.1, 0}, r_0.start = {0, 0.08, 0}, r_CM = {0, 0.05, 0}, r_0.fixed = false, shapeType = "sphere", sphereColor = {0, 230, 0}, sphereDiameter = 0.05) annotation(Placement(visible = true, transformation(origin = {17.593, -46.771}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-0.25, -0.1, 0}) annotation(Placement(visible = true, transformation(origin = {-72.94199999999999, -25}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
@@ -31,13 +31,13 @@ model MuscleStiffnessTrial
   parameter Modelica.SIunits.Position r_OFingerBone[3](start = {0.1, 0, 0}) = {0.5, 0, 0};
   parameter Modelica.SIunits.Position r_shape_OFingerBone[3] = {0, 0, 0};
   parameter Modelica.SIunits.Position diameterOFingerBone = 0.02;
-  Modelica.Blocks.Sources.Constant const3(k = 0.1) annotation(Placement(visible = true, transformation(origin = {-125, 47.531}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const3(k = 0.11) annotation(Placement(visible = true, transformation(origin = {-125, 47.531}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Sources.Torque torque annotation(Placement(visible = true, transformation(origin = {110, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Constant const6(k = 3) annotation(Placement(visible = true, transformation(origin = {145, -22.931}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Components.NeuralMuscle neuralMuscle(f_max_a = 200, f_max_p = 200) annotation(Placement(visible = true, transformation(origin = {-10, 75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Sources.Position position2 annotation(Placement(visible = true, transformation(origin = {112.3, 16.825}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp ramp(duration = 1, offset = 0.402, height = 0) annotation(Placement(visible = true, transformation(origin = {-125, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp ramp1(offset = 1.45, height = 0.1, duration = 10) annotation(Placement(visible = true, transformation(origin = {187.06, 15}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Ramp ramp(duration = 10, offset = 0.485345, height = 0) annotation(Placement(visible = true, transformation(origin = {-125, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Ramp ramp1(offset = 1.05, height = 0.1, duration = 10) annotation(Placement(visible = true, transformation(origin = {187.06, 15}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 equation
   connect(ramp1.y, position2.phi_ref) annotation(Line(visible = true, origin = {138.74, 15.913}, points = {{37.32, -0.913}, {-11.44, -0.913}, {-11.44, 0.912}, {-14.44, 0.912}}, color = {0, 0, 127}));
   connect(ramp.y, neuralMuscle.forcePValue_a) annotation(Line(visible = true, origin = {-45.676, 79.389}, points = {{-68.324, 0.611}, {20.664, 0.611}, {20.664, -0.611}, {26.996, -0.611}}, color = {0, 0, 127}));
