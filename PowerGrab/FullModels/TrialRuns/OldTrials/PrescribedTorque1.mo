@@ -1,4 +1,4 @@
-within PowerGrab.FullModels.TrialRuns;
+within PowerGrab.FullModels.TrialRuns.OldTrials;
 
 model PrescribedTorque1 "Incomplete model; does not include the newer version of the muscle model"
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder PalmBone(r = {0.5, 0, 0}, r_shape = {0, 0, 0}, color = {155, 0, 0}, diameter = 0.2, animation = true) "The palm bone that is connected via a joint to the finger extension" annotation(Placement(visible = true, transformation(origin = {-55, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -17,7 +17,7 @@ model PrescribedTorque1 "Incomplete model; does not include the newer version of
   Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(angle = 90, n = {0, 0, 1}) annotation(Placement(visible = true, transformation(origin = {-101.892, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Components.Damper damper(useHeatPort = false, d = 20) annotation(Placement(visible = true, transformation(origin = {-50, 35}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Components.Damper damper1(d = 20, phi_rel.fixed = false) annotation(Placement(visible = true, transformation(origin = {-40, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PowerGrab.Components.PhysicalMuscle3 physicalMuscle3(d_front = 200, c_posterior = 50, d_posterior = 200, freeLength_posterior = 0, freeLength_anterior = 0.05, K_m = 1100, muscleLengthNom = 0.5013879999999999) annotation(Placement(visible = true, transformation(origin = {-16.581, 75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PowerGrab.Components.OldComponents.PhysicalMuscle3 physicalMuscle3(d_front = 200, c_posterior = 50, d_posterior = 200, freeLength_posterior = 0, freeLength_anterior = 0.05, K_m = 1100, muscleLengthNom = 0.5013879999999999) annotation(Placement(visible = true, transformation(origin = {-16.581, 75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Constant const2(k = 16) annotation(Placement(visible = true, transformation(origin = {110, -5}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Sources.Torque torque(useSupport = false) annotation(Placement(visible = true, transformation(origin = {22.578, -21.872}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   PowerGrab.Components.RevoluteRestrained revoluteRestrained(useAxisFlange = true, phi_0_restrained = 0, theta_1 = -0.1, theta_2 = 1.57) annotation(Placement(visible = true, transformation(origin = {-10, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

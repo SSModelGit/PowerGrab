@@ -1,4 +1,5 @@
-within PowerGrab.Components;
+within PowerGrab.Components.OldComponents;
+
 model YappariMadaTsukutteimasu
   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-135, 57.434}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-100, 100}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a1 annotation(Placement(visible = true, transformation(origin = {-135, -75}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-98.062, -100}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));

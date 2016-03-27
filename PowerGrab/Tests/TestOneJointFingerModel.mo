@@ -1,4 +1,5 @@
 within PowerGrab.Tests;
+
 model TestOneJointFingerModel
   PowerGrab.Components.OpenLoopComponent openLoopComponent(K_m = 1100, muscleLengthNom = 0.5013879999999999, r_IFingerBone = {0.5, 0, 0}, r_OFingerBone = {0.5, 0, 0}) annotation(Placement(visible = true, transformation(origin = {0, -1.936}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Constant const(k = 1) annotation(Placement(visible = true, transformation(origin = {-70, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

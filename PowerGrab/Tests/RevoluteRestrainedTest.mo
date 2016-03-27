@@ -1,7 +1,7 @@
 within PowerGrab.Tests;
 
 model RevoluteRestrainedTest
-  PowerGrab.Components.RevoluteRestrained revoluteRestrained(theta_1 = -1, theta_2 = 1, phi_0_restrained = 1.57) annotation(Placement(visible = true, transformation(origin = {2.785, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  PowerGrab.Components.RevoluteRestrained revoluteRestrained(theta_1 = -1, theta_2 = 1, phi_0_restrained = 0) annotation(Placement(visible = true, transformation(origin = {2.785, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   inner Modelica.Mechanics.MultiBody.World world(n = {0, -1, 0}, g = 9.81, gravityType = Modelica.Mechanics.MultiBody.Types.GravityTypes.UniformGravity) annotation(Placement(visible = true, transformation(origin = {-77.258, -5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.Body body(r_CM = {0.5, 0, 0}, m = 1, r_0.start = {0, 0.5, 0}, r_0.fixed = false) annotation(Placement(visible = true, transformation(origin = {45, 1.852}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.Body body1(r_0.fixed = false, r_CM = {0.5, 0, 0}, m = 1) annotation(Placement(visible = true, transformation(origin = {50, -36.784}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));

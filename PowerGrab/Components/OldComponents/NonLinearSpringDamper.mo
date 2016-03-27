@@ -24,20 +24,20 @@ equation
   lossPower = f_d * der(s);
   springForce = -f;
   annotation(Documentation(info = "<HTML>
-           <p>
-           <b>Linear spring</b> and <b>linear damper</b>
-           in parallel acting as line force between frame_a and frame_b.
-           A <b>force f</b> is exerted on the origin of frame_b and with opposite sign
-           on the origin of frame_a along the line from the origin of frame_a to the origin
-           of frame_b according to the equation:
-           </p>
-           <pre>
-              f = c*(s - s_unstretched) + d*<b>der</b>(s);
-           </pre>
-           <p>
-           where \"c\", \"s_unstretched\" and \"d\" are parameters, \"s\" is the
-           distance between the origin of frame_a and the origin of frame_b
-           and der(s) is the time derivative of s.
-           </p>
-           </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, initialScale = 0.1, grid = {10, 10}), graphics = {Rectangle(visible = true, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid, extent = {{-52, -100}, {38, -40}}), Text(visible = true, textColor = {0, 0, 255}, extent = {{-150, -150}, {150, -110}}, textString = "%name"), Line(visible = true, points = {{-80, 40}, {-60, 40}, {-45, 10}, {-15, 70}, {15, 10}, {45, 70}, {60, 40}, {80, 40}}), Line(visible = true, points = {{-80, 40}, {-80, -70}}), Line(visible = true, points = {{-80, -70}, {-52, -70}}), Line(visible = true, points = {{-52, -40}, {68, -40}}), Line(visible = true, points = {{-52, -100}, {68, -100}}), Line(visible = true, points = {{38, -70}, {80, -70}}), Line(visible = true, points = {{80, 40}, {80, -70}}), Line(visible = true, points = {{-100, 0}, {-80, 0}}), Line(visible = true, points = {{80, 0}, {100, 0}}), Text(visible = true, extent = {{-150, 70}, {150, 100}}, textString = "d=%d"), Line(visible = useHeatPort, points = {{-100, -101}, {-100, -80}, {-6, -80}}, color = {191, 0, 0}, pattern = LinePattern.Dot), Text(visible = true, extent = {{-150, 105}, {150, 135}}, textString = "c=%c"), Text(visible = true, origin = {-70, 65.92100000000001}, extent = {{-8.948, -11.511}, {8.948, 11.511}}, textString = "s2"), Text(visible = true, origin = {-3.378, 10.882}, extent = {{-13.378, -9.118}, {13.378, 9.118}}, textString = "k"), Text(visible = true, origin = {95.44799999999999, 62.944}, extent = {{-8.391999999999999, -7.056}, {8.391999999999999, 7.056}}, textString = "F")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Line(points = {{-80, 32}, {-58, 32}, {-43, 2}, {-13, 62}, {17, 2}, {47, 62}, {62, 32}, {80, 32}}, color = {0, 0, 0}, thickness = 0.5), Line(points = {{-68, 32}, {-68, 97}}, color = {128, 128, 128}), Line(points = {{72, 32}, {72, 97}}, color = {128, 128, 128}), Line(points = {{-68, 92}, {72, 92}}, color = {128, 128, 128}), Polygon(points = {{62, 95}, {72, 92}, {62, 89}, {62, 95}}, lineColor = {128, 128, 128}, fillColor = {128, 128, 128}, fillPattern = FillPattern.Solid), Text(extent = {{-20, 72}, {20, 97}}, lineColor = {0, 0, 255}, textString = "s"), Rectangle(extent = {{-52, -20}, {38, -80}}, lineColor = {0, 0, 0}, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid), Line(points = {{-52, -80}, {68, -80}}, color = {0, 0, 0}), Line(points = {{-52, -20}, {68, -20}}, color = {0, 0, 0}), Line(points = {{38, -50}, {80, -50}}, color = {0, 0, 0}), Line(points = {{-80, -50}, {-52, -50}}, color = {0, 0, 0}), Line(points = {{-80, 32}, {-80, -50}}, color = {0, 0, 0}), Line(points = {{80, 32}, {80, -50}}, color = {0, 0, 0}), Line(points = {{-100, 0}, {-80, 0}}, color = {0, 0, 0}), Line(points = {{100, 0}, {80, 0}}, color = {0, 0, 0})}));
+            <p>
+            <b>Linear spring</b> and <b>linear damper</b>
+            in parallel acting as line force between frame_a and frame_b.
+            A <b>force f</b> is exerted on the origin of frame_b and with opposite sign
+            on the origin of frame_a along the line from the origin of frame_a to the origin
+            of frame_b according to the equation:
+            </p>
+            <pre>
+               f = c*(s - s_unstretched) + d*<b>der</b>(s);
+            </pre>
+            <p>
+            where \"c\", \"s_unstretched\" and \"d\" are parameters, \"s\" is the
+            distance between the origin of frame_a and the origin of frame_b
+            and der(s) is the time derivative of s.
+            </p>
+            </html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}, initialScale = 0.1, grid = {10, 10}), graphics = {Rectangle(visible = true, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid, extent = {{-52, -100}, {38, -40}}), Text(visible = true, textColor = {0, 0, 255}, extent = {{-150, -150}, {150, -110}}, textString = "%name"), Line(visible = true, points = {{-80, 40}, {-60, 40}, {-45, 10}, {-15, 70}, {15, 10}, {45, 70}, {60, 40}, {80, 40}}), Line(visible = true, points = {{-80, 40}, {-80, -70}}), Line(visible = true, points = {{-80, -70}, {-52, -70}}), Line(visible = true, points = {{-52, -40}, {68, -40}}), Line(visible = true, points = {{-52, -100}, {68, -100}}), Line(visible = true, points = {{38, -70}, {80, -70}}), Line(visible = true, points = {{80, 40}, {80, -70}}), Line(visible = true, points = {{-100, 0}, {-80, 0}}), Line(visible = true, points = {{80, 0}, {100, 0}}), Text(visible = true, extent = {{-150, 70}, {150, 100}}, textString = "d=%d"), Line(visible = useHeatPort, points = {{-100, -101}, {-100, -80}, {-6, -80}}, color = {191, 0, 0}, pattern = LinePattern.Dot), Text(visible = true, extent = {{-150, 105}, {150, 135}}, textString = "c=%c"), Text(visible = true, origin = {-70, 65.92100000000001}, extent = {{-8.948, -11.511}, {8.948, 11.511}}, textString = "s2"), Text(visible = true, origin = {-3.378, 10.882}, extent = {{-13.378, -9.118}, {13.378, 9.118}}, textString = "k"), Text(visible = true, origin = {95.44799999999999, 62.944}, extent = {{-8.391999999999999, -7.056}, {8.391999999999999, 7.056}}, textString = "F")}), Diagram(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Line(points = {{-80, 32}, {-58, 32}, {-43, 2}, {-13, 62}, {17, 2}, {47, 62}, {62, 32}, {80, 32}}, color = {0, 0, 0}, thickness = 0.5), Line(points = {{-68, 32}, {-68, 97}}, color = {128, 128, 128}), Line(points = {{72, 32}, {72, 97}}, color = {128, 128, 128}), Line(points = {{-68, 92}, {72, 92}}, color = {128, 128, 128}), Polygon(points = {{62, 95}, {72, 92}, {62, 89}, {62, 95}}, lineColor = {128, 128, 128}, fillColor = {128, 128, 128}, fillPattern = FillPattern.Solid), Text(extent = {{-20, 72}, {20, 97}}, lineColor = {0, 0, 255}, textString = "s"), Rectangle(extent = {{-52, -20}, {38, -80}}, lineColor = {0, 0, 0}, fillColor = {192, 192, 192}, fillPattern = FillPattern.Solid), Line(points = {{-52, -80}, {68, -80}}, color = {0, 0, 0}), Line(points = {{-52, -20}, {68, -20}}, color = {0, 0, 0}), Line(points = {{38, -50}, {80, -50}}, color = {0, 0, 0}), Line(points = {{-80, -50}, {-52, -50}}, color = {0, 0, 0}), Line(points = {{-80, 32}, {-80, -50}}, color = {0, 0, 0}), Line(points = {{80, 32}, {80, -50}}, color = {0, 0, 0}), Line(points = {{-100, 0}, {-80, 0}}, color = {0, 0, 0}), Line(points = {{100, 0}, {80, 0}}, color = {0, 0, 0})}));
 end NonLinearSpringDamper;

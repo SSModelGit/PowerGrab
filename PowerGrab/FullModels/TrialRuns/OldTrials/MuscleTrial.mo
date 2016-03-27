@@ -1,5 +1,7 @@
-within PowerGrab.Components;
-model MuscleYappariTrial
+within PowerGrab.FullModels.TrialRuns.OldTrials;
+
+model MuscleTrial
+  PowerGrab.Components.NewMuscle newMuscle(k_min_a = 1000, k_max_a = 1100, x_min_a = 0.405, x_max_a = 0.528, k_min_p = 1000, k_max_p = 1100, x_min_p = 0.502, x_max_p = 0.67) annotation(Placement(visible = true, transformation(origin = {0, 75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder IFingerBone(r = r_IFingerBone, r_shape = r_shape_IFingerBone, color = {155, 0, 0}, diameter = diameterIFingerBone * 10, animation = true, r_0.fixed = false) "The palm bone that is connected via a joint to the finger extension" annotation(Placement(visible = true, transformation(origin = {-55, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.BodyCylinder OFingerExtension(r = r_OFingerBone, r_shape = r_shape_OFingerBone, r_0.start = {0, 0.08, 0}, r_0.fixed = false, color = {255, 255, 0}, diameter = diameterOFingerBone * 10, animation = true) "Part of the finger that extends from the palm" annotation(Placement(visible = true, transformation(origin = {30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape(r = {0, 0, 0}, r_0.start = {0, 0.08, 0}, m = 0.001, r_CM = {0, 0, 0}, r_0.fixed = false, shapeType = "sphere", sphereColor = {0, 230, 0}, sphereDiameter = 0.05) annotation(Placement(visible = true, transformation(origin = {-2.144, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -30,19 +32,24 @@ model MuscleYappariTrial
   parameter Modelica.SIunits.Position r_OFingerBone[3](start = {0.1, 0, 0}) = {0.5, 0, 0};
   parameter Modelica.SIunits.Position r_shape_OFingerBone[3] = {0, 0, 0};
   parameter Modelica.SIunits.Position diameterOFingerBone = 0.02;
-  YappariMadaTsukutteimasu yappariMadaTsukutteimasu(k_0_a = 11000, k_0_p = 11000, x_min_a = 0.405, x_max_a = 0.528, x_min_p = 0.502, x_max_p = 0.67) annotation(Placement(visible = true, transformation(origin = {-37.747, 77.611}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Modelica.Blocks.Sources.Ramp ramp(height = 60, duration = 10) annotation(Placement(visible = true, transformation(origin = {-120, 78.31699999999999}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const(k = 0) annotation(Placement(visible = true, transformation(origin = {-125, 77.611}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const3(k = 1) annotation(Placement(visible = true, transformation(origin = {-125, 47.531}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const4(k = 0) annotation(Placement(visible = true, transformation(origin = {45, 90}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+  Modelica.Blocks.Sources.Constant const5(k = 0) annotation(Placement(visible = true, transformation(origin = {45, 60}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
 equation
-  connect(ramp.y, yappariMadaTsukutteimasu.forceCValue) annotation(Line(visible = true, origin = {-65.19799999999999, 79.464}, points = {{-43.802, -1.147}, {12.438, -1.147}, {12.438, 1.147}, {18.926, 1.147}}, color = {0, 0, 127}));
-  connect(yappariMadaTsukutteimasu.frame_resolve1, bodyShape1.frame_b) annotation(Line(visible = true, origin = {2.702, 19.982}, points = {{-40.449, 47.63}, {-40.449, 42.938}, {28.004, 42.938}, {28.004, -66.753}, {24.891, -66.753}}));
-  connect(yappariMadaTsukutteimasu.frame_resolve, bodyShape.frame_b) annotation(Line(visible = true, origin = {-9.140000000000001, 70.38500000000001}, points = {{-28.607, 17.226}, {-28.607, 21.772}, {20.109, 21.772}, {20.109, -30.385}, {16.996, -30.385}}, color = {95, 95, 95}));
-  connect(yappariMadaTsukutteimasu.frame_b1, fixedTranslation3.frame_b) annotation(Line(visible = true, origin = {21.507, 21.306}, points = {{-49.254, 46.306}, {15.381, 46.306}, {15.381, -46.306}, {18.493, -46.306}}));
-  connect(yappariMadaTsukutteimasu.frame_a1, fixedTranslation2.frame_b) annotation(Line(visible = true, origin = {-70.032, 28.69}, points = {{22.478, 38.921}, {22.478, 34.229}, {-16.023, 34.229}, {-16.023, -53.69}, {-12.91, -53.69}}));
-  connect(yappariMadaTsukutteimasu.frame_a, fixedTranslation.frame_b) annotation(Line(visible = true, origin = {-69.858, 61.698}, points = {{22.11, 25.913}, {22.11, 30.459}, {-15.778, 30.459}, {-15.778, -43.415}, {-12.665, -43.415}}));
-  connect(yappariMadaTsukutteimasu.frame_b, fixedTranslation1.frame_b) annotation(Line(visible = true, origin = {6.987, 63.766}, points = {{-34.734, 24.089}, {-34.734, 28.391}, {22.119, 28.391}, {22.119, -40.435}, {25.231, -40.435}}));
   connect(position.flange, revolute1.axis) annotation(Line(visible = true, origin = {13.616, 30}, points = {{39.037, 5}, {-0.21, 5}, {-0.21, -5}, {-38.616, -5}}));
   connect(fixedRotation.frame_b, IFingerBone.frame_a) annotation(Line(visible = true, origin = {-75.651, -15}, points = {{-25.93, -15}, {7.639, -15}, {7.639, 15}, {10.651, 15}}));
   connect(world.frame_b, fixedRotation.frame_a) annotation(Line(visible = true, origin = {-121.512, -50.295}, points = {{-0.007, -16.76}, {3.118, -16.76}, {3.118, -3.535}, {-3.081, -3.535}, {-3.081, 20.295}, {-0.068, 20.295}}));
+  connect(const5.y, newMuscle.xPercent_p) annotation(Line(visible = true, origin = {18.123, 65.5}, points = {{15.877, -5.5}, {-3.377, -5.5}, {-3.377, 5.5}, {-9.122999999999999, 5.5}}, color = {0, 0, 127}));
+  connect(const4.y, newMuscle.kPercent_p) annotation(Line(visible = true, origin = {18.123, 84}, points = {{15.877, 6}, {-3.377, 6}, {-3.377, -6}, {-9.122999999999999, -6}}, color = {0, 0, 127}));
+  connect(const3.y, newMuscle.xPercent_a) annotation(Line(visible = true, origin = {-38.256, 59.113}, points = {{-75.744, -11.583}, {23.244, -11.583}, {23.244, 11.583}, {29.256, 11.583}}, color = {0, 0, 127}));
+  connect(const.y, newMuscle.kPercent_a) annotation(Line(visible = true, origin = {-38.138, 77.806}, points = {{-75.86199999999999, -0.194}, {23.125, -0.194}, {23.125, 0.194}, {29.612, 0.194}}, color = {0, 0, 127}));
+  connect(newMuscle.frame_resolve, fixedTranslation5.frame_b) annotation(Line(visible = true, origin = {-9.829000000000001, 66.33}, points = {{9.829000000000001, 18.27}, {9.829000000000001, 23.216}, {-5.184, 23.216}, {-5.184, -6.021}, {-2.059, -6.021}, {-2.059, -26.33}, {-5.171, -26.33}}));
+  connect(newMuscle.frame_b1, fixedTranslation3.frame_b) annotation(Line(visible = true, origin = {30.944, 20}, points = {{-20.944, 45}, {5.944, 45}, {5.944, -45}, {9.055999999999999, -45}}));
+  connect(newMuscle.frame_b, fixedTranslation1.frame_b) annotation(Line(visible = true, origin = {22.086, 62.199}, points = {{-12.086, 23.045}, {-12.086, 27.346}, {7.02, 27.346}, {7.02, -38.868}, {10.132, -38.868}}));
+  connect(newMuscle.frame_resolve1, fixedTranslation4.frame_b) annotation(Line(visible = true, origin = {1.245, 18.539}, points = {{-1.245, 46.672}, {-1.245, 41.77}, {1.868, 41.77}, {1.868, -65.10599999999999}, {-1.245, -65.10599999999999}}));
+  connect(newMuscle.frame_a1, fixedTranslation2.frame_b) annotation(Line(visible = true, origin = {-54.933, 27.123}, points = {{45.126, 37.877}, {45.126, 33.185}, {-31.122, 33.185}, {-31.122, -52.123}, {-28.009, -52.123}}));
+  connect(newMuscle.frame_a, fixedTranslation.frame_b) annotation(Line(visible = true, origin = {-54.759, 60.131}, points = {{44.759, 24.869}, {44.759, 29.414}, {-30.877, 29.414}, {-30.877, -41.848}, {-27.764, -41.848}}));
   connect(const2.y, add1.u1) annotation(Line(visible = true, origin = {116.5, 55.5}, points = {{7.5, 9.5}, {-1.5, 9.5}, {-1.5, -9.5}, {-4.5, -9.5}}, color = {0, 0, 127}));
   connect(add1.y, position.phi_ref) annotation(Line(visible = true, origin = {79.73999999999999, 37.5}, points = {{9.26, 2.5}, {-2.087, 2.5}, {-2.087, -2.5}, {-5.087, -2.5}}, color = {0, 0, 127}));
   connect(relAngleSensor.phi_rel, add1.u2) annotation(Line(visible = true, origin = {104.4, 11.8}, points = {{-14.4, -12.8}, {-14.4, -15.8}, {10.6, -15.8}, {10.6, 22.2}, {7.6, 22.2}}, color = {0, 0, 127}));
@@ -68,5 +75,5 @@ equation
   connect(fixedTranslation1.frame_a, OFingerExtension.frame_b) annotation(Line(visible = true, origin = {49.663, 11.665}, points = {{2.555, 11.665}, {3.555, 11.665}, {3.555, -11.665}, {-9.663, -11.665}}));
   connect(fixedTranslation.frame_a, IFingerBone.frame_b) annotation(Line(visible = true, origin = {-48.458, 9.141999999999999}, points = {{-14.065, 9.141}, {5.304, 9.141999999999999}, {5.304, -9.141999999999999}, {3.458, -9.141999999999999}}));
   connect(IFingerBone.frame_b, revolute1.frame_a) annotation(Line(visible = true, origin = {-39.006, 7.5}, points = {{-5.994, -7.5}, {0.994, -7.5}, {0.994, 7.5}, {4.006, 7.5}}));
-  annotation(Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
-end MuscleYappariTrial;
+  annotation(experiment(StopTime = 100.0), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
+end MuscleTrial;

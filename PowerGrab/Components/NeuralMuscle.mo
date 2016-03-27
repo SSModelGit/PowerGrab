@@ -26,14 +26,14 @@ model NeuralMuscle
   Modelica.Mechanics.MultiBody.Forces.Damper damper1(animation = false, d = 100) annotation(Placement(visible = true, transformation(origin = {0, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Interfaces.RealInput forcePValue_p "Percent value of total posterior force" annotation(Placement(visible = true, transformation(origin = {-142.039, -13.094}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-86.887, -34.808}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
 equation
+  connect(posteriorMuscleUpperForce.flange, UpperPosteriorMuscle.flange_a) annotation(Line(visible = true, origin = {74.176, -48.333}, points = {{-2.412, 3.333}, {-2.412, -1.667}, {4.824, -1.667}}, color = {0, 127, 0}));
+  connect(posteriorMuscleLowerForce.flange, LowerPosteriorMuscle.flange_a) annotation(Line(visible = true, origin = {-82.333, -46.667}, points = {{17.333, 1.667}, {-8.667, 1.667}, {-8.667, -3.333}}, color = {0, 127, 0}));
+  connect(anteriorMuscleUpperForce.flange, UpperAnteriorMuscle.flange_a) annotation(Line(visible = true, origin = {76.928, 11.325}, points = {{-1.928, -3.917}, {-1.928, 1.958}, {3.855, 1.958}}, color = {0, 127, 0}));
+  connect(anteriorMuscleLowerForce.flange, LowerAnteriorMuscle.flange_a) annotation(Line(visible = true, origin = {-80.646, 10.92}, points = {{15.646, -0.92}, {-7.823, -0.92}, {-7.823, 1.841}}, color = {0, 127, 0}));
   connect(damper1.frame_b, frame_b1) annotation(Line(visible = true, origin = {98, -62.5}, points = {{-88, 12.5}, {23, 12.5}, {23, -12.5}, {42, -12.5}}));
   connect(damper1.frame_a, frame_a1) annotation(Line(visible = true, origin = {-94.25, -62.5}, points = {{84.25, 12.5}, {-21.75, 12.5}, {-21.75, -12.5}, {-40.75, -12.5}}));
   connect(damper.frame_a, frame_a) annotation(Line(visible = true, origin = {-94.25, 59.53}, points = {{84.25, 2.096}, {-21.75, 2.096}, {-21.75, -2.096}, {-40.75, -2.096}}));
   connect(damper.frame_b, frame_b) annotation(Line(visible = true, origin = {99.479, 59.208}, points = {{-89.479, 2.419}, {23.493, 2.419}, {23.493, -2.419}, {42.493, -2.419}}));
-  connect(posteriorMuscleUpperForce.flange, UpperPosteriorMuscle.flange_b) annotation(Line(visible = true, origin = {83.667, -46.667}, points = {{-11.903, 1.667}, {6.333, 1.667}, {7.333, -3.333}}, color = {0, 127, 0}));
-  connect(posteriorMuscleLowerForce.flange, LowerPosteriorMuscle.flange_b) annotation(Line(visible = true, origin = {-74.333, -46.667}, points = {{9.333, 1.667}, {-4.667, 1.667}, {-4.667, -3.333}}, color = {0, 127, 0}));
-  connect(anteriorMuscleUpperForce.flange, UpperAnteriorMuscle.flange_b) annotation(Line(visible = true, origin = {86.73699999999999, 9.367000000000001}, points = {{-11.737, -1.958}, {5.691, -1.958}, {6.046, 3.917}}, color = {0, 127, 0}));
-  connect(anteriorMuscleLowerForce.flange, LowerAnteriorMuscle.flange_b) annotation(Line(visible = true, origin = {-72.646, 10.92}, points = {{7.646, -0.92}, {-3.823, -0.92}, {-3.823, 1.841}}, color = {0, 127, 0}));
   connect(UpperPosteriorMuscle.frame_b, frame_b1) annotation(Line(visible = true, origin = {119.25, -67.5}, points = {{-24.25, 7.5}, {1.75, 7.5}, {1.75, -7.5}, {20.75, -7.5}}));
   connect(UpperPosteriorMuscle.frame_a, frame_resolve1) annotation(Line(visible = true, origin = {28.25, -74.5}, points = {{46.75, 14.5}, {-9.25, 14.5}, {-9.25, -14.5}, {-28.25, -14.5}}));
   connect(LowerPosteriorMuscle.frame_a, frame_a1) annotation(Line(visible = true, origin = {-115.5, -67.5}, points = {{20.5, 7.5}, {-0.5, 7.5}, {-0.5, -7.5}, {-19.5, -7.5}}));

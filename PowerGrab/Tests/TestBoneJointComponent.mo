@@ -1,4 +1,5 @@
 within PowerGrab.Tests;
+
 model TestBoneJointComponent
   PowerGrab.Components.BoneJointComponent boneJointComponent(phi_0_restrained = 0, r_OFingerBone = {0.25, 0, 0}) annotation(Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   PowerGrab.Components.NeuralMuscle neuralMuscle(f_max_a = 200, f_max_p = 200) annotation(Placement(visible = true, transformation(origin = {0, 42.333}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -14,8 +15,8 @@ model TestBoneJointComponent
   Modelica.Blocks.Sources.Trapezoid trapezoid(amplitude = 0.2, rising = 4, falling = 4, width = 2, period = 12, offset = 0) annotation(Placement(visible = true, transformation(origin = {-17.699, 73.23099999999999}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Trapezoid trapezoid1(offset = 0.65, width = 1, falling = 5, rising = 5, period = 12, amplitude = 0.3) annotation(Placement(visible = true, transformation(origin = {103.002, -2.196}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
-  connect(trapezoid.y, boneJointComponent.u) annotation(Line(visible = true, origin = {-1.868, 49.821}, points = {{-4.831, 23.41}, {2.415, 23.41}, {2.415, -46.821}}, color = {0, 0, 127}));
-  connect(trapezoid1.y, boneJointComponent1.u) annotation(Line(visible = true, origin = {94.175, 3.873}, points = {{19.826, -6.07}, {22.826, -6.07}, {22.826, 6.943}, {-17.675, 6.943}, {-17.675, -0.873}, {-30.128, -0.873}}, color = {0, 0, 127}));
+  connect(trapezoid.y, boneJointComponent.thetaControl) annotation(Line(visible = true, origin = {-1.868, 49.821}, points = {{-4.831, 23.41}, {2.415, 23.41}, {2.415, -46.821}}, color = {0, 0, 127}));
+  connect(trapezoid1.y, boneJointComponent1.thetaControl) annotation(Line(visible = true, origin = {94.175, 3.873}, points = {{19.826, -6.07}, {22.826, -6.07}, {22.826, 6.943}, {-17.675, 6.943}, {-17.675, -0.873}, {-30.128, -0.873}}, color = {0, 0, 127}));
   connect(fixedRotation.frame_b, boneJointComponent.frame_a) annotation(Line(visible = true, origin = {-47.5, 0}, points = {{-37.5, 0}, {37.5, 0}}));
   connect(world.frame_b, fixedRotation.frame_a) annotation(Line(visible = true, origin = {-112.5, 0}, points = {{-7.5, 0}, {7.5, 0}}, color = {95, 95, 95}));
   connect(const3.y, neuralMuscle.forcePValue_p) annotation(Line(visible = true, origin = {-20.678, 30.566}, points = {{-23.322, -8.287000000000001}, {5.666, -8.287000000000001}, {5.666, 8.287000000000001}, {11.99, 8.287000000000001}}, color = {0, 0, 127}));
