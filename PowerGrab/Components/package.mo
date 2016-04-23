@@ -27,9 +27,10 @@ package Components
     parameter Modelica.SIunits.Position r_shape_OFingerBone[3] = {0, 0, 0};
     parameter Modelica.SIunits.Position diameterOFingerBone = 0.02;
     parameter Modelica.SIunits.Angle phi_0_restrained;
-    Modelica.Mechanics.Rotational.Sources.Torque torque annotation(Placement(visible = true, transformation(origin = {110, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.Rotational.Sources.Torque torque if torD annotation(Placement(visible = true, transformation(origin = {110, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-145, -1}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    Modelica.Blocks.Interfaces.RealInput LoadTorque "Value for the torque the load exerts on the joint" annotation(Placement(visible = true, transformation(origin = {153.458, -22.225}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {0, -50}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput LoadTorque if torD "Value for the torque the load exerts on the joint" annotation(Placement(visible = true, transformation(origin = {153.458, -27.854}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {0, -50}, extent = {{20, -20}, {-20, 20}}, rotation = 0)));
+    parameter Boolean torD = true "True if direct torque on joint is desired";
     Modelica.Mechanics.MultiBody.Interfaces.Frame_resolve frame_resolve annotation(Placement(visible = true, transformation(origin = {-7.644, 105}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-0, 100}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_resolve frame_resolve1 annotation(Placement(visible = true, transformation(origin = {0, -105}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {0, -100}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b annotation(Placement(visible = true, transformation(origin = {150, 90}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {101.01, 85.714}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
@@ -53,7 +54,7 @@ package Components
     connect(frame_b1, fixedTranslation3.frame_b) annotation(Line(visible = true, origin = {65.485, -52.5}, points = {{82.681, -27.5}, {-28.598, -27.5}, {-28.598, 27.5}, {-25.485, 27.5}}));
     connect(frame_b, fixedTranslation1.frame_b) annotation(Line(visible = true, origin = {60.107, 56.665}, points = {{89.893, 33.335}, {-31.002, 33.335}, {-31.002, -33.334}, {-27.889, -33.334}}));
     connect(frame_resolve1, fixedTranslation4.frame_b) annotation(Line(visible = true, origin = {1.245, -74.027}, points = {{-1.245, -30.973}, {-1.245, -11.973}, {1.868, -11.973}, {1.868, 27.46}, {-1.245, 27.46}}, color = {95, 95, 95}));
-    connect(LoadTorque, torque.tau) annotation(Line(visible = true, origin = {131.364, -21.113}, points = {{22.094, -1.113}, {-6.364, -1.113}, {-6.364, 1.113}, {-9.364000000000001, 1.113}}, color = {0, 0, 127}));
+    connect(LoadTorque, torque.tau) annotation(Line(visible = true, origin = {131.364, -23.927}, points = {{22.094, -3.927}, {-6.364, -3.927}, {-6.364, 3.927}, {-9.364000000000001, 3.927}}, color = {0, 0, 127}));
     connect(torque.flange, revoluteRestrained.flange_a) annotation(Line(visible = true, origin = {55.799, -8.050000000000001}, points = {{44.201, -11.95}, {41.201, -11.95}, {41.201, 8.967000000000001}, {-63.302, 8.967000000000001}, {-63.302, 5.967}}));
     connect(position.flange, revolute1.axis) annotation(Line(visible = true, origin = {13.616, 30}, points = {{39.037, 5}, {-0.21, 5}, {-0.21, -5}, {-38.616, -5}}));
     connect(const2.y, add1.u1) annotation(Line(visible = true, origin = {116.5, 55.5}, points = {{7.5, 9.5}, {-1.5, 9.5}, {-1.5, -9.5}, {-4.5, -9.5}}, color = {0, 0, 127}));
@@ -108,8 +109,8 @@ package Components
   end LineMuscle;
 
   model FingerMultipleRevoluteArray
-    PowerGrab.Components.BoneJointComponent boneMDistal(r_IFingerBone = r_IboneMDistal, r_shape_IFingerBone = r_shape_IboneMDistal, diameterIFingerBone = diameterIboneMDistal, diameterOFingerBone = diameterOboneMDistal, r_OFingerBone = r_OboneMDistal, r_shape_OFingerBone = r_shape_OboneMDistal, phi_0_restrained = phi_0_boneMDistal, stateSelect = true, closedLoop = mDistalClosed) annotation(Placement(visible = true, transformation(origin = {5.256, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.BoneJointComponent boneFDistal(r_IFingerBone = r_IboneFDistal, r_shape_IFingerBone = r_shape_IboneFDistal, diameterIFingerBone = diameterIboneFDistal, diameterOFingerBone = diameterOboneFDistal, r_OFingerBone = r_OboneFDistal, r_shape_OFingerBone = r_shape_OboneFDistal, phi_0_restrained = phi_0_boneFDistal, closedLoop = fDistalClosed) annotation(Placement(visible = true, transformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.BoneJointComponent boneMDistal(r_IFingerBone = r_IboneMDistal, r_shape_IFingerBone = r_shape_IboneMDistal, diameterIFingerBone = diameterIboneMDistal, diameterOFingerBone = diameterOboneMDistal, r_OFingerBone = r_OboneMDistal, r_shape_OFingerBone = r_shape_OboneMDistal, phi_0_restrained = phi_0_boneMDistal, stateSelect = true, closedLoop = mDistalClosed, torD = dirTorque) annotation(Placement(visible = true, transformation(origin = {5.256, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.BoneJointComponent boneFDistal(r_IFingerBone = r_IboneFDistal, r_shape_IFingerBone = r_shape_IboneFDistal, diameterIFingerBone = diameterIboneFDistal, diameterOFingerBone = diameterOboneFDistal, r_OFingerBone = r_OboneFDistal, r_shape_OFingerBone = r_shape_OboneFDistal, phi_0_restrained = phi_0_boneFDistal, closedLoop = fDistalClosed, torD = dirTorque) annotation(Placement(visible = true, transformation(origin = {70, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_1P annotation(Placement(visible = true, transformation(origin = {120, -104}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {120.205, 120.205}, extent = {{-10.205, -10.205}, {10.205, 10.205}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_1A annotation(Placement(visible = true, transformation(origin = {120, 104}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {-119.709, 119.709}, extent = {{-10.291, -10.291}, {10.291, 10.291}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_2A annotation(Placement(visible = true, transformation(origin = {80, 104}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {-120, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -158,10 +159,11 @@ package Components
     parameter Boolean mDistalClosed = true "If true, the middle distal phalange will be in a constrained mode";
     parameter Boolean cDistalRegularClosed = true "If true, the close distal phalange's regular joint will be in a constrained mode";
     parameter Boolean cDistalSideClosed = true "If true, the close distal phalange's side joint will be in a constrained mode";
-    Modelica.Blocks.Interfaces.RealInput loadForce annotation(Placement(visible = true, transformation(origin = {-101.6, 64.464}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {27.454, -121.759}, extent = {{-20, -20}, {20, 20}}, rotation = -270)));
-    PowerGrab.Components.FingerLoad fingerLoad(r2 = r_OboneMDistal[1], r3 = r_OboneCDistal[1], r1 = r_OboneFDistal[1] / 2) annotation(Placement(visible = true, transformation(origin = {-52.096, 71.024}, extent = {{-13.29, -13.29}, {13.29, 13.29}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput loadForce if dirTorque annotation(Placement(visible = true, transformation(origin = {-101.6, 64.464}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {27.454, -121.759}, extent = {{-20, -20}, {20, 20}}, rotation = -270)));
+    PowerGrab.Components.FingerLoad fingerLoad(r2 = r_OboneMDistal[1], r3 = r_OboneCDistal[1], r1 = r_OboneFDistal[1] / 2) if dirTorque annotation(Placement(visible = true, transformation(origin = {-52.096, 71.024}, extent = {{-13.29, -13.29}, {13.29, 13.29}}, rotation = 0)));
+    parameter Boolean dirTorque = true "True if direct torque upon joint is desired";
     Modelica.Blocks.Interfaces.RealInput sideTheta if cDistalSideClosed "secondary revolute joint - sideways swaying" annotation(Placement(visible = true, transformation(origin = {-20, -32.963}, extent = {{-12.963, -12.963}, {12.963, 12.963}}, rotation = 0), iconTransformation(origin = {-27.35, 0}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
-    BoneDoubleJointComponent boneCDistal(phi_0_doubleJoint = phi_0_doubleJoint, closedDoubleJoint = cDistalSideClosed, closedRegularJoint = cDistalRegularClosed) annotation(Placement(visible = true, transformation(origin = {-86.959, -2.646}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    BoneDoubleJointComponent boneCDistal(phi_0_doubleJoint = phi_0_doubleJoint, closedDoubleJoint = cDistalSideClosed, closedRegularJoint = cDistalRegularClosed, torD = dirTorque) annotation(Placement(visible = true, transformation(origin = {-86.959, -2.646}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput sideAnterior annotation(Placement(visible = true, transformation(origin = {-123.296, 21.696}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-24.454, 50}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput sidePosterior annotation(Placement(visible = true, transformation(origin = {-123.704, -16.668}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-24.209, -47.974}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
   equation
@@ -222,9 +224,10 @@ package Components
     parameter Modelica.SIunits.Angle phi_0_doubleJoint = 0;
     parameter Boolean closedDoubleJoint = true "Results in an open loop run when false";
     parameter Boolean closedRegularJoint = true "Results in an open loop run when false";
-    Modelica.Mechanics.Rotational.Sources.Torque torque annotation(Placement(visible = true, transformation(origin = {110, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.Rotational.Sources.Torque torque if torD annotation(Placement(visible = true, transformation(origin = {110, -20}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-145, -1}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    Modelica.Blocks.Interfaces.RealInput LoadTorque "Value for the torque the load exerts on the joint" annotation(Placement(visible = true, transformation(origin = {153.458, -25}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-44.609, 109.799}, extent = {{15.391, -15.391}, {-15.391, 15.391}}, rotation = -270)));
+    Modelica.Blocks.Interfaces.RealInput LoadTorque if torD "Value for the torque the load exerts on the joint" annotation(Placement(visible = true, transformation(origin = {153.458, -25}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-44.609, 109.799}, extent = {{15.391, -15.391}, {-15.391, 15.391}}, rotation = -270)));
+    parameter Boolean torD = true "True if direct torque on joint is desired";
     Modelica.Mechanics.MultiBody.Interfaces.Frame_resolve frame_resolve annotation(Placement(visible = true, transformation(origin = {-7.644, 105}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-100, 90}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_resolve frame_resolve1 annotation(Placement(visible = true, transformation(origin = {0, -105}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-100, -90}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b annotation(Placement(visible = true, transformation(origin = {150, 90}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {101.804, 90}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
@@ -322,28 +325,23 @@ package Components
   model ObjectLFConnection
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-112.796, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-75.95699999999999, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b annotation(Placement(visible = true, transformation(origin = {112.1, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {75.488, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Forces.LineForceWithMass lineForceWithMass annotation(Placement(visible = true, transformation(origin = {0, 0}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
-    Modelica.Mechanics.Translational.Sources.Force force annotation(Placement(visible = true, transformation(origin = {-20, -27.781}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     parameter Modelica.SIunits.Distance threshold;
-    parameter Modelica.SIunits.TranslationalSpringConstant k;
+    parameter Modelica.SIunits.TranslationalSpringConstant k = 5000;
     Boolean contact;
     Modelica.Mechanics.MultiBody.Sensors.Distance deltaX annotation(Placement(visible = true, transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     OldComponents.NonLinearSpringDamper nonLinearSpringDamper annotation(Placement(visible = true, transformation(origin = {0, 55}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Trapezoid trapezoid(amplitude = 0, period = 1) annotation(Placement(visible = true, transformation(origin = {-128.344, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 0 "Damping constant";
+    parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 5000 "Damping constant";
     Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(shapeType = "sphere", length = threshold, width = threshold, height = threshold) annotation(Placement(visible = true, transformation(origin = {-0, 86.994}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(n = {0, 1, 0}) annotation(Placement(visible = true, transformation(origin = {82.753, 0}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   equation
+    connect(prismatic.frame_a, frame_b) annotation(Line(visible = true, origin = {102.426, 0}, points = {{-9.673999999999999, 0}, {9.673999999999999, 0}}));
+    connect(deltaX.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {55.452, 15}, points = {{-45.452, 15}, {14.076, 15}, {14.076, -15}, {17.301, -15}}));
+    connect(nonLinearSpringDamper.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {55.452, 27.5}, points = {{-45.452, 27.5}, {14.076, 27.5}, {14.076, -27.5}, {17.301, -27.5}}));
     connect(fixedShape.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 43.497}, points = {{67.59699999999999, 43.497}, {-16.199, 43.497}, {-16.199, -43.497}, {-35.199, -43.497}}));
-    connect(trapezoid.y, nonLinearSpringDamper.k) annotation(Line(visible = true, origin = {-39.342, 39.624}, points = {{-78.002, -9.624000000000001}, {23.33, -9.624000000000001}, {23.33, 9.624000000000001}, {31.342, 9.624000000000001}}, color = {0, 0, 127}));
-    connect(nonLinearSpringDamper.frame_b, frame_b) annotation(Line(visible = true, origin = {77.075, 27.5}, points = {{-67.075, 27.5}, {16.025, 27.5}, {16.025, -27.5}, {35.025, -27.5}}));
     connect(nonLinearSpringDamper.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 27.5}, points = {{67.59699999999999, 27.5}, {-16.199, 27.5}, {-16.199, -27.5}, {-35.199, -27.5}}));
-    connect(deltaX.frame_b, frame_b) annotation(Line(visible = true, origin = {77.075, 15}, points = {{-67.075, 15}, {16.025, 15}, {16.025, -15}, {35.025, -15}}));
     connect(deltaX.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 15}, points = {{67.59699999999999, 15}, {-16.199, 15}, {-16.199, -15}, {-35.199, -15}}));
     contact = deltaX.distance < threshold;
-    connect(force.flange, lineForceWithMass.flange_b) annotation(Line(visible = true, origin = {0.667, -21.854}, points = {{-10.667, -5.927}, {5.333, -5.927}, {5.333, 11.854}}, color = {0, 127, 0}));
-    connect(lineForceWithMass.frame_b, frame_b) annotation(Line(visible = true, origin = {61.05, 0}, points = {{-51.05, 0}, {51.05, 0}}));
-    connect(frame_a, lineForceWithMass.frame_a) annotation(Line(visible = true, origin = {-61.398, 0}, points = {{-51.398, 0}, {51.398, 0}}));
-    force.f = smooth(1, noEvent(if contact then -k * (deltaX.distance - threshold) else 0));
+    nonLinearSpringDamper.k = smooth(1, noEvent(if contact then k else 0));
     nonLinearSpringDamper.d = smooth(0, noEvent(if contact then dampingCoefficient else 0));
     annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {10, 10}), graphics = {Ellipse(visible = true, fillPattern = FillPattern.Solid, extent = {{-65.545, -65}, {65.545, 65}}), Rectangle(visible = true, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-70, -6.615}, {70, 6.615}}), Text(visible = true, origin = {3.683, 1.181}, extent = {{-13.683, -8.819000000000001}, {13.683, 8.819000000000001}}, textString = "LF")}), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
   end ObjectLFConnection;
