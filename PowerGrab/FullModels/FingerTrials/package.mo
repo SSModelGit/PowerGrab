@@ -60,17 +60,35 @@ package FingerTrials
   end TrialFingerRevoluteModel;
 
   model TrialOpposableFingers
-    Components.ObjectLFConnection objectLFConnection(threshold = 0.25) annotation(Placement(visible = true, transformation(origin = {-10, 27.15}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Components.ObjectLFConnection objectLFConnection(threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {-25, 27.15}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Components.WholeFingerArray wholeFingerArray(fDistalClosed = false, mDistalClosed = false, cDistalSideClosed = false, cDistalRegularClosed = false) annotation(Placement(visible = true, transformation(origin = {17.5, 70}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
     Components.WholeFingerArray wholeFingerArray1(mDistalClosed = false, cDistalRegularClosed = false, fDistalClosed = false, cDistalSideClosed = false) annotation(Placement(visible = true, transformation(origin = {55, 12.5}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
-    inner Modelica.Mechanics.MultiBody.World world annotation(Placement(visible = true, transformation(origin = {-132.292, -21.955}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    inner Modelica.Mechanics.MultiBody.World world(g = 0) annotation(Placement(visible = true, transformation(origin = {-132.292, -21.955}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(angle = 90, n = {0, 0, 1}) annotation(Placement(visible = true, transformation(origin = {-65, 53.311}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation1(angle = 90, n = {0, 0, -1}) annotation(Placement(visible = true, transformation(origin = {-65, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-0.6, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-30, -21.693}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Components.ObjectLFConnection objectLFConnection1(threshold = 0.25) annotation(Placement(visible = true, transformation(origin = {5, -33.214}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-1.2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-30, -21.693}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Components.ObjectLFConnection objectLFConnection1(threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {5, -33.214}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant one(k = 1) annotation(Placement(visible = true, transformation(origin = {-117.828, 77.258}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant zero(k = 0) annotation(Placement(visible = true, transformation(origin = {-118.181, 45}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Components.ObjectLFConnection objectLFConnection2(threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {-25, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Components.ObjectLFConnection objectLFConnection3(threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {-25, 43.039}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Components.ObjectLFConnection objectLFConnection4(threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {5, -15}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Components.ObjectLFConnection objectLFConnection5(threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {5, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation2(angle = -90, n = {0, 0, 1}) annotation(Placement(visible = true, transformation(origin = {-36.689, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation1(angle = 180, n = {0, 1, 0}) annotation(Placement(visible = true, transformation(origin = {-65, -70}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
+    connect(fixedRotation2.frame_b, wholeFingerArray1.frame_a) annotation(Line(visible = true, origin = {26.328, -46.228}, points = {{-53.017, -23.772}, {26.508, -23.772}, {26.508, 47.543}}));
+    connect(fixedRotation1.frame_b, fixedRotation2.frame_a) annotation(Line(visible = true, origin = {-50.844, -70}, points = {{-4.156, 0}, {4.156, 0}}));
+    connect(world.frame_b, fixedRotation1.frame_a) annotation(Line(visible = true, origin = {-88.32899999999999, -45.977}, points = {{-33.963, 24.023}, {10.317, 24.023}, {10.317, -24.023}, {13.329, -24.023}}));
+    connect(objectLFConnection5.frame_b, wholeFingerArray1.frame_a1) annotation(Line(visible = true, origin = {33.512, -23.3}, points = {{-20.963, -26.7}, {5.988, -26.7}, {5.988, 26.7}, {8.988, 26.7}}));
+    connect(objectLFConnection1.frame_b, wholeFingerArray1.frame_a2) annotation(Line(visible = true, origin = {33.512, -10.357}, points = {{-20.963, -22.857}, {5.988, -22.857}, {5.988, 22.857}, {8.988, 22.857}}));
+    connect(objectLFConnection4.frame_b, wholeFingerArray1.frame_a3) annotation(Line(visible = true, origin = {33.552, 3.3}, points = {{-21.003, -18.3}, {5.948, -18.3}, {5.948, 18.3}, {9.106999999999999, 18.3}}));
+    connect(fixedTranslation.frame_b, objectLFConnection5.frame_a) annotation(Line(visible = true, origin = {-9.648999999999999, -35.846}, points = {{-10.351, 14.153}, {1.649, 14.153}, {1.649, -14.154}, {7.053, -14.154}}));
+    connect(fixedTranslation.frame_b, objectLFConnection4.frame_a) annotation(Line(visible = true, origin = {-9.648999999999999, -18.346}, points = {{-10.351, -3.347}, {1.649, -3.347}, {1.649, 3.346}, {7.053, 3.346}}));
+    connect(objectLFConnection2.frame_b, wholeFingerArray.frame_a1) annotation(Line(visible = true, origin = {-2.113, 35.45}, points = {{-15.338, -25.45}, {4.113, -25.45}, {4.113, 25.45}, {7.113, 25.45}}));
+    connect(objectLFConnection.frame_b, wholeFingerArray.frame_a2) annotation(Line(visible = true, origin = {-2.113, 48.575}, points = {{-15.338, -21.425}, {4.113, -21.425}, {4.113, 21.425}, {7.113, 21.425}}));
+    connect(objectLFConnection3.frame_b, wholeFingerArray.frame_a3) annotation(Line(visible = true, origin = {-2.073, 61.069}, points = {{-15.378, -18.031}, {4.073, -18.031}, {4.073, 18.031}, {7.232, 18.031}}));
+    connect(fixedTranslation.frame_b, objectLFConnection2.frame_a) annotation(Line(visible = true, origin = {-27.062, -6.795}, points = {{7.062, -14.898}, {10.174, -14.898}, {10.174, -1.898}, {-10.938, -1.898}, {-10.938, 16.795}, {-5.534, 16.795}}));
+    connect(fixedTranslation.frame_b, objectLFConnection3.frame_a) annotation(Line(visible = true, origin = {-27.062, 4.218}, points = {{7.062, -25.911}, {10.174, -25.911}, {10.174, -12.911}, {-10.938, -12.911}, {-10.938, 38.821}, {-5.534, 38.821}}));
     connect(one.y, wholeFingerArray1.anteriorInput[3]) annotation(Line(visible = true, origin = {6.336, 46.978}, points = {{-113.163, 30.28}, {33.164, 30.28}, {33.164, -30.28}, {46.834, -30.28}}, color = {0, 0, 127}));
     connect(one.y, wholeFingerArray.anteriorInput[3]) annotation(Line(visible = true, origin = {-21.789, 75.72799999999999}, points = {{-85.038, 1.53}, {23.789, 1.53}, {23.789, -1.53}, {37.459, -1.53}}, color = {0, 0, 127}));
     connect(zero.y, wholeFingerArray1.posteriorInput[4]) annotation(Line(visible = true, origin = {6.271, 26.11}, points = {{-113.451, 18.89}, {33.229, 18.89}, {33.229, -18.89}, {46.992, -18.89}}, color = {0, 0, 127}));
@@ -87,14 +105,10 @@ package FingerTrials
     connect(zero.y, wholeFingerArray.posteriorInput[3]) annotation(Line(visible = true, origin = {-21.854, 54.86}, points = {{-85.32599999999999, -9.859999999999999}, {23.854, -9.859999999999999}, {23.854, 9.859999999999999}, {37.617, 9.859999999999999}}, color = {0, 0, 127}));
     connect(zero.y, wholeFingerArray.posteriorInput[2]) annotation(Line(visible = true, origin = {-21.854, 54.86}, points = {{-85.32599999999999, -9.859999999999999}, {23.854, -9.859999999999999}, {23.854, 9.859999999999999}, {37.617, 9.859999999999999}}, color = {0, 0, 127}));
     connect(zero.y, wholeFingerArray.posteriorInput[1]) annotation(Line(visible = true, origin = {-21.854, 54.86}, points = {{-85.32599999999999, -9.859999999999999}, {23.854, -9.859999999999999}, {23.854, 9.859999999999999}, {37.617, 9.859999999999999}}, color = {0, 0, 127}));
-    connect(objectLFConnection1.frame_b, wholeFingerArray1.frame_a1) annotation(Line(visible = true, origin = {30.22, 2.095}, points = {{-17.671, -35.308}, {-12.22, -35.308}, {-12.22, 25.905}, {21.056, 25.905}, {21.056, 18.805}}));
-    connect(objectLFConnection.frame_b, wholeFingerArray.frame_a1) annotation(Line(visible = true, origin = {5.014, 54.857}, points = {{-7.466, -27.707}, {-2.014, -27.707}, {-2.014, -14.707}, {-3.014, -14.707}, {-3.014, 30.643}, {8.760999999999999, 30.643}, {8.760999999999999, 23.543}}));
-    connect(fixedTranslation.frame_b, objectLFConnection.frame_a) annotation(Line(visible = true, origin = {-19.562, -1.079}, points = {{-0.438, -20.614}, {2.674, -20.614}, {2.674, -7.614}, {-3.438, -7.614}, {-3.438, 28.229}, {1.966, 28.229}}));
+    connect(fixedTranslation.frame_b, objectLFConnection.frame_a) annotation(Line(visible = true, origin = {-27.062, -1.079}, points = {{7.062, -20.614}, {10.174, -20.614}, {10.174, -7.614}, {-10.938, -7.614}, {-10.938, 28.229}, {-5.534, 28.229}}));
     connect(fixedTranslation.frame_b, objectLFConnection1.frame_a) annotation(Line(visible = true, origin = {-9.648999999999999, -27.453}, points = {{-10.351, 5.76}, {1.649, 5.76}, {1.649, -5.76}, {7.053, -5.76}}));
     connect(fixedTranslation.frame_a, world.frame_b) annotation(Line(visible = true, origin = {-100.156, -21.824}, points = {{60.156, 0.131}, {-19.01, 0.131}, {-19.01, -0.131}, {-22.135, -0.131}}));
-    connect(fixedRotation1.frame_b, wholeFingerArray1.frame_a) annotation(Line(visible = true, origin = {16.891, -32.895}, points = {{-71.89100000000001, -17.105}, {35.945, -17.105}, {35.945, 34.21}}));
     connect(fixedRotation.frame_b, wholeFingerArray.frame_a) annotation(Line(visible = true, origin = {-8.109, 55.146}, points = {{-46.891, -1.835}, {23.445, -1.835}, {23.445, 3.669}}));
-    connect(world.frame_b, fixedRotation1.frame_a) annotation(Line(visible = true, origin = {-88.32899999999999, -35.977}, points = {{-33.962, 14.023}, {10.317, 14.023}, {10.317, -14.023}, {13.329, -14.023}}));
     connect(world.frame_b, fixedRotation.frame_a) annotation(Line(visible = true, origin = {-88.32899999999999, 15.678}, points = {{-33.962, -37.633}, {10.317, -37.633}, {10.317, 37.633}, {13.329, 37.633}}));
     annotation(experiment(StopTime = 60.0), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
   end TrialOpposableFingers;

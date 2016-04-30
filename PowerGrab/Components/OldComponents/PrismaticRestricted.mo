@@ -1,7 +1,7 @@
 within PowerGrab.Components.OldComponents;
 
 model PrismaticRestricted
-  Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange = true, s.fixed = false, n = {1, 0, 0}, s.start = 0, v.start = 0, a.start = 0, v.fixed = false, a.fixed = false) annotation(Placement(visible = true, transformation(origin = {-16.756, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(useAxisFlange = true, s.fixed = false, n = axisOR, s.start = 0, v.start = 0, a.start = 0, v.fixed = false, a.fixed = false) annotation(Placement(visible = true, transformation(origin = {-16.756, 10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Translational.Components.ElastoGap elastoGap(c = c_upper, d = d_upper, s_rel0 = 0, n = 1, s_rel.start = 0, v_rel.start = 0) annotation(Placement(visible = true, transformation(origin = {40, 35}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Mechanics.Translational.Components.Rod rod(L = l_stop) annotation(Placement(visible = true, transformation(origin = {-60, 35}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Translational.Components.ElastoGap elastoGap1(c = c_bottom, d = d_bottom, s_rel0 = 0, n = 1, s_rel.start = 0, v_rel.start = 0) annotation(Placement(visible = true, transformation(origin = {-60, -25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -13,6 +13,7 @@ model PrismaticRestricted
   parameter Modelica.SIunits.TranslationalSpringConstant c_bottom;
   parameter Modelica.SIunits.TranslationalDampingConstant d_bottom;
   Modelica.Mechanics.Translational.Components.SpringDamper springDamper(c = 0, d = 200) annotation(Placement(visible = true, transformation(origin = {-15, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Integer[3] axisOR = {1, 0, 0};
 equation
   connect(springDamper.flange_a, prismatic.support) annotation(Line(visible = true, origin = {-23.585, 20.667}, points = {{-1.415, 9.333}, {-1.415, -4.667}, {2.829, -4.667}}, color = {0, 127, 0}));
   connect(springDamper.flange_b, prismatic.axis) annotation(Line(visible = true, origin = {-6.252, 20.667}, points = {{1.252, 9.333}, {1.252, -4.667}, {-2.504, -4.667}}, color = {0, 127, 0}));
