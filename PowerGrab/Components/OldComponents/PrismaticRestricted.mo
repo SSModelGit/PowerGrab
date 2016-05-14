@@ -7,6 +7,7 @@ model PrismaticRestricted
   Modelica.Mechanics.Translational.Components.ElastoGap elastoGap1(c = c_bottom, d = d_bottom, s_rel0 = 0, n = 1, s_rel.start = 0, v_rel.start = 0) annotation(Placement(visible = true, transformation(origin = {-60, -25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-120, 15}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-80.80800000000001, 14.286}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b annotation(Placement(visible = true, transformation(origin = {110, 15}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {74.074, 14.286}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
+  parameter Boolean useAxisFlange = false;
   parameter Modelica.SIunits.Distance l_stop;
   parameter Modelica.SIunits.TranslationalSpringConstant c_upper;
   parameter Modelica.SIunits.TranslationalDampingConstant d_upper;
@@ -14,7 +15,11 @@ model PrismaticRestricted
   parameter Modelica.SIunits.TranslationalDampingConstant d_bottom;
   Modelica.Mechanics.Translational.Components.SpringDamper springDamper(c = 0, d = 200) annotation(Placement(visible = true, transformation(origin = {-15, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Integer[3] axisOR = {1, 0, 0};
+  Modelica.Mechanics.Translational.Interfaces.Flange_a flange_a if useAxisFlange annotation(Placement(visible = true, transformation(origin = {25, 101.961}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {16.835, 97.10599999999999}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Mechanics.Translational.Interfaces.Flange_b flange_b if useAxisFlange annotation(Placement(visible = true, transformation(origin = {-30, 101.961}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-20.202, 97.10599999999999}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
 equation
+  connect(prismatic.support, flange_b) annotation(Line(visible = true, origin = {-25.378, 73.971}, points = {{4.622, -57.971}, {4.622, 14.99}, {-4.622, 14.99}, {-4.622, 27.99}}, color = {0, 127, 0}));
+  connect(prismatic.axis, flange_a) annotation(Line(visible = true, origin = {13.748, 44.654}, points = {{-22.504, -28.654}, {11.252, -28.654}, {11.252, 57.308}}, color = {0, 127, 0}));
   connect(springDamper.flange_a, prismatic.support) annotation(Line(visible = true, origin = {-23.585, 20.667}, points = {{-1.415, 9.333}, {-1.415, -4.667}, {2.829, -4.667}}, color = {0, 127, 0}));
   connect(springDamper.flange_b, prismatic.axis) annotation(Line(visible = true, origin = {-6.252, 20.667}, points = {{1.252, 9.333}, {1.252, -4.667}, {-2.504, -4.667}}, color = {0, 127, 0}));
   connect(prismatic.frame_b, frame_b) annotation(Line(visible = true, origin = {71.31100000000001, 12.5}, points = {{-78.06699999999999, -2.5}, {19.689, -2.5}, {19.689, 2.5}, {38.689, 2.5}}, color = {95, 95, 95}));
