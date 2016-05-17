@@ -1,8 +1,8 @@
 within PowerGrab.FullModels.FingerTrials;
 
 model TrialMultipleFingerArray
-  Components.FinalFingerArray middleMostFinger(fDistalClosed = false, mDistalClosed = false, cDistalSideClosed = false, cDistalRegularClosed = false, threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {-46.326, 57.203}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
-  Components.FinalFingerArray opposable(mDistalClosed = false, cDistalRegularClosed = false, fDistalClosed = false, cDistalSideClosed = false, threshold = 0.75) annotation(Placement(visible = true, transformation(origin = {-21.326, -77.797}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
+  Components.FinalFingerArray middleMostFinger(fDistalClosed = false, mDistalClosed = false, cDistalSideClosed = false, cDistalRegularClosed = false, threshold = 0.75, fingerLength = {mFinger * 0.343137255, mFinger * 0.31372549, mFinger * 0.196078431, mFinger * 0.147058824}) annotation(Placement(visible = true, transformation(origin = {-46.326, 57.203}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
+  Components.FinalFingerArray opposable(mDistalClosed = false, cDistalRegularClosed = false, fDistalClosed = false, cDistalSideClosed = false, threshold = 0.75, fingerLength = {tFinger * 0.137931034, tFinger * 0.344827586, tFinger * 0.275862069, tFinger * 0.24137931}) annotation(Placement(visible = true, transformation(origin = {-21.326, -77.797}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
   inner Modelica.Mechanics.MultiBody.World world(g = 0) annotation(Placement(visible = true, transformation(origin = {-162.128, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(angle = 90, n = {0, 0, 1}) annotation(Placement(visible = true, transformation(origin = {-66.32599999999999, 14.703}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-1.2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-130, -46.75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -16,9 +16,9 @@ model TrialMultipleFingerArray
   Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation4(n = {0, 0, 1}, angle = 90) if fourth annotation(Placement(visible = true, transformation(origin = {65.34699999999999, -9.643000000000001}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation3(r = {0, 0, 0.25}) if fifth annotation(Placement(visible = true, transformation(origin = {35.347, -49.643}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation5(n = {0, 0, 1}, angle = 90) if fifth annotation(Placement(visible = true, transformation(origin = {65.34699999999999, -49.643}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Components.FinalFingerArray middleLeftFinger(fDistalClosed = false, mDistalClosed = false, cDistalRegularClosed = false, cDistalSideClosed = false) if third annotation(Placement(visible = true, transformation(origin = {98.56100000000001, 25.357}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
-  Components.FinalFingerArray leftMostFinger(fDistalClosed = false, mDistalClosed = false, cDistalRegularClosed = false, cDistalSideClosed = false) if fourth annotation(Placement(visible = true, transformation(origin = {97.998, -14.643}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
-  Components.FinalFingerArray middleRight(fDistalClosed = false, mDistalClosed = false, cDistalRegularClosed = false, cDistalSideClosed = false) if fifth annotation(Placement(visible = true, transformation(origin = {97.998, -56.5}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
+  Components.FinalFingerArray middleLeftFinger(fDistalClosed = false, mDistalClosed = false, cDistalRegularClosed = false, cDistalSideClosed = false, fingerLength = {rFinger * 0.319148936, rFinger * 0.319148936, rFinger * 0.212765957, rFinger * 0.14893617}) if third annotation(Placement(visible = true, transformation(origin = {98.56100000000001, 25.357}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
+  Components.FinalFingerArray leftMostFinger(fDistalClosed = false, mDistalClosed = false, cDistalRegularClosed = false, cDistalSideClosed = false, fingerLength = {lFinger * 0.337837838, lFinger * 0.324324324, lFinger * 0.168918919, lFinger * 0.168918919}) if fourth annotation(Placement(visible = true, transformation(origin = {97.998, -14.643}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
+  Components.FinalFingerArray middleRight(fDistalClosed = false, mDistalClosed = false, cDistalRegularClosed = false, cDistalSideClosed = false, fingerLength = {iFinger * 0.342857143, iFinger * 0.342857143, iFinger * 0.171428571, iFinger * 0.142857143}) if fifth annotation(Placement(visible = true, transformation(origin = {97.998, -56.5}, extent = {{-12.5, -12.5}, {12.5, 12.5}}, rotation = 0)));
   parameter Boolean third = true;
   parameter Boolean fourth = true;
   parameter Boolean fifth = false;
@@ -31,6 +31,11 @@ model TrialMultipleFingerArray
   Modelica.Blocks.Sources.Ramp ramp1(duration = 0.01, startTime = 5) annotation(Placement(visible = true, transformation(origin = {-207.786, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Sources.Ramp ramp2(duration = 0.01) annotation(Placement(visible = true, transformation(origin = {-210, 5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation8(angle = 30, n = {1, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-65, -95}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  parameter Modelica.SIunits.Length mFinger = 0.0204;
+  parameter Modelica.SIunits.Length iFinger = 0.0175;
+  parameter Modelica.SIunits.Length rFinger = 0.0188;
+  parameter Modelica.SIunits.Length lFinger = 0.0148;
+  parameter Modelica.SIunits.Length tFinger = 0.0145;
 equation
   connect(bodyShape.frame_b, middleRight.frame_a4) annotation(Line(visible = true, origin = {7.306, -61.302}, points = {{-57.306, 14.547}, {-54.194, 14.547}, {-54.194, -10.698}, {82.84699999999999, -10.698}, {82.84699999999999, -7.698}}));
   connect(bodyShape.frame_b, opposable.frame_a4) annotation(Line(visible = true, origin = {-40.423, -74.08}, points = {{-9.577, 27.325}, {-6.464, 27.325}, {-6.464, -19.217}, {11.253, -19.217}, {11.253, -16.217}}));
