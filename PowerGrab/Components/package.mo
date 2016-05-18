@@ -500,10 +500,10 @@ package Components
     position.s_ref = max(min(boneLength, -relativePosition.r_rel[1]), 0);
     lHat = lVec.r_rel / lMag.distance;
     v2 = rV.v_rel - rV.v_rel * lHat * lHat;
-    v2Hat = v2 / sqrt(v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2);
+    v2Hat = v2 / (v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2);
     mu0 = smooth(0, noEvent(if fContact then mu else 0));
-    fPrism.force = -mu0 * min(spring.y, 50) * v2Hat;
-    fSphere.force = mu0 * min(spring.y, 50) * v2Hat;
+    fPrism.force = -mu0 * min(spring.y, 50) * v2;
+    fSphere.force = mu0 * min(spring.y, 50) * v2;
     annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {10, 10}), graphics = {Ellipse(visible = true, fillPattern = FillPattern.Solid, extent = {{-65.545, -65}, {65.545, 65}}), Rectangle(visible = true, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-70, -6.615}, {70, 6.615}}), Text(visible = true, origin = {-0.339, 0}, extent = {{-66.146, -7.55}, {66.146, 7.55}}, textString = "PRISM DAMP")}), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
   end PrismDampingOC;
 
@@ -859,12 +859,13 @@ package Components
   end Body;
 
   model RealFingerContact
-    PowerGrab.Components.FingerMuscleLineArray anteriorMuscleArray(maxFDistal = 500, maxMDistal = 500, maxCDistal = 500) annotation(Placement(visible = true, transformation(origin = {-120, 15}, extent = {{-51.322, -51.322}, {51.322, 51.322}}, rotation = 0)));
-    PowerGrab.Components.RealFingerStructure fingerArray(phi_0_boneFDistal = 0.1, phi_0_boneMDistal = 0.1, phi_0_boneCDistal = 0.1, fDistalClosed = fDistalClosed, mDistalClosed = mDistalClosed, cDistalRegularClosed = cDistalRegularClosed, cDistalSideClosed = cDistalSideClosed, dirTorque = false, phi_0_doubleJoint = 0, diameterIboneFDistal = 0.02, diameterIboneMDistal = 0.02, diameterIboneCDistal = 0.02, diameterOboneCDistal = 0.02, diameterOboneFDistal = 0.02, diameterOboneMDistal = 0.02, r_IboneFDistal = {fingerLength[4], 0, 0}, r_OboneFDistal = {fingerLength[3] / 2, 0, 0}, r_IboneMDistal = {fingerLength[3] / 2, 0, 0}, r_OboneMDistal = {fingerLength[2] / 2, 0, 0}, r_IboneCDistal = {fingerLength[2] / 2, 0, 0}, r_OboneCDistal = {fingerLength[1], 0, 0}) annotation(Placement(visible = true, transformation(origin = {17.255, 15}, extent = {{-47.745, -47.745}, {47.745, 47.745}}, rotation = 0)));
-    PowerGrab.Components.FingerMuscleLineArray posteriorMuscleArray(maxFDistal = 500, maxMDistal = 500, maxCDistal = 500) annotation(Placement(visible = true, transformation(origin = {137.5, 15}, extent = {{52.5, -52.5}, {-52.5, 52.5}}, rotation = 0)));
+    PowerGrab.Components.FingerMuscleLineArray anteriorMuscleArray(maxFDistal = 20, maxMDistal = 20, maxCDistal = 20) annotation(Placement(visible = true, transformation(origin = {-120, 15}, extent = {{-51.322, -51.322}, {51.322, 51.322}}, rotation = 0)));
+    PowerGrab.Components.RealFingerStructure fingerArray(phi_0_boneFDistal = 0.1, phi_0_boneMDistal = 0.1, phi_0_boneCDistal = 0.1, fDistalClosed = fDistalClosed, mDistalClosed = mDistalClosed, cDistalRegularClosed = cDistalRegularClosed, cDistalSideClosed = cDistalSideClosed, dirTorque = false, phi_0_doubleJoint = phiThumb0, diameterIboneFDistal = 0.02, diameterIboneMDistal = 0.02, diameterIboneCDistal = 0.02, diameterOboneCDistal = 0.02, diameterOboneFDistal = 0.02, diameterOboneMDistal = 0.02, r_IboneFDistal = {fingerLength[3] / 2, 0, 0}, r_OboneFDistal = {fingerLength[4], 0, 0}, r_IboneMDistal = {fingerLength[2] / 2, 0, 0}, r_OboneMDistal = {fingerLength[3] / 2, 0, 0}, r_IboneCDistal = {fingerLength[1], 0, 0}, r_OboneCDistal = {fingerLength[2] / 2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {17.255, 15}, extent = {{-47.745, -47.745}, {47.745, 47.745}}, rotation = 0)));
+    PowerGrab.Components.FingerMuscleLineArray posteriorMuscleArray(maxFDistal = 50, maxMDistal = 20, maxCDistal = 20) annotation(Placement(visible = true, transformation(origin = {137.5, 15}, extent = {{52.5, -52.5}, {-52.5, 52.5}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-149, -80}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-21.635, -111.85}, extent = {{-16, -16}, {16, 16}}, rotation = -90)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-fingerLength[2] / 4, 0.015, 0}) annotation(Placement(visible = true, transformation(origin = {-165, 90}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a1 annotation(Placement(visible = true, transformation(origin = {-251, 89}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-125, -91}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
+    parameter Modelica.SIunits.Angle phiThumb0 annotation(Dialog(group = "Initial values"));
     parameter Boolean fDistalClosed = true;
     parameter Boolean mDistalClosed = true;
     parameter Boolean cDistalRegularClosed = true;
@@ -877,13 +878,13 @@ package Components
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-fingerLength[3] / 4, 0.015, 0}) annotation(Placement(visible = true, transformation(origin = {-92.404, 115}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-fingerLength[4] / 2, 0.015, 0}) annotation(Placement(visible = true, transformation(origin = {-85, 138.311}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a3 annotation(Placement(visible = true, transformation(origin = {-255, 140}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-123.407, 91}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection(threshold = threshold, k = k, dampingCoefficient = dampingCoefficient, boneLength = 1, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-190, 135}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection1(k = k, dampingCoefficient = dampingCoefficient, threshold = threshold, boneLength = 1, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-190, 115}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection2(k = k, dampingCoefficient = dampingCoefficient, threshold = threshold, boneLength = 1, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-200, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection(boneLength = fingerLength[4], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-190, 135}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection1(boneLength = fingerLength[3], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-190, 115}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection2(boneLength = fingerLength[2], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-200, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     parameter Modelica.SIunits.Distance threshold = 0.75 "radius of contact sphere";
     parameter Modelica.SIunits.TranslationalSpringConstant k = 5000 "Stiffness of contact spring";
     parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 5000 "Damping constant";
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection3(boneLength = 1, dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-125, -45}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection3(boneLength = fingerLength[1], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-125, -45}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a4 annotation(Placement(visible = true, transformation(origin = {-267, -49}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-78.444, -125}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     parameter Real mu;
     parameter Modelica.SIunits.Length delta;
@@ -1057,7 +1058,7 @@ package Components
     Modelica.Mechanics.Rotational.Sources.Position regularAngleControl if closedRegularJoint annotation(Placement(visible = true, transformation(origin = {122.06, 15}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput thetaControl if closedRegularJoint annotation(Placement(visible = true, transformation(origin = {155, 42.881}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-80, 110}, extent = {{15, -15}, {-15, 15}}, rotation = -270)));
     Modelica.Blocks.Interfaces.RealOutput y annotation(Placement(visible = true, transformation(origin = {157.74, -46.967}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {6.023, -120}, extent = {{-20, -20}, {20, 20}}, rotation = -450)));
-    PowerGrab.Components.RevoluteRestrained doubleJointRevolute(useAxisFlange = true, theta_1 = -0.87, theta_2 = 0.87, phi_0_restrained = phi_0_doubleJoint, axisRotation = {0, 1, 0}, c = 10000, d = 10000) annotation(Placement(visible = true, transformation(origin = {-25, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.RevoluteRestrained doubleJointRevolute(useAxisFlange = true, theta_1 = -0.87, theta_2 = 1, phi_0_restrained = phi_0_doubleJoint, axisRotation = {0, 1, 0}, c = 10000, d = 10000) annotation(Placement(visible = true, transformation(origin = {-25, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-r_IFingerBone[1] * 0.5, 0, diameterOFingerBone * 0.1}) annotation(Placement(visible = true, transformation(origin = {-85, 75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-r_IFingerBone[1] * 0.5, 0, diameterOFingerBone * 0.5}) annotation(Placement(visible = true, transformation(origin = {-65, -80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation6(r = {-r_OFingerBone[1] * 0.5, 0, -diameterOFingerBone * 0.5}) annotation(Placement(visible = true, transformation(origin = {50, 70}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
@@ -1066,8 +1067,8 @@ package Components
     PowerGrab.Components.LineMuscle lineMuscle1 annotation(Placement(visible = true, transformation(origin = {25, 75}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     PowerGrab.Components.LineMuscle lineMuscle2 annotation(Placement(visible = true, transformation(origin = {-35, -85}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
     PowerGrab.Components.LineMuscle lineMuscle3 annotation(Placement(visible = true, transformation(origin = {25, -70}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
-    PowerGrab.Components.MagnitudeMuscle magnitudeMuscle(f_max = 200) annotation(Placement(visible = true, transformation(origin = {-110, -87.842}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.MagnitudeMuscle magnitudeMuscle1(f_max = 200) annotation(Placement(visible = true, transformation(origin = {-115, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.MagnitudeMuscle magnitudeMuscle(f_max = 20) annotation(Placement(visible = true, transformation(origin = {-110, -87.842}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.MagnitudeMuscle magnitudeMuscle1(f_max = 20) annotation(Placement(visible = true, transformation(origin = {-115, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput anteriorDoubleJointMuscle annotation(Placement(visible = true, transformation(origin = {-148.467, 80}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {28.108, 111.603}, extent = {{-14.789, -14.789}, {14.789, 14.789}}, rotation = -90)));
     Modelica.Blocks.Interfaces.RealInput posteriorDoubleJointMuscle annotation(Placement(visible = true, transformation(origin = {-148.053, -88.256}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {66.792, 110.334}, extent = {{-14.988, -14.988}, {14.988, 14.988}}, rotation = -90)));
     Modelica.Mechanics.Rotational.Components.Damper damper2(d = 200, useHeatPort = false) annotation(Placement(visible = true, transformation(origin = {-23.775, 155}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
