@@ -458,52 +458,68 @@ package Components
     parameter Modelica.SIunits.Length boneLength;
     parameter Modelica.SIunits.Distance threshold;
     parameter Modelica.SIunits.TranslationalSpringConstant k = 5000;
+    parameter Modelica.SIunits.TranslationalSpringConstant bufferEffect = 500 "Repulsion caused by skin buffer approximation";
     Boolean contact;
     parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 5000 "Damping constant";
-    Modelica.Mechanics.Translational.Sources.Position position annotation(Placement(visible = true, transformation(origin = {12.261, -35}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Sensors.Distance lMag(animation = false) annotation(Placement(visible = true, transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.OldComponents.NonLinearSpringDamper spring(s_unstretched = threshold, fMagDesired = true, width = 0.005, animation = false) annotation(Placement(visible = true, transformation(origin = {0, 55}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(height = 2 * threshold, length = 2 * threshold, r_shape = {-threshold, 0, 0}, shapeType = "sphere", width = 2 * threshold) annotation(Placement(visible = true, transformation(origin = {0, 86.994}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b) annotation(Placement(visible = true, transformation(origin = {-46.768, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(s.fixed = false, useAxisFlange = true, boxWidth = 0.001, boxHeight = 0.001) annotation(Placement(visible = true, transformation(origin = {61.951, -1.936}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Sensors.RelativePosition lVec(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.world) annotation(Placement(visible = true, transformation(origin = {5, -12.7}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping(final min = 0) = 500 "Buffer zone's damping constant";
+    Modelica.Mechanics.Translational.Sources.Position position annotation(Placement(visible = true, transformation(origin = {11.732, -65}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Sensors.Distance lMag(animation = false) annotation(Placement(visible = true, transformation(origin = {-0, 5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.OldComponents.NonLinearSpringDamper spring(s_unstretched = threshold, fMagDesired = true) annotation(Placement(visible = true, transformation(origin = {-0, 57.91}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(height = 2 * threshold, length = 2 * threshold, r_shape = {-threshold, 0, 0}, shapeType = "sphere", width = 2 * threshold, animation = true) annotation(Placement(visible = true, transformation(origin = {0, 86.994}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b) annotation(Placement(visible = true, transformation(origin = {-46.768, -25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(s.fixed = false, useAxisFlange = true) annotation(Placement(visible = true, transformation(origin = {61.951, -1.936}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Sensors.RelativePosition lVec(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.world) annotation(Placement(visible = true, transformation(origin = {5, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.SIunits.Length lHat[3];
     Modelica.SIunits.Velocity v2[3];
     Modelica.SIunits.Velocity v2Hat[3];
     Modelica.Mechanics.MultiBody.Forces.WorldForce fPrism(diameter = 0.005, animation = false) annotation(Placement(visible = true, transformation(origin = {-65, 38.1}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Forces.WorldForce fSphere(diameter = 0.005, animation = false) annotation(Placement(visible = true, transformation(origin = {-117.719, 38.229}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Forces.WorldForce fSphere(diameter = 0.005, animation = false, resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameB.world) annotation(Placement(visible = true, transformation(origin = {-117.719, 38.229}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Real mu0;
+    Real checkProjection;
+    Real v2Mag;
     parameter Real mu;
-    Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity rV(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.world) annotation(Placement(visible = true, transformation(origin = {-45, -25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Sensors.RelativeVelocity rV(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.world) annotation(Placement(visible = true, transformation(origin = {-45, -55}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Boolean fContact;
+    Boolean bContact "True if within range of skin buffer";
+    parameter Modelica.SIunits.Length bufferRange "Range the buffer approximating skin extends";
     parameter Modelica.SIunits.Length delta;
+    parameter Modelica.SIunits.Velocity v0Mag = 5;
+    parameter Modelica.SIunits.Velocity v2delta = 0.1;
+    OldComponents.NonLinearSpringDamper skinBuffer(animation = true, fMagDesired = true, s_unstretched = threshold + bufferRange) annotation(Placement(visible = true, transformation(origin = {0, 26.587}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
-    connect(rV.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {28.601, -13.468}, points = {{-63.601, -11.532}, {20.125, -11.532}, {20.125, 11.532}, {23.35, 11.532}}));
-    connect(rV.frame_a, frame_a) annotation(Line(visible = true, origin = {-88.84699999999999, -12.5}, points = {{33.847, -12.5}, {-4.949, -12.5}, {-4.949, 12.5}, {-23.949, 12.5}}));
+    connect(skinBuffer.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 12.325}, points = {{-29.851, 14.261}, {8.875, 14.261}, {8.875, -14.261}, {12.1, -14.261}}));
+    connect(skinBuffer.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 13.293}, points = {{67.59699999999999, 13.293}, {-16.199, 13.293}, {-16.199, -13.293}, {-35.199, -13.293}}));
+    connect(rV.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {28.601, -28.468}, points = {{-63.601, -26.532}, {20.125, -26.532}, {20.125, 26.532}, {23.35, 26.532}}));
+    connect(rV.frame_a, frame_a) annotation(Line(visible = true, origin = {-88.84699999999999, -27.5}, points = {{33.847, -27.5}, {-4.949, -27.5}, {-4.949, 27.5}, {-23.949, 27.5}}));
     connect(fSphere.frame_b, frame_a) annotation(Line(visible = true, origin = {-108.55, 22.892}, points = {{0.831, 15.338}, {3.831, 15.338}, {3.831, -3.892}, {-4.246, -3.892}, {-4.246, -22.892}}));
     connect(fPrism.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {23.601, 18.082}, points = {{-78.601, 20.018}, {25.125, 20.018}, {25.125, -20.018}, {28.35, -20.018}}));
-    connect(lVec.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {41.101, -7.318}, points = {{-26.101, -5.382}, {7.625, -5.382}, {7.625, 5.382}, {10.85, 5.382}}));
-    connect(lVec.frame_a, frame_a) annotation(Line(visible = true, origin = {-76.34699999999999, -6.35}, points = {{71.34699999999999, -6.35}, {-17.449, -6.35}, {-17.449, 6.35}, {-36.449, 6.35}}));
-    connect(position.flange, prismatic.axis) annotation(Line(visible = true, origin = {43.416, -15.468}, points = {{-21.155, -19.532}, {5.31, -19.532}, {5.31, 19.532}, {10.535, 19.532}}, color = {0, 127, 0}));
-    connect(relativePosition.frame_b, prismatic.frame_a) annotation(Line(visible = true, origin = {19.596, 3.043}, points = {{-56.364, -3.043}, {-53.364, -3.043}, {-53.364, 8.021000000000001}, {55.368, 8.021000000000001}, {55.368, -4.979}, {52.355, -4.979}}));
-    connect(spring.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 26.532}, points = {{-29.851, 28.468}, {8.875, 28.468}, {8.875, -28.468}, {12.1, -28.468}}));
-    connect(lMag.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 14.032}, points = {{-29.851, 15.968}, {8.875, 15.968}, {8.875, -15.968}, {12.1, -15.968}}));
+    connect(lVec.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {41.101, -20.968}, points = {{-26.101, -19.032}, {7.625, -19.032}, {7.625, 19.032}, {10.85, 19.032}}));
+    connect(lVec.frame_a, frame_a) annotation(Line(visible = true, origin = {-76.34699999999999, -20}, points = {{71.34699999999999, -20}, {-17.449, -20}, {-17.449, 20}, {-36.449, 20}}));
+    connect(position.flange, prismatic.axis) annotation(Line(visible = true, origin = {43.284, -30.468}, points = {{-21.552, -34.532}, {5.442, -34.532}, {5.442, 34.532}, {10.667, 34.532}}, color = {0, 127, 0}));
+    connect(relativePosition.frame_b, prismatic.frame_a) annotation(Line(visible = true, origin = {46.277, -13.468}, points = {{-83.04600000000001, -11.532}, {28.686, -11.532}, {28.686, 11.532}, {25.673, 11.532}}));
+    connect(spring.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 27.987}, points = {{-29.851, 29.923}, {8.875, 29.923}, {8.875, -29.923}, {12.1, -29.923}}));
+    connect(lMag.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 1.532}, points = {{-29.851, 3.468}, {8.875, 3.468}, {8.875, -3.468}, {12.1, -3.468}}));
     connect(prismatic.frame_a, frame_b) annotation(Line(visible = true, origin = {92.563, -0.968}, points = {{-20.612, -0.968}, {0.537, -0.968}, {0.537, 0.968}, {19.537, 0.968}}));
-    connect(relativePosition.frame_a, frame_a) annotation(Line(visible = true, origin = {-84.782, 0}, points = {{28.014, 0}, {-28.014, 0}}));
-    connect(lMag.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 15}, points = {{67.59699999999999, 15}, {-16.199, 15}, {-16.199, -15}, {-35.199, -15}}));
-    connect(spring.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 27.5}, points = {{67.59699999999999, 27.5}, {-16.199, 27.5}, {-16.199, -27.5}, {-35.199, -27.5}}));
+    connect(relativePosition.frame_a, frame_a) annotation(Line(visible = true, origin = {-89.289, -12.5}, points = {{32.521, -12.5}, {-4.507, -12.5}, {-4.507, 12.5}, {-23.507, 12.5}}));
+    connect(lMag.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 2.5}, points = {{67.59699999999999, 2.5}, {-16.199, 2.5}, {-16.199, -2.5}, {-35.199, -2.5}}));
+    connect(spring.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 28.955}, points = {{67.59699999999999, 28.955}, {-16.199, 28.955}, {-16.199, -28.955}, {-35.199, -28.955}}));
     connect(fixedShape.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 43.497}, points = {{67.59699999999999, 43.497}, {-16.199, 43.497}, {-16.199, -43.497}, {-35.199, -43.497}}));
     contact = lMag.distance <= threshold;
     fContact = abs(lMag.distance - threshold) <= delta;
+    bContact = lMag.distance - threshold <= bufferRange;
     spring.k = smooth(1, noEvent(if contact then k else 0));
+    skinBuffer.k = smooth(1, noEvent(if bContact then bufferEffect else 0));
     spring.d = smooth(0, noEvent(if contact then dampingCoefficient else 0));
+    skinBuffer.d = smooth(0, noEvent(if bContact then bufferDamping else 0));
     position.s_ref = max(min(boneLength, -relativePosition.r_rel[1]), 0);
     lHat = lVec.r_rel / lMag.distance;
     v2 = rV.v_rel - rV.v_rel * lHat * lHat;
-    v2Hat = v2 / (v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2);
+    v2Hat = v2 / (v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2 + 0.1);
+    v2Mag = sqrt(v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2 + 0.1);
     mu0 = smooth(0, noEvent(if fContact then mu else 0));
-    fPrism.force = -mu0 * min(spring.y, 50) * v2;
-    fSphere.force = mu0 * min(spring.y, 50) * v2;
+    checkProjection = v2Hat * lHat;
+    fPrism.force = -mu0 * min(skinBuffer.y, 50) * v2Hat * min(smooth(0, noEvent(if v2Mag > v2delta then v2Mag - v2delta else 0)), v0Mag - v2delta);
+    fSphere.force = -fPrism.force;
     annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {10, 10}), graphics = {Ellipse(visible = true, fillPattern = FillPattern.Solid, extent = {{-65.545, -65}, {65.545, 65}}), Rectangle(visible = true, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-70, -6.615}, {70, 6.615}}), Text(visible = true, origin = {-0.339, 0}, extent = {{-66.146, -7.55}, {66.146, 7.55}}, textString = "PRISM DAMP")}), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
   end PrismDampingOC;
 
@@ -633,26 +649,26 @@ package Components
     connect(frameTranslation.frame_b, frame_b) annotation(Line(points = {{10, 0}, {100, 0}}, color = {95, 95, 95}, thickness = 0.5));
     connect(frame_a, body.frame_a) annotation(Line(points = {{-100, 0}, {-70, 0}, {-70, -60}, {-30, -60}}, color = {95, 95, 95}, thickness = 0.5));
     annotation(Documentation(info = "<HTML>
-    <p>
-    <b>Rigid body</b> with <b>cylinder</b> shape.
-    The mass properties of the body (mass, center of mass,
-    inertia tensor) are computed
-    from the cylinder data. Optionally, the cylinder may be hollow.
-    The cylinder shape is by default used in the animation.
-    The two connector frames <b>frame_a</b> and <b>frame_b</b>
-    are always parallel to each other. Example of component
-    animation (note, that
-    the animation may be switched off via parameter animation = <b>false</b>):
-    </p>
-    
-    <p>
-    <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/BodyCylinder.png\" ALT=\"Parts.BodyCylinder\">
-    </p>
-    
-    <p>
-    A BodyCylinder component has potential states. For details of these
-    states and of the \"Advanced\" menu parameters, see model
-    <a href=\"modelica://Modelica.Mechanics.MultiBody.Parts.Body\">MultiBody.Parts.Body</a>.</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255}), Text(extent = {{150, -80}, {-150, -50}}, lineColor = {0, 0, 0}, textString = "%=r"), Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{-87, 13}, {-51, -12}}, lineColor = {0, 0, 0}, textString = "a"), Text(extent = {{51, 12}, {87, -13}}, lineColor = {0, 0, 0}, textString = "b")}));
+      <p>
+      <b>Rigid body</b> with <b>cylinder</b> shape.
+      The mass properties of the body (mass, center of mass,
+      inertia tensor) are computed
+      from the cylinder data. Optionally, the cylinder may be hollow.
+      The cylinder shape is by default used in the animation.
+      The two connector frames <b>frame_a</b> and <b>frame_b</b>
+      are always parallel to each other. Example of component
+      animation (note, that
+      the animation may be switched off via parameter animation = <b>false</b>):
+      </p>
+      
+      <p>
+      <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/BodyCylinder.png\" ALT=\"Parts.BodyCylinder\">
+      </p>
+      
+      <p>
+      A BodyCylinder component has potential states. For details of these
+      states and of the \"Advanced\" menu parameters, see model
+      <a href=\"modelica://Modelica.Mechanics.MultiBody.Parts.Body\">MultiBody.Parts.Body</a>.</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255}), Text(extent = {{150, -80}, {-150, -50}}, lineColor = {0, 0, 0}, textString = "%=r"), Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{-87, 13}, {-51, -12}}, lineColor = {0, 0, 0}, textString = "a"), Text(extent = {{51, 12}, {87, -13}}, lineColor = {0, 0, 0}, textString = "b")}));
   end BodyCylinder;
 
   model Body "Rigid body with mass, inertia tensor and one frame connector (12 potential states)"
@@ -760,137 +776,145 @@ package Components
     w_a = Frames.angularVelocity2(frame_a.R);
     z_a = der(w_a);
     /* Newton/Euler equations with respect to center of mass
-                        a_CM = a_a + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM));
-                        f_CM = m*(a_CM - g_a);
-                        t_CM = I*z_a + cross(w_a, I*w_a);
-                   frame_a.f = f_CM
-                   frame_a.t = t_CM + cross(r_CM, f_CM);
-                Inserting the first three equations in the last two results in:
-              */
+                                a_CM = a_a + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM));
+                                f_CM = m*(a_CM - g_a);
+                                t_CM = I*z_a + cross(w_a, I*w_a);
+                           frame_a.f = f_CM
+                           frame_a.t = t_CM + cross(r_CM, f_CM);
+                        Inserting the first three equations in the last two results in:
+                      */
     frame_a.f = m * (Frames.resolve2(frame_a.R, a_0 - g_0) + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM)));
     frame_a.t = I * z_a + cross(w_a, I * w_a) + cross(r_CM, frame_a.f);
     annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-100, 30}, {-3, -31}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{150, -100}, {-150, -70}}, lineColor = {0, 0, 0}, textString = "m=%m"), Text(extent = {{-150, 110}, {150, 70}}, textString = "%name", lineColor = {0, 0, 255}), Ellipse(extent = {{-20, 60}, {100, -60}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.Sphere, fillColor = {0, 127, 255})}), Documentation(info = "<HTML>
-    <p>
-    <b>Rigid body</b> with mass and inertia tensor.
-    All parameter vectors have to be resolved in frame_a.
-    The <b>inertia tensor</b> has to be defined with respect to a
-    coordinate system that is parallel to frame_a with the
-    origin at the center of mass of the body.
-    </p>
-    <p>
-    By default, this component is visualized by a <b>cylinder</b> located
-    between frame_a and the center of mass and by a <b>sphere</b> that has
-    its center at the center of mass. If the cylinder length is smaller as
-    the radius of the sphere, e.g., since frame_a is located at the
-    center of mass, the cylinder is not displayed. Note, that
-    the animation may be switched off via parameter animation = <b>false</b>.
-    </p>
-    <p>
-    <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Body.png\" ALT=\"Parts.Body\">
-    </p>
-    
-    <p>
-    <b>States of Body Components</b>
-    </p>
-    <p>
-    Every body has potential states. If possible a tool will select
-    the states of joints and not the states of bodies because this is
-    usually the most efficient choice. In this case the position, orientation,
-    velocity and angular velocity of frame_a of the body will be computed
-    by the component that is connected to frame_a. However, if a body is moving
-    freely in space, variables of the body have to be used as states. The potential
-    states of the body are:
-    </p>
-    <ul>
-    <li> The <b>position vector</b> frame_a.r_0 from the origin of the
-         world frame to the origin of frame_a of the body, resolved in
-         the world frame and the <b>absolute velocity</b> v_0 of the origin of
-         frame_a, resolved in the world frame (= der(frame_a.r_0)).
-    </li>
-    <li> If parameter <b>useQuaternions</b> in the \"Advanced\" menu
-         is <b>true</b> (this is the default), then <b>4 quaternions</b>
-         are potential states. Additionally, the coordinates of the
-         absolute angular velocity vector of the
-         body are 3 potential states.<br>
-         If <b>useQuaternions</b> in the \"Advanced\" menu
-         is <b>false</b>, then <b>3 angles</b> and the derivatives of
-         these angles are potential states. The orientation of frame_a
-         is computed by rotating the world frame along the axes defined
-         in parameter vector \"sequence_angleStates\" (default = {1,2,3}, i.e.,
-         the Cardan angle sequence) around the angles used as potential states.
-         For example, the default is to rotate the x-axis of the world frame
-         around angles[1], the new y-axis around angles[2] and the new z-axis
-         around angles[3], arriving at frame_a.
-     </li>
-    </ul>
-    <p>
-    The quaternions have the slight disadvantage that there is a
-    non-linear constraint equation between the 4 quaternions.
-    Therefore, at least one non-linear equation has to be solved
-    during simulation. A tool might, however, analytically solve this
-    simple constraint equation. Using the 3 angles as states has the
-    disadvantage that there is a singular configuration in which a
-    division by zero will occur. If it is possible to determine in advance
-    for an application class that this singular configuration is outside
-    of the operating region, the 3 angles might be used as potential
-    states by setting <b>useQuaternions</b> = <b>false</b>.
-    </p>
-    <p>
-    In text books about 3-dimensional mechanics often 3 angles and the
-    angular velocity are used as states. This is not the case here, since
-    3 angles and their derivatives are used as potential states
-    (if useQuaternions = false). The reason
-    is that for real-time simulation the discretization formula of the
-    integrator might be \"inlined\" and solved together with the body equations.
-    By appropriate symbolic transformation the performance is
-    drastically increased if angles and their
-    derivatives are used as states, instead of angles and the angular
-    velocity.
-    </p>
-    <p>
-    Whether or not variables of the body are used as states is usually
-    automatically selected by the Modelica translator. If parameter
-    <b>enforceStates</b> is set to <b>true</b> in the \"Advanced\" menu,
-    then body variables are forced to be used as states according
-    to the setting of parameters \"useQuaternions\" and
-    \"sequence_angleStates\".
-    </p>
-    </HTML>"));
+      <p>
+      <b>Rigid body</b> with mass and inertia tensor.
+      All parameter vectors have to be resolved in frame_a.
+      The <b>inertia tensor</b> has to be defined with respect to a
+      coordinate system that is parallel to frame_a with the
+      origin at the center of mass of the body.
+      </p>
+      <p>
+      By default, this component is visualized by a <b>cylinder</b> located
+      between frame_a and the center of mass and by a <b>sphere</b> that has
+      its center at the center of mass. If the cylinder length is smaller as
+      the radius of the sphere, e.g., since frame_a is located at the
+      center of mass, the cylinder is not displayed. Note, that
+      the animation may be switched off via parameter animation = <b>false</b>.
+      </p>
+      <p>
+      <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Body.png\" ALT=\"Parts.Body\">
+      </p>
+      
+      <p>
+      <b>States of Body Components</b>
+      </p>
+      <p>
+      Every body has potential states. If possible a tool will select
+      the states of joints and not the states of bodies because this is
+      usually the most efficient choice. In this case the position, orientation,
+      velocity and angular velocity of frame_a of the body will be computed
+      by the component that is connected to frame_a. However, if a body is moving
+      freely in space, variables of the body have to be used as states. The potential
+      states of the body are:
+      </p>
+      <ul>
+      <li> The <b>position vector</b> frame_a.r_0 from the origin of the
+           world frame to the origin of frame_a of the body, resolved in
+           the world frame and the <b>absolute velocity</b> v_0 of the origin of
+           frame_a, resolved in the world frame (= der(frame_a.r_0)).
+      </li>
+      <li> If parameter <b>useQuaternions</b> in the \"Advanced\" menu
+           is <b>true</b> (this is the default), then <b>4 quaternions</b>
+           are potential states. Additionally, the coordinates of the
+           absolute angular velocity vector of the
+           body are 3 potential states.<br>
+           If <b>useQuaternions</b> in the \"Advanced\" menu
+           is <b>false</b>, then <b>3 angles</b> and the derivatives of
+           these angles are potential states. The orientation of frame_a
+           is computed by rotating the world frame along the axes defined
+           in parameter vector \"sequence_angleStates\" (default = {1,2,3}, i.e.,
+           the Cardan angle sequence) around the angles used as potential states.
+           For example, the default is to rotate the x-axis of the world frame
+           around angles[1], the new y-axis around angles[2] and the new z-axis
+           around angles[3], arriving at frame_a.
+       </li>
+      </ul>
+      <p>
+      The quaternions have the slight disadvantage that there is a
+      non-linear constraint equation between the 4 quaternions.
+      Therefore, at least one non-linear equation has to be solved
+      during simulation. A tool might, however, analytically solve this
+      simple constraint equation. Using the 3 angles as states has the
+      disadvantage that there is a singular configuration in which a
+      division by zero will occur. If it is possible to determine in advance
+      for an application class that this singular configuration is outside
+      of the operating region, the 3 angles might be used as potential
+      states by setting <b>useQuaternions</b> = <b>false</b>.
+      </p>
+      <p>
+      In text books about 3-dimensional mechanics often 3 angles and the
+      angular velocity are used as states. This is not the case here, since
+      3 angles and their derivatives are used as potential states
+      (if useQuaternions = false). The reason
+      is that for real-time simulation the discretization formula of the
+      integrator might be \"inlined\" and solved together with the body equations.
+      By appropriate symbolic transformation the performance is
+      drastically increased if angles and their
+      derivatives are used as states, instead of angles and the angular
+      velocity.
+      </p>
+      <p>
+      Whether or not variables of the body are used as states is usually
+      automatically selected by the Modelica translator. If parameter
+      <b>enforceStates</b> is set to <b>true</b> in the \"Advanced\" menu,
+      then body variables are forced to be used as states according
+      to the setting of parameters \"useQuaternions\" and
+      \"sequence_angleStates\".
+      </p>
+      </HTML>"));
   end Body;
 
   model RealFingerContact
-    PowerGrab.Components.FingerMuscleLineArray anteriorMuscleArray(maxFDistal = 20, maxMDistal = 20, maxCDistal = 20) annotation(Placement(visible = true, transformation(origin = {-120, 15}, extent = {{-51.322, -51.322}, {51.322, 51.322}}, rotation = 0)));
-    PowerGrab.Components.RealFingerStructure fingerArray(phi_0_boneFDistal = 0.1, phi_0_boneMDistal = 0.1, phi_0_boneCDistal = 0.1, fDistalClosed = fDistalClosed, mDistalClosed = mDistalClosed, cDistalRegularClosed = cDistalRegularClosed, cDistalSideClosed = cDistalSideClosed, dirTorque = false, phi_0_doubleJoint = phiThumb0, diameterIboneFDistal = 0.02, diameterIboneMDistal = 0.02, diameterIboneCDistal = 0.02, diameterOboneCDistal = 0.02, diameterOboneFDistal = 0.02, diameterOboneMDistal = 0.02, r_IboneFDistal = {fingerLength[3] / 2, 0, 0}, r_OboneFDistal = {fingerLength[4], 0, 0}, r_IboneMDistal = {fingerLength[2] / 2, 0, 0}, r_OboneMDistal = {fingerLength[3] / 2, 0, 0}, r_IboneCDistal = {fingerLength[1], 0, 0}, r_OboneCDistal = {fingerLength[2] / 2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {17.255, 15}, extent = {{-47.745, -47.745}, {47.745, 47.745}}, rotation = 0)));
-    PowerGrab.Components.FingerMuscleLineArray posteriorMuscleArray(maxFDistal = 50, maxMDistal = 20, maxCDistal = 20) annotation(Placement(visible = true, transformation(origin = {137.5, 15}, extent = {{52.5, -52.5}, {-52.5, 52.5}}, rotation = 0)));
+    PowerGrab.Components.FingerMuscleLineArray anteriorMuscleArray(maxFDistal = fMuscle_max, maxMDistal = fMuscle_max, maxCDistal = fMuscle_max) annotation(Placement(visible = true, transformation(origin = {-120, 15}, extent = {{-51.322, -51.322}, {51.322, 51.322}}, rotation = 0)));
+    PowerGrab.Components.RealFingerStructure fingerArray(phi_0_boneFDistal = initialRotations[1], phi_0_boneMDistal = initialRotations[2], phi_0_boneCDistal = initialRotations[3], fDistalClosed = fDistalClosed, mDistalClosed = mDistalClosed, cDistalRegularClosed = cDistalRegularClosed, cDistalSideClosed = cDistalSideClosed, dirTorque = false, phi_0_doubleJoint = phiThumb0, diameterIboneFDistal = diameter, diameterIboneMDistal = diameter, diameterIboneCDistal = diameter, diameterOboneCDistal = diameter, diameterOboneFDistal = diameter, diameterOboneMDistal = diameter, r_IboneFDistal = {fingerLength[3] / 2, 0, 0}, r_OboneFDistal = {fingerLength[4], 0, 0}, r_IboneMDistal = {fingerLength[2] / 2, 0, 0}, r_OboneMDistal = {fingerLength[3] / 2, 0, 0}, r_IboneCDistal = {fingerLength[1], 0, 0}, r_OboneCDistal = {fingerLength[2] / 2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {17.255, 15}, extent = {{-47.745, -47.745}, {47.745, 47.745}}, rotation = 0)));
+    PowerGrab.Components.FingerMuscleLineArray posteriorMuscleArray(maxFDistal = fMuscle_max, maxMDistal = fMuscle_max, maxCDistal = fMuscle_max) annotation(Placement(visible = true, transformation(origin = {137.5, 15}, extent = {{52.5, -52.5}, {-52.5, 52.5}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-149, -80}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-21.635, -111.85}, extent = {{-16, -16}, {16, 16}}, rotation = -90)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-fingerLength[2] / 4, 0.015, 0}) annotation(Placement(visible = true, transformation(origin = {-165, 90}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-fingerLength[2] / 4, fingerArray.diameterOboneCDistal * 0.75, 0}) annotation(Placement(visible = true, transformation(origin = {-165, 90}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a1 annotation(Placement(visible = true, transformation(origin = {-251, 89}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-125, -91}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    parameter Modelica.SIunits.Angle phiThumb0 annotation(Dialog(group = "Initial values"));
-    parameter Boolean fDistalClosed = true;
-    parameter Boolean mDistalClosed = true;
-    parameter Boolean cDistalRegularClosed = true;
-    parameter Boolean cDistalSideClosed = true;
+    parameter Modelica.SIunits.Angle phiSide0 annotation(Dialog(group = "Initial values"));
+    parameter Boolean fDistalClosed = true annotation(Dialog(tab = "Advanced", group = "Parameters"));
+    parameter Boolean mDistalClosed = true annotation(Dialog(tab = "Advanced", group = "Parameters"));
+    parameter Boolean cDistalRegularClosed = true annotation(Dialog(tab = "Advanced", group = "Parameters"));
+    parameter Boolean cDistalSideClosed = true annotation(Dialog(tab = "Advanced", group = "Parameters"));
     parameter Modelica.SIunits.Length fingerLength[4] = {0.5, 0.5, 0.5, 0.5} "Length of bone from Palm, Proximal, Middle, and Distal";
     Modelica.Blocks.Interfaces.RealInput anteriorInput[4] "Anterior Activation Input in order of F, M, CReg, CSide" annotation(Placement(visible = true, transformation(origin = {-275, 12.948}, extent = {{-20, -20}, {20, 20}}, rotation = 0), iconTransformation(origin = {-18.302, 41.976}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput posteriorInput[4] "Posterior Activation Input in order of F, M, CReg, CSide" annotation(Placement(visible = true, transformation(origin = {250, 11.866}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-17.374, -52.794}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput jointControl[4] if not (not fDistalClosed and not mDistalClosed and not cDistalRegularClosed and not cDistalSideClosed) "Joint control signal in order of F, M, CReg, CSide" annotation(Placement(visible = true, transformation(origin = {13.183, 162.518}, extent = {{-20, -20}, {20, 20}}, rotation = -90), iconTransformation(origin = {-15.106, -5}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a2 annotation(Placement(visible = true, transformation(origin = {-254, 116}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-125, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-fingerLength[3] / 4, 0.015, 0}) annotation(Placement(visible = true, transformation(origin = {-92.404, 115}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-fingerLength[4] / 2, 0.015, 0}) annotation(Placement(visible = true, transformation(origin = {-85, 138.311}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-fingerLength[3] / 4, fingerArray.diameterOboneMDistal * 0.75, 0}) annotation(Placement(visible = true, transformation(origin = {-92.404, 115}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-fingerLength[4] / 2, fingerArray.diameterOboneFDistal * 0.75, 0}) annotation(Placement(visible = true, transformation(origin = {-85, 138.311}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a3 annotation(Placement(visible = true, transformation(origin = {-255, 140}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-123.407, 91}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection(boneLength = fingerLength[4], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-190, 135}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection1(boneLength = fingerLength[3], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-190, 115}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection2(boneLength = fingerLength[2], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-200, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection(boneLength = fingerLength[4], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta, bufferEffect = bufferEffect, bufferRange = bufferRange, bufferDamping = bufferDamping, v0Mag = v0Mag, v2delta = v2delta) annotation(Placement(visible = true, transformation(origin = {-190, 135}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection1(boneLength = fingerLength[3], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta, bufferEffect = bufferEffect, bufferRange = bufferRange, bufferDamping = bufferDamping, v0Mag = v0Mag, v2delta = v2delta) annotation(Placement(visible = true, transformation(origin = {-190, 115}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection2(boneLength = fingerLength[2], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta, bufferEffect = bufferEffect, bufferRange = bufferRange, bufferDamping = bufferDamping, v0Mag = v0Mag, v2delta = v2delta) annotation(Placement(visible = true, transformation(origin = {-200, 90}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     parameter Modelica.SIunits.Distance threshold = 0.75 "radius of contact sphere";
     parameter Modelica.SIunits.TranslationalSpringConstant k = 5000 "Stiffness of contact spring";
     parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 5000 "Damping constant";
-    PowerGrab.Components.PrismDampingOC objectPrismDampConnection3(boneLength = fingerLength[1], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta) annotation(Placement(visible = true, transformation(origin = {-125, -45}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.PrismDampingOC objectPrismDampConnection3(boneLength = fingerLength[1], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta, bufferEffect = bufferEffect, bufferRange = bufferRange, bufferDamping = bufferDamping, v0Mag = v0Mag, v2delta = v2delta) annotation(Placement(visible = true, transformation(origin = {-125, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a4 annotation(Placement(visible = true, transformation(origin = {-267, -49}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-78.444, -125}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    parameter Real mu;
-    parameter Modelica.SIunits.Length delta;
+    parameter Real mu = 0.01 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Length delta = 0.01 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Velocity v0Mag = 5 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Velocity v2delta = 1 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.TranslationalSpringConstant bufferEffect = 500 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Length bufferRange = 0.1 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping = 50 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Length diameter = 0.02;
+    parameter Modelica.SIunits.Force fMuscle_max = 50;
+    parameter Modelica.SIunits.Angle initialRotations[3] = {0, 0, 0} "In the order of: far distal phalange, middle phalange, and proximal phalange" annotation(Dialog(group = "Initial values"));
   equation
-    connect(objectPrismDampConnection3.frame_b, anteriorMuscleArray.frame_7) annotation(Line(visible = true, origin = {-101.193, -39.215}, points = {{-16.258, -5.785}, {-16.258, 2.893}, {32.515, 2.893}}));
-    connect(frame_a4, objectPrismDampConnection3.frame_a) annotation(Line(visible = true, origin = {-168.899, -47}, points = {{-98.101, -2}, {30.899, -2}, {30.899, 2}, {36.303, 2}}));
+    connect(objectPrismDampConnection3.frame_b, anteriorMuscleArray.frame_7) annotation(Line(visible = true, origin = {-84.93600000000001, -45.441}, points = {{-32.515, -4.559}, {16.258, -4.559}, {16.258, 9.119}}));
+    connect(frame_a4, objectPrismDampConnection3.frame_a) annotation(Line(visible = true, origin = {-168.899, -49.5}, points = {{-98.101, 0.5}, {30.899, 0.5}, {30.899, -0.5}, {36.303, -0.5}}));
     connect(fixedTranslation.frame_a, fingerArray.frame_5A) annotation(Line(visible = true, origin = {-63.125, 44.547}, points = {{-91.875, 45.453}, {29.615, 45.453}, {29.615, -45.453}, {32.645, -45.453}}));
     connect(fixedTranslation1.frame_a, fingerArray.frame_3A) annotation(Line(visible = true, origin = {-44.955, 72.911}, points = {{-37.449, 42.089}, {11.445, 42.089}, {11.445, -42.089}, {14.559, -42.089}}));
     connect(fixedTranslation2.frame_a, fingerArray.frame_1A) annotation(Line(visible = true, origin = {-43.099, 100.47}, points = {{-31.901, 37.841}, {9.587999999999999, 37.841}, {9.587999999999999, -37.841}, {12.725, -37.841}}));
@@ -1149,7 +1173,7 @@ package Components
     Modelica.Mechanics.MultiBody.Parts.BodyCylinder OFingerExtension(r = r_OFingerBone, r_shape = r_shape_OFingerBone, r_0.start = {0, 0.08, 0}, r_0.fixed = false, color = {255, 255, 0}, diameter = diameterOFingerBone, animation = true, specularCoefficient = 1) "Part of the finger that extends from the palm" annotation(Placement(visible = true, transformation(origin = {30, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-r_OFingerBone[1] * 0.5, -diameterOFingerBone * 0.25, 0}) annotation(Placement(visible = true, transformation(origin = {42.218, 23.331}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Joints.Revolute revolute1(animation = false, n = {0, 0, 1}, useAxisFlange = true, phi.fixed = false, phi.start = 1.5, cylinderLength = 0.001, cylinderDiameter = 0.001) annotation(Placement(visible = true, transformation(origin = {-25, 15}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.RevoluteRestrained revoluteRestrained(phi_0_restrained = phi_0_restrained, theta_1 = 0, theta_2 = 1.6, useAxisFlange = true, stateSelect = stateSelect) annotation(Placement(visible = true, transformation(origin = {-10, -12.083}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.RevoluteRestrained revoluteRestrained(phi_0_restrained = phi_0_restrained, theta_1 = -0.1, theta_2 = 1.6, useAxisFlange = true, stateSelect = stateSelect) annotation(Placement(visible = true, transformation(origin = {-10, -12.083}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Joints.Revolute revolute2(animation = false, n = {0, 0, 1}, phi.start = 1.5, useAxisFlange = true, phi.fixed = false, cylinderLength = 0.001, cylinderDiameter = 0.001) annotation(Placement(visible = true, transformation(origin = {-32.475, -30}, extent = {{-10, 10}, {10, -10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation3(r = {-0.5 * r_OFingerBone[1], -diameterOFingerBone * 0.5, 0}) annotation(Placement(visible = true, transformation(origin = {50, -25}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation4(r = {-diameterOFingerBone * 0.6, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-10, -46.567}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
