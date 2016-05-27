@@ -464,10 +464,10 @@ package Components
     parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping(final min = 0) = 500 "Buffer zone's damping constant";
     Modelica.Mechanics.Translational.Sources.Position position annotation(Placement(visible = true, transformation(origin = {11.732, -65}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Sensors.Distance lMag(animation = false) annotation(Placement(visible = true, transformation(origin = {-0, 5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    PowerGrab.Components.OldComponents.NonLinearSpringDamper spring(s_unstretched = threshold, fMagDesired = true) annotation(Placement(visible = true, transformation(origin = {-0, 57.91}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    PowerGrab.Components.OldComponents.NonLinearSpringDamper spring(s_unstretched = threshold, fMagDesired = true, animation = false) annotation(Placement(visible = true, transformation(origin = {-0, 57.91}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(height = 2 * threshold, length = 2 * threshold, r_shape = {-threshold, 0, 0}, shapeType = "sphere", width = 2 * threshold, animation = true) annotation(Placement(visible = true, transformation(origin = {0, 86.994}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b) annotation(Placement(visible = true, transformation(origin = {-46.768, -25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(s.fixed = false, useAxisFlange = true) annotation(Placement(visible = true, transformation(origin = {61.951, -1.936}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(s.fixed = false, useAxisFlange = true, animation = false) annotation(Placement(visible = true, transformation(origin = {61.951, -1.936}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Sensors.RelativePosition lVec(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.world) annotation(Placement(visible = true, transformation(origin = {5, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.SIunits.Length lHat[3];
     Modelica.SIunits.Velocity v2[3];
@@ -485,7 +485,7 @@ package Components
     parameter Modelica.SIunits.Length delta;
     parameter Modelica.SIunits.Velocity v0Mag = 5;
     parameter Modelica.SIunits.Velocity v2delta = 0.1;
-    OldComponents.NonLinearSpringDamper skinBuffer(animation = true, fMagDesired = true, s_unstretched = threshold + bufferRange) annotation(Placement(visible = true, transformation(origin = {0, 26.587}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    OldComponents.NonLinearSpringDamper skinBuffer(animation = false, fMagDesired = true, s_unstretched = threshold + bufferRange) annotation(Placement(visible = true, transformation(origin = {0, 26.587}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
     connect(skinBuffer.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 12.325}, points = {{-29.851, 14.261}, {8.875, 14.261}, {8.875, -14.261}, {12.1, -14.261}}));
     connect(skinBuffer.frame_a, frame_a) annotation(Line(visible = true, origin = {-77.59699999999999, 13.293}, points = {{67.59699999999999, 13.293}, {-16.199, 13.293}, {-16.199, -13.293}, {-35.199, -13.293}}));
@@ -649,26 +649,26 @@ package Components
     connect(frameTranslation.frame_b, frame_b) annotation(Line(points = {{10, 0}, {100, 0}}, color = {95, 95, 95}, thickness = 0.5));
     connect(frame_a, body.frame_a) annotation(Line(points = {{-100, 0}, {-70, 0}, {-70, -60}, {-30, -60}}, color = {95, 95, 95}, thickness = 0.5));
     annotation(Documentation(info = "<HTML>
-      <p>
-      <b>Rigid body</b> with <b>cylinder</b> shape.
-      The mass properties of the body (mass, center of mass,
-      inertia tensor) are computed
-      from the cylinder data. Optionally, the cylinder may be hollow.
-      The cylinder shape is by default used in the animation.
-      The two connector frames <b>frame_a</b> and <b>frame_b</b>
-      are always parallel to each other. Example of component
-      animation (note, that
-      the animation may be switched off via parameter animation = <b>false</b>):
-      </p>
-      
-      <p>
-      <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/BodyCylinder.png\" ALT=\"Parts.BodyCylinder\">
-      </p>
-      
-      <p>
-      A BodyCylinder component has potential states. For details of these
-      states and of the \"Advanced\" menu parameters, see model
-      <a href=\"modelica://Modelica.Mechanics.MultiBody.Parts.Body\">MultiBody.Parts.Body</a>.</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255}), Text(extent = {{150, -80}, {-150, -50}}, lineColor = {0, 0, 0}, textString = "%=r"), Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{-87, 13}, {-51, -12}}, lineColor = {0, 0, 0}, textString = "a"), Text(extent = {{51, 12}, {87, -13}}, lineColor = {0, 0, 0}, textString = "b")}));
+       <p>
+       <b>Rigid body</b> with <b>cylinder</b> shape.
+       The mass properties of the body (mass, center of mass,
+       inertia tensor) are computed
+       from the cylinder data. Optionally, the cylinder may be hollow.
+       The cylinder shape is by default used in the animation.
+       The two connector frames <b>frame_a</b> and <b>frame_b</b>
+       are always parallel to each other. Example of component
+       animation (note, that
+       the animation may be switched off via parameter animation = <b>false</b>):
+       </p>
+       
+       <p>
+       <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/BodyCylinder.png\" ALT=\"Parts.BodyCylinder\">
+       </p>
+       
+       <p>
+       A BodyCylinder component has potential states. For details of these
+       states and of the \"Advanced\" menu parameters, see model
+       <a href=\"modelica://Modelica.Mechanics.MultiBody.Parts.Body\">MultiBody.Parts.Body</a>.</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255}), Text(extent = {{150, -80}, {-150, -50}}, lineColor = {0, 0, 0}, textString = "%=r"), Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{-87, 13}, {-51, -12}}, lineColor = {0, 0, 0}, textString = "a"), Text(extent = {{51, 12}, {87, -13}}, lineColor = {0, 0, 0}, textString = "b")}));
   end BodyCylinder;
 
   model Body "Rigid body with mass, inertia tensor and one frame connector (12 potential states)"
@@ -776,110 +776,110 @@ package Components
     w_a = Frames.angularVelocity2(frame_a.R);
     z_a = der(w_a);
     /* Newton/Euler equations with respect to center of mass
-                                a_CM = a_a + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM));
-                                f_CM = m*(a_CM - g_a);
-                                t_CM = I*z_a + cross(w_a, I*w_a);
-                           frame_a.f = f_CM
-                           frame_a.t = t_CM + cross(r_CM, f_CM);
-                        Inserting the first three equations in the last two results in:
-                      */
+                                    a_CM = a_a + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM));
+                                    f_CM = m*(a_CM - g_a);
+                                    t_CM = I*z_a + cross(w_a, I*w_a);
+                               frame_a.f = f_CM
+                               frame_a.t = t_CM + cross(r_CM, f_CM);
+                            Inserting the first three equations in the last two results in:
+                          */
     frame_a.f = m * (Frames.resolve2(frame_a.R, a_0 - g_0) + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM)));
     frame_a.t = I * z_a + cross(w_a, I * w_a) + cross(r_CM, frame_a.f);
     annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-100, 30}, {-3, -31}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{150, -100}, {-150, -70}}, lineColor = {0, 0, 0}, textString = "m=%m"), Text(extent = {{-150, 110}, {150, 70}}, textString = "%name", lineColor = {0, 0, 255}), Ellipse(extent = {{-20, 60}, {100, -60}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.Sphere, fillColor = {0, 127, 255})}), Documentation(info = "<HTML>
-      <p>
-      <b>Rigid body</b> with mass and inertia tensor.
-      All parameter vectors have to be resolved in frame_a.
-      The <b>inertia tensor</b> has to be defined with respect to a
-      coordinate system that is parallel to frame_a with the
-      origin at the center of mass of the body.
-      </p>
-      <p>
-      By default, this component is visualized by a <b>cylinder</b> located
-      between frame_a and the center of mass and by a <b>sphere</b> that has
-      its center at the center of mass. If the cylinder length is smaller as
-      the radius of the sphere, e.g., since frame_a is located at the
-      center of mass, the cylinder is not displayed. Note, that
-      the animation may be switched off via parameter animation = <b>false</b>.
-      </p>
-      <p>
-      <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Body.png\" ALT=\"Parts.Body\">
-      </p>
-      
-      <p>
-      <b>States of Body Components</b>
-      </p>
-      <p>
-      Every body has potential states. If possible a tool will select
-      the states of joints and not the states of bodies because this is
-      usually the most efficient choice. In this case the position, orientation,
-      velocity and angular velocity of frame_a of the body will be computed
-      by the component that is connected to frame_a. However, if a body is moving
-      freely in space, variables of the body have to be used as states. The potential
-      states of the body are:
-      </p>
-      <ul>
-      <li> The <b>position vector</b> frame_a.r_0 from the origin of the
-           world frame to the origin of frame_a of the body, resolved in
-           the world frame and the <b>absolute velocity</b> v_0 of the origin of
-           frame_a, resolved in the world frame (= der(frame_a.r_0)).
-      </li>
-      <li> If parameter <b>useQuaternions</b> in the \"Advanced\" menu
-           is <b>true</b> (this is the default), then <b>4 quaternions</b>
-           are potential states. Additionally, the coordinates of the
-           absolute angular velocity vector of the
-           body are 3 potential states.<br>
-           If <b>useQuaternions</b> in the \"Advanced\" menu
-           is <b>false</b>, then <b>3 angles</b> and the derivatives of
-           these angles are potential states. The orientation of frame_a
-           is computed by rotating the world frame along the axes defined
-           in parameter vector \"sequence_angleStates\" (default = {1,2,3}, i.e.,
-           the Cardan angle sequence) around the angles used as potential states.
-           For example, the default is to rotate the x-axis of the world frame
-           around angles[1], the new y-axis around angles[2] and the new z-axis
-           around angles[3], arriving at frame_a.
+       <p>
+       <b>Rigid body</b> with mass and inertia tensor.
+       All parameter vectors have to be resolved in frame_a.
+       The <b>inertia tensor</b> has to be defined with respect to a
+       coordinate system that is parallel to frame_a with the
+       origin at the center of mass of the body.
+       </p>
+       <p>
+       By default, this component is visualized by a <b>cylinder</b> located
+       between frame_a and the center of mass and by a <b>sphere</b> that has
+       its center at the center of mass. If the cylinder length is smaller as
+       the radius of the sphere, e.g., since frame_a is located at the
+       center of mass, the cylinder is not displayed. Note, that
+       the animation may be switched off via parameter animation = <b>false</b>.
+       </p>
+       <p>
+       <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Body.png\" ALT=\"Parts.Body\">
+       </p>
+       
+       <p>
+       <b>States of Body Components</b>
+       </p>
+       <p>
+       Every body has potential states. If possible a tool will select
+       the states of joints and not the states of bodies because this is
+       usually the most efficient choice. In this case the position, orientation,
+       velocity and angular velocity of frame_a of the body will be computed
+       by the component that is connected to frame_a. However, if a body is moving
+       freely in space, variables of the body have to be used as states. The potential
+       states of the body are:
+       </p>
+       <ul>
+       <li> The <b>position vector</b> frame_a.r_0 from the origin of the
+            world frame to the origin of frame_a of the body, resolved in
+            the world frame and the <b>absolute velocity</b> v_0 of the origin of
+            frame_a, resolved in the world frame (= der(frame_a.r_0)).
        </li>
-      </ul>
-      <p>
-      The quaternions have the slight disadvantage that there is a
-      non-linear constraint equation between the 4 quaternions.
-      Therefore, at least one non-linear equation has to be solved
-      during simulation. A tool might, however, analytically solve this
-      simple constraint equation. Using the 3 angles as states has the
-      disadvantage that there is a singular configuration in which a
-      division by zero will occur. If it is possible to determine in advance
-      for an application class that this singular configuration is outside
-      of the operating region, the 3 angles might be used as potential
-      states by setting <b>useQuaternions</b> = <b>false</b>.
-      </p>
-      <p>
-      In text books about 3-dimensional mechanics often 3 angles and the
-      angular velocity are used as states. This is not the case here, since
-      3 angles and their derivatives are used as potential states
-      (if useQuaternions = false). The reason
-      is that for real-time simulation the discretization formula of the
-      integrator might be \"inlined\" and solved together with the body equations.
-      By appropriate symbolic transformation the performance is
-      drastically increased if angles and their
-      derivatives are used as states, instead of angles and the angular
-      velocity.
-      </p>
-      <p>
-      Whether or not variables of the body are used as states is usually
-      automatically selected by the Modelica translator. If parameter
-      <b>enforceStates</b> is set to <b>true</b> in the \"Advanced\" menu,
-      then body variables are forced to be used as states according
-      to the setting of parameters \"useQuaternions\" and
-      \"sequence_angleStates\".
-      </p>
-      </HTML>"));
+       <li> If parameter <b>useQuaternions</b> in the \"Advanced\" menu
+            is <b>true</b> (this is the default), then <b>4 quaternions</b>
+            are potential states. Additionally, the coordinates of the
+            absolute angular velocity vector of the
+            body are 3 potential states.<br>
+            If <b>useQuaternions</b> in the \"Advanced\" menu
+            is <b>false</b>, then <b>3 angles</b> and the derivatives of
+            these angles are potential states. The orientation of frame_a
+            is computed by rotating the world frame along the axes defined
+            in parameter vector \"sequence_angleStates\" (default = {1,2,3}, i.e.,
+            the Cardan angle sequence) around the angles used as potential states.
+            For example, the default is to rotate the x-axis of the world frame
+            around angles[1], the new y-axis around angles[2] and the new z-axis
+            around angles[3], arriving at frame_a.
+        </li>
+       </ul>
+       <p>
+       The quaternions have the slight disadvantage that there is a
+       non-linear constraint equation between the 4 quaternions.
+       Therefore, at least one non-linear equation has to be solved
+       during simulation. A tool might, however, analytically solve this
+       simple constraint equation. Using the 3 angles as states has the
+       disadvantage that there is a singular configuration in which a
+       division by zero will occur. If it is possible to determine in advance
+       for an application class that this singular configuration is outside
+       of the operating region, the 3 angles might be used as potential
+       states by setting <b>useQuaternions</b> = <b>false</b>.
+       </p>
+       <p>
+       In text books about 3-dimensional mechanics often 3 angles and the
+       angular velocity are used as states. This is not the case here, since
+       3 angles and their derivatives are used as potential states
+       (if useQuaternions = false). The reason
+       is that for real-time simulation the discretization formula of the
+       integrator might be \"inlined\" and solved together with the body equations.
+       By appropriate symbolic transformation the performance is
+       drastically increased if angles and their
+       derivatives are used as states, instead of angles and the angular
+       velocity.
+       </p>
+       <p>
+       Whether or not variables of the body are used as states is usually
+       automatically selected by the Modelica translator. If parameter
+       <b>enforceStates</b> is set to <b>true</b> in the \"Advanced\" menu,
+       then body variables are forced to be used as states according
+       to the setting of parameters \"useQuaternions\" and
+       \"sequence_angleStates\".
+       </p>
+       </HTML>"));
   end Body;
 
   model RealFingerContact
-    PowerGrab.Components.FingerMuscleLineArray anteriorMuscleArray(maxFDistal = fMuscle_max, maxMDistal = fMuscle_max, maxCDistal = fMuscle_max) annotation(Placement(visible = true, transformation(origin = {-120, 15}, extent = {{-51.322, -51.322}, {51.322, 51.322}}, rotation = 0)));
-    PowerGrab.Components.RealFingerStructure fingerArray(phi_0_boneFDistal = initialRotations[1], phi_0_boneMDistal = initialRotations[2], phi_0_boneCDistal = initialRotations[3], fDistalClosed = fDistalClosed, mDistalClosed = mDistalClosed, cDistalRegularClosed = cDistalRegularClosed, cDistalSideClosed = cDistalSideClosed, dirTorque = false, phi_0_doubleJoint = phiThumb0, diameterIboneFDistal = diameter, diameterIboneMDistal = diameter, diameterIboneCDistal = diameter, diameterOboneCDistal = diameter, diameterOboneFDistal = diameter, diameterOboneMDistal = diameter, r_IboneFDistal = {fingerLength[3] / 2, 0, 0}, r_OboneFDistal = {fingerLength[4], 0, 0}, r_IboneMDistal = {fingerLength[2] / 2, 0, 0}, r_OboneMDistal = {fingerLength[3] / 2, 0, 0}, r_IboneCDistal = {fingerLength[1], 0, 0}, r_OboneCDistal = {fingerLength[2] / 2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {17.255, 15}, extent = {{-47.745, -47.745}, {47.745, 47.745}}, rotation = 0)));
+    PowerGrab.Components.FingerMuscleLineArray anteriorMuscleArray(maxFDistal = fMuscle_max, maxMDistal = fMuscle_max, maxCDistal = fMuscle_max) annotation(Placement(visible = true, transformation(origin = {-103.678, 21.322}, extent = {{-51.322, -51.322}, {51.322, 51.322}}, rotation = 0)));
+    PowerGrab.Components.RealFingerStructure fingerArray(phi_0_boneFDistal = initialRotations[1], phi_0_boneMDistal = initialRotations[2], phi_0_boneCDistal = initialRotations[3], fDistalClosed = fDistalClosed, mDistalClosed = mDistalClosed, cDistalRegularClosed = cDistalRegularClosed, cDistalSideClosed = cDistalSideClosed, dirTorque = false, phi_0_doubleJoint = phiSide0, diameterIboneFDistal = diameter, diameterIboneMDistal = diameter, diameterIboneCDistal = diameter, diameterOboneCDistal = diameter, diameterOboneFDistal = diameter, diameterOboneMDistal = diameter, r_IboneFDistal = {fingerLength[3] / 2, 0, 0}, r_OboneFDistal = {fingerLength[4], 0, 0}, r_IboneMDistal = {fingerLength[2] / 2, 0, 0}, r_OboneMDistal = {fingerLength[3] / 2, 0, 0}, r_IboneCDistal = {fingerLength[1], 0, 0}, r_OboneCDistal = {fingerLength[2] / 2, 0, 0}) annotation(Placement(visible = true, transformation(origin = {17.255, 15}, extent = {{-47.745, -47.745}, {47.745, 47.745}}, rotation = 0)));
     PowerGrab.Components.FingerMuscleLineArray posteriorMuscleArray(maxFDistal = fMuscle_max, maxMDistal = fMuscle_max, maxCDistal = fMuscle_max) annotation(Placement(visible = true, transformation(origin = {137.5, 15}, extent = {{52.5, -52.5}, {-52.5, 52.5}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a annotation(Placement(visible = true, transformation(origin = {-149, -80}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-21.635, -111.85}, extent = {{-16, -16}, {16, 16}}, rotation = -90)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-fingerLength[2] / 4, fingerArray.diameterOboneCDistal * 0.75, 0}) annotation(Placement(visible = true, transformation(origin = {-165, 90}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = {-fingerLength[2] / 4, fingerArray.diameterOboneCDistal * 0.75, 0}, animation = false) annotation(Placement(visible = true, transformation(origin = {-165, 90}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a1 annotation(Placement(visible = true, transformation(origin = {-251, 89}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-125, -91}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     parameter Modelica.SIunits.Angle phiSide0 annotation(Dialog(group = "Initial values"));
     parameter Boolean fDistalClosed = true annotation(Dialog(tab = "Advanced", group = "Parameters"));
@@ -891,8 +891,8 @@ package Components
     Modelica.Blocks.Interfaces.RealInput posteriorInput[4] "Posterior Activation Input in order of F, M, CReg, CSide" annotation(Placement(visible = true, transformation(origin = {250, 11.866}, extent = {{20, -20}, {-20, 20}}, rotation = 0), iconTransformation(origin = {-17.374, -52.794}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput jointControl[4] if not (not fDistalClosed and not mDistalClosed and not cDistalRegularClosed and not cDistalSideClosed) "Joint control signal in order of F, M, CReg, CSide" annotation(Placement(visible = true, transformation(origin = {13.183, 162.518}, extent = {{-20, -20}, {20, 20}}, rotation = -90), iconTransformation(origin = {-15.106, -5}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a2 annotation(Placement(visible = true, transformation(origin = {-254, 116}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-125, 0}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-fingerLength[3] / 4, fingerArray.diameterOboneMDistal * 0.75, 0}) annotation(Placement(visible = true, transformation(origin = {-92.404, 115}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-fingerLength[4] / 2, fingerArray.diameterOboneFDistal * 0.75, 0}) annotation(Placement(visible = true, transformation(origin = {-85, 138.311}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation1(r = {-fingerLength[3] / 4, fingerArray.diameterOboneMDistal * 0.75, 0}, animation = false) annotation(Placement(visible = true, transformation(origin = {-92.404, 115}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-fingerLength[4] / 2, fingerArray.diameterOboneFDistal * 0.75, 0}, animation = false) annotation(Placement(visible = true, transformation(origin = {-85, 138.311}, extent = {{10, -10}, {-10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a3 annotation(Placement(visible = true, transformation(origin = {-255, 140}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-123.407, 91}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     PowerGrab.Components.PrismDampingOC objectPrismDampConnection(boneLength = fingerLength[4], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta, bufferEffect = bufferEffect, bufferRange = bufferRange, bufferDamping = bufferDamping, v0Mag = v0Mag, v2delta = v2delta) annotation(Placement(visible = true, transformation(origin = {-190, 135}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     PowerGrab.Components.PrismDampingOC objectPrismDampConnection1(boneLength = fingerLength[3], dampingCoefficient = dampingCoefficient, k = k, threshold = threshold, mu = mu, delta = delta, bufferEffect = bufferEffect, bufferRange = bufferRange, bufferDamping = bufferDamping, v0Mag = v0Mag, v2delta = v2delta) annotation(Placement(visible = true, transformation(origin = {-190, 115}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -913,7 +913,10 @@ package Components
     parameter Modelica.SIunits.Force fMuscle_max = 50;
     parameter Modelica.SIunits.Angle initialRotations[3] = {0, 0, 0} "In the order of: far distal phalange, middle phalange, and proximal phalange" annotation(Dialog(group = "Initial values"));
   equation
-    connect(objectPrismDampConnection3.frame_b, anteriorMuscleArray.frame_7) annotation(Line(visible = true, origin = {-84.93600000000001, -45.441}, points = {{-32.515, -4.559}, {16.258, -4.559}, {16.258, 9.119}}));
+    connect(anteriorInput[3], anteriorMuscleArray.perCDistal) annotation(Line(visible = true, origin = {-187.848, -2.668}, points = {{-87.152, 15.616}, {27.152, 15.616}, {27.152, -15.616}, {32.848, -15.616}}, color = {0, 0, 127}));
+    connect(anteriorInput[1], anteriorMuscleArray.perFDistal) annotation(Line(visible = true, origin = {-187.546, 36.102}, points = {{-87.45399999999999, -23.154}, {26.85, -23.154}, {26.85, 23.154}, {33.755, 23.154}}, color = {0, 0, 127}));
+    connect(anteriorInput[2], anteriorMuscleArray.perMDistal) annotation(Line(visible = true, origin = {-187.848, 15.913}, points = {{-87.152, -2.965}, {27.152, -2.965}, {27.152, 2.965}, {32.848, 2.965}}, color = {0, 0, 127}));
+    connect(objectPrismDampConnection3.frame_b, anteriorMuscleArray.frame_7) annotation(Line(visible = true, origin = {-74.054, -43.333}, points = {{-43.397, -6.667}, {21.698, -6.667}, {21.698, 13.333}}));
     connect(frame_a4, objectPrismDampConnection3.frame_a) annotation(Line(visible = true, origin = {-168.899, -49.5}, points = {{-98.101, 0.5}, {30.899, 0.5}, {30.899, -0.5}, {36.303, -0.5}}));
     connect(fixedTranslation.frame_a, fingerArray.frame_5A) annotation(Line(visible = true, origin = {-63.125, 44.547}, points = {{-91.875, 45.453}, {29.615, 45.453}, {29.615, -45.453}, {32.645, -45.453}}));
     connect(fixedTranslation1.frame_a, fingerArray.frame_3A) annotation(Line(visible = true, origin = {-44.955, 72.911}, points = {{-37.449, 42.089}, {11.445, 42.089}, {11.445, -42.089}, {14.559, -42.089}}));
@@ -930,27 +933,24 @@ package Components
     connect(jointControl[1], fingerArray.thetaFDistal) annotation(Line(visible = true, origin = {25.166, 91.074}, points = {{-11.983, 71.443}, {-11.983, -22.814}, {11.983, -22.814}, {11.983, -25.814}}, color = {0, 0, 127}));
     connect(posteriorInput[4], fingerArray.sidePosterior) annotation(Line(visible = true, origin = {143.669, -10.727}, points = {{106.331, 22.593}, {82.881, 22.593}, {82.881, -25.913}, {-136.046, -25.913}, {-136.046, 6.639}}, color = {0, 0, 127}));
     connect(anteriorInput[4], fingerArray.sideAnterior) annotation(Line(visible = true, origin = {-152.61, 38.814}, points = {{-122.39, -25.866}, {-98.94, -25.866}, {-98.94, 27.826}, {160.135, 27.826}, {160.135, -3.92}}, color = {0, 0, 127}));
-    connect(anteriorMuscleArray.frame_4, fingerArray.frame_4A) annotation(Line(visible = true, origin = {-41.548, 14.261}, points = {{-27.13, -0.737}, {8.037000000000001, -0.737}, {8.037000000000001, 0.737}, {11.056, 0.737}}));
+    connect(anteriorMuscleArray.frame_4, fingerArray.frame_4A) annotation(Line(visible = true, origin = {-37.467, 17.422}, points = {{-14.889, 2.424}, {3.957, 2.424}, {3.957, -2.424}, {6.975, -2.424}}));
     connect(posteriorInput[3], posteriorMuscleArray.perCDistal) annotation(Line(visible = true, origin = {207.879, -6.825}, points = {{42.121, 18.691}, {-12.121, 18.691}, {-12.121, -18.691}, {-17.879, -18.691}}, color = {0, 0, 127}));
     connect(posteriorInput[1], posteriorMuscleArray.perFDistal) annotation(Line(visible = true, origin = {207.57, 32.836}, points = {{42.43, -20.97}, {-11.812, -20.97}, {-11.812, 20.97}, {-18.807, 20.97}}, color = {0, 0, 127}));
     connect(posteriorInput[2], posteriorMuscleArray.perMDistal) annotation(Line(visible = true, origin = {207.879, 12.183}, points = {{42.121, -0.317}, {-12.121, -0.317}, {-12.121, 0.317}, {-17.879, 0.317}}, color = {0, 0, 127}));
-    connect(anteriorInput[3], anteriorMuscleArray.perCDistal) annotation(Line(visible = true, origin = {-200.089, -5.829}, points = {{-74.911, 18.777}, {23.072, 18.777}, {23.072, -18.777}, {28.767, -18.777}}, color = {0, 0, 127}));
-    connect(anteriorInput[2], anteriorMuscleArray.perMDistal) annotation(Line(visible = true, origin = {-200.089, 12.752}, points = {{-74.911, 0.196}, {23.072, 0.196}, {23.072, -0.196}, {28.767, -0.196}}, color = {0, 0, 127}));
-    connect(anteriorInput[1], anteriorMuscleArray.perFDistal) annotation(Line(visible = true, origin = {-199.787, 32.941}, points = {{-75.21299999999999, -19.993}, {22.769, -19.993}, {22.769, 19.993}, {29.675, 19.993}}, color = {0, 0, 127}));
     connect(fingerArray.frame_a, frame_a) annotation(Line(visible = true, origin = {-43.468, -62.922}, points = {{52.766, 34.156}, {52.766, -17.078}, {-105.532, -17.078}}));
     connect(posteriorMuscleArray.frame_7, fingerArray.frame_7P) annotation(Line(visible = true, origin = {74.917, -37.811}, points = {{10.083, 0.311}, {10.083, -2.689}, {-10.083, -2.689}, {-10.083, 5.066}}));
     connect(posteriorMuscleArray.frame_6, fingerArray.frame_6P) annotation(Line(visible = true, origin = {71.5, -18.709}, points = {{13.5, -1.731}, {-3.5, -1.731}, {-3.5, 1.731}, {-6.5, 1.731}}));
     connect(posteriorMuscleArray.frame_5, fingerArray.frame_5P) annotation(Line(visible = true, origin = {71.48699999999999, -2.194}, points = {{13.513, -1.227}, {-3.487, -1.227}, {-3.487, 1.227}, {-6.539, 1.227}}));
-    connect(anteriorMuscleArray.frame_7, fingerArray.frame_7A) annotation(Line(visible = true, origin = {-49.499, -36.885}, points = {{-19.179, 0.5629999999999999}, {-19.179, -2.437}, {19.179, -2.437}, {19.179, 4.31}}, color = {95, 95, 95}));
-    connect(anteriorMuscleArray.frame_6, fingerArray.frame_6A) annotation(Line(visible = true, origin = {-41.52, -18.183}, points = {{-27.158, -1.462}, {8.009, -1.462}, {8.009, 1.462}, {11.139, 1.462}}));
-    connect(anteriorMuscleArray.frame_5, fingerArray.frame_5A) annotation(Line(visible = true, origin = {-41.545, -1.957}, points = {{-27.133, -1.051}, {8.034000000000001, -1.051}, {8.034000000000001, 1.051}, {11.065, 1.051}}, color = {95, 95, 95}));
+    connect(anteriorMuscleArray.frame_7, fingerArray.frame_7A) annotation(Line(visible = true, origin = {-41.338, -33.964}, points = {{-11.018, 3.964}, {-11.018, -2.676}, {11.018, -2.676}, {11.018, 1.388}}, color = {95, 95, 95}));
+    connect(anteriorMuscleArray.frame_6, fingerArray.frame_6A) annotation(Line(visible = true, origin = {-37.439, -15.022}, points = {{-14.917, 1.699}, {3.929, 1.699}, {3.929, -1.699}, {7.059, -1.699}}));
+    connect(anteriorMuscleArray.frame_5, fingerArray.frame_5A) annotation(Line(visible = true, origin = {-37.464, 1.204}, points = {{-14.892, 2.11}, {3.954, 2.11}, {3.954, -2.11}, {6.984, -2.11}}, color = {95, 95, 95}));
     connect(posteriorMuscleArray.frame_4, fingerArray.frame_4P) annotation(Line(visible = true, origin = {71.44, 14.126}, points = {{13.56, -0.636}, {-3.44, -0.636}, {-3.44, 0.636}, {-6.679, 0.636}}, color = {95, 95, 95}));
     connect(posteriorMuscleArray.frame_3, fingerArray.frame_3P) annotation(Line(visible = true, origin = {71.482, 30.796}, points = {{13.518, -0.046}, {-3.482, -0.046}, {-3.482, 0.046}, {-6.554, 0.046}}));
     connect(posteriorMuscleArray.frame_2, fingerArray.frame_2P) annotation(Line(visible = true, origin = {71.56699999999999, 47.453}, points = {{13.433, 0.623}, {-3.478, 0.623}, {-3.478, -0.623}, {-6.478, -0.623}}));
     connect(posteriorMuscleArray.frame_1, fingerArray.frame_1P) annotation(Line(visible = true, origin = {71.56100000000001, 64.376}, points = {{13.439, 1.549}, {-3.48, 1.549}, {-3.48, -1.549}, {-6.48, -1.549}}, color = {95, 95, 95}));
-    connect(anteriorMuscleArray.frame_3, fingerArray.frame_3A) annotation(Line(visible = true, origin = {-41.524, 30.609}, points = {{-27.154, -0.212}, {8.013, -0.212}, {8.013, 0.212}, {11.128, 0.212}}));
-    connect(anteriorMuscleArray.frame_2, fingerArray.frame_2A) annotation(Line(visible = true, origin = {-41.547, 47.081}, points = {{-27.131, 0.251}, {8.037000000000001, 0.251}, {8.037000000000001, -0.251}, {11.057, -0.251}}));
-    connect(anteriorMuscleArray.frame_1, fingerArray.frame_1A) annotation(Line(visible = true, origin = {-52.156, 65.095}, points = {{-16.522, -0.313}, {-13.522, -0.313}, {-13.522, 1.545}, {21.782, 1.545}, {21.782, -2.466}}));
+    connect(anteriorMuscleArray.frame_3, fingerArray.frame_3A) annotation(Line(visible = true, origin = {-37.443, 33.77}, points = {{-14.913, 2.949}, {3.933, 2.949}, {3.933, -2.949}, {7.047, -2.949}}));
+    connect(anteriorMuscleArray.frame_2, fingerArray.frame_2A) annotation(Line(visible = true, origin = {-37.467, 50.242}, points = {{-14.889, 3.412}, {3.956, 3.412}, {3.956, -3.412}, {6.977, -3.412}}));
+    connect(anteriorMuscleArray.frame_1, fingerArray.frame_1A) annotation(Line(visible = true, origin = {-52.156, 65.095}, points = {{-0.2, 6.009}, {-13.522, -0.313}, {-13.522, 1.545}, {21.782, 1.545}, {21.782, -2.466}}));
     annotation(Icon(coordinateSystem(extent = {{-125, -125}, {125, 125}}, preserveAspectRatio = true, initialScale = 0.1, grid = {25, 25}), graphics = {Polygon(visible = true, origin = {-11.122, -85.083}, fillColor = {0, 0, 255}, fillPattern = FillPattern.VerticalCylinder, points = {{-38.878, -26.42}, {13.483, -26.42}, {34.272, 25.083}, {-8.878, 27.757}}), Polygon(visible = true, origin = {11.791, -38.344}, fillColor = {0, 128, 255}, fillPattern = FillPattern.VerticalCylinder, points = {{-31.791, -21.656}, {11.359, -21.656}, {20.178, 38.344}, {-21.791, 38.344}}), Polygon(visible = true, origin = {11.3, 30}, fillColor = {102, 204, 255}, fillPattern = FillPattern.VerticalCylinder, points = {{-21.3, -30}, {21.3, -30}, {21.3, 30}, {-21.3, 30}}), Polygon(visible = true, origin = {-4.193, 90}, fillColor = {0, 255, 255}, fillPattern = FillPattern.VerticalCylinder, points = {{-5.807, -30}, {37.422, -30}, {4.193, 30}, {-35.807, 30}})}), experiment(StopTime = 60.0), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
   end RealFingerContact;
 
@@ -971,8 +971,8 @@ package Components
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_5P annotation(Placement(visible = true, transformation(origin = {-40, -104}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {119.869, -40.131}, extent = {{-9.869, -9.869}, {9.869, 9.869}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_6P annotation(Placement(visible = true, transformation(origin = {-80, -104}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {120, -80.37}, extent = {{-10.37, -10.37}, {10.37, 10.37}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_7P annotation(Placement(visible = true, transformation(origin = {-120, -104}, extent = {{-16, -16}, {16, 16}}, rotation = -90), iconTransformation(origin = {119.582, -120}, extent = {{-10.418, -10.418}, {10.418, 10.418}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation anteriorBase(r = {0, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-127.882, 41.75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Mechanics.MultiBody.Parts.FixedTranslation posteriorBase(r = {0, 0, 0}) annotation(Placement(visible = true, transformation(origin = {-127.948, -41.75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation anteriorBase(r = {0, 0, 0}, animation = false) annotation(Placement(visible = true, transformation(origin = {-127.882, 41.75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Mechanics.MultiBody.Parts.FixedTranslation posteriorBase(r = {0, 0, 0}, animation = false) annotation(Placement(visible = true, transformation(origin = {-127.948, -41.75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Interfaces.RealInput thetaCDistal if cDistalRegularClosed annotation(Placement(visible = true, transformation(origin = {-63.718, 26.436}, extent = {{10.401, -10.401}, {-10.401, 10.401}}, rotation = 0), iconTransformation(origin = {-66.84999999999999, 125.992}, extent = {{-20, -20}, {20, 20}}, rotation = -90)));
     Modelica.Blocks.Interfaces.RealInput thetaMDistal if mDistalClosed annotation(Placement(visible = true, transformation(origin = {25.215, 26.054}, extent = {{10.401, -10.401}, {-10.401, 10.401}}, rotation = 0), iconTransformation(origin = {-10, 126.471}, extent = {{-20, -20}, {20, 20}}, rotation = -90)));
     Modelica.Blocks.Interfaces.RealInput thetaFDistal if fDistalClosed annotation(Placement(visible = true, transformation(origin = {99.599, 26.473}, extent = {{10.401, -10.401}, {-10.401, 10.401}}, rotation = 0), iconTransformation(origin = {50, 126.321}, extent = {{-20, -20}, {20, 20}}, rotation = -90)));
