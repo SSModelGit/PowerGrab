@@ -904,11 +904,11 @@ package Components
     Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a4 annotation(Placement(visible = true, transformation(origin = {-267, -49}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-78.444, -125}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
     parameter Real mu = 0.01 annotation(Dialog(tab = "Friction", group = "Parameters"));
     parameter Modelica.SIunits.Length delta = 0.01 annotation(Dialog(tab = "Friction", group = "Parameters"));
-    parameter Modelica.SIunits.Velocity v0Mag = 5 annotation(Dialog(tab = "Friction", group = "Parameters"));
-    parameter Modelica.SIunits.Velocity v2delta = 1 annotation(Dialog(tab = "Friction", group = "Parameters"));
-    parameter Modelica.SIunits.TranslationalSpringConstant bufferEffect = 500 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Velocity v0Mag = 1 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.Velocity v2delta = 0.01 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.TranslationalSpringConstant bufferEffect = 25 annotation(Dialog(tab = "Friction", group = "Parameters"));
     parameter Modelica.SIunits.Length bufferRange = 0.1 annotation(Dialog(tab = "Friction", group = "Parameters"));
-    parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping = 50 annotation(Dialog(tab = "Friction", group = "Parameters"));
+    parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping = 15 annotation(Dialog(tab = "Friction", group = "Parameters"));
     parameter Modelica.SIunits.Length diameter = 0.02;
     parameter Modelica.SIunits.Force fMuscle_max = 50;
     parameter Modelica.SIunits.Angle initialRotations[3] = {0, 0, 0} "In the order of: far distal phalange, middle phalange, and proximal phalange" annotation(Dialog(group = "Initial values"));
