@@ -1,0 +1,4 @@
+within PowerGrabStructure.Interfaces;
+package FingerWithContact
+  
+end FingerWithContact;

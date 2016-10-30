@@ -649,26 +649,26 @@ package Components
     connect(frameTranslation.frame_b, frame_b) annotation(Line(points = {{10, 0}, {100, 0}}, color = {95, 95, 95}, thickness = 0.5));
     connect(frame_a, body.frame_a) annotation(Line(points = {{-100, 0}, {-70, 0}, {-70, -60}, {-30, -60}}, color = {95, 95, 95}, thickness = 0.5));
     annotation(Documentation(info = "<HTML>
-       <p>
-       <b>Rigid body</b> with <b>cylinder</b> shape.
-       The mass properties of the body (mass, center of mass,
-       inertia tensor) are computed
-       from the cylinder data. Optionally, the cylinder may be hollow.
-       The cylinder shape is by default used in the animation.
-       The two connector frames <b>frame_a</b> and <b>frame_b</b>
-       are always parallel to each other. Example of component
-       animation (note, that
-       the animation may be switched off via parameter animation = <b>false</b>):
-       </p>
-       
-       <p>
-       <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/BodyCylinder.png\" ALT=\"Parts.BodyCylinder\">
-       </p>
-       
-       <p>
-       A BodyCylinder component has potential states. For details of these
-       states and of the \"Advanced\" menu parameters, see model
-       <a href=\"modelica://Modelica.Mechanics.MultiBody.Parts.Body\">MultiBody.Parts.Body</a>.</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255}), Text(extent = {{150, -80}, {-150, -50}}, lineColor = {0, 0, 0}, textString = "%=r"), Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{-87, 13}, {-51, -12}}, lineColor = {0, 0, 0}, textString = "a"), Text(extent = {{51, 12}, {87, -13}}, lineColor = {0, 0, 0}, textString = "b")}));
+        <p>
+        <b>Rigid body</b> with <b>cylinder</b> shape.
+        The mass properties of the body (mass, center of mass,
+        inertia tensor) are computed
+        from the cylinder data. Optionally, the cylinder may be hollow.
+        The cylinder shape is by default used in the animation.
+        The two connector frames <b>frame_a</b> and <b>frame_b</b>
+        are always parallel to each other. Example of component
+        animation (note, that
+        the animation may be switched off via parameter animation = <b>false</b>):
+        </p>
+        
+        <p>
+        <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/BodyCylinder.png\" ALT=\"Parts.BodyCylinder\">
+        </p>
+        
+        <p>
+        A BodyCylinder component has potential states. For details of these
+        states and of the \"Advanced\" menu parameters, see model
+        <a href=\"modelica://Modelica.Mechanics.MultiBody.Parts.Body\">MultiBody.Parts.Body</a>.</html>"), Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255}), Text(extent = {{150, -80}, {-150, -50}}, lineColor = {0, 0, 0}, textString = "%=r"), Rectangle(extent = {{-100, 40}, {100, -40}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{-87, 13}, {-51, -12}}, lineColor = {0, 0, 0}, textString = "a"), Text(extent = {{51, 12}, {87, -13}}, lineColor = {0, 0, 0}, textString = "b")}));
   end BodyCylinder;
 
   model Body "Rigid body with mass, inertia tensor and one frame connector (12 potential states)"
@@ -776,102 +776,102 @@ package Components
     w_a = Frames.angularVelocity2(frame_a.R);
     z_a = der(w_a);
     /* Newton/Euler equations with respect to center of mass
-                                    a_CM = a_a + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM));
-                                    f_CM = m*(a_CM - g_a);
-                                    t_CM = I*z_a + cross(w_a, I*w_a);
-                               frame_a.f = f_CM
-                               frame_a.t = t_CM + cross(r_CM, f_CM);
-                            Inserting the first three equations in the last two results in:
-                          */
+                                        a_CM = a_a + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM));
+                                        f_CM = m*(a_CM - g_a);
+                                        t_CM = I*z_a + cross(w_a, I*w_a);
+                                   frame_a.f = f_CM
+                                   frame_a.t = t_CM + cross(r_CM, f_CM);
+                                Inserting the first three equations in the last two results in:
+                              */
     frame_a.f = m * (Frames.resolve2(frame_a.R, a_0 - g_0) + cross(z_a, r_CM) + cross(w_a, cross(w_a, r_CM)));
     frame_a.t = I * z_a + cross(w_a, I * w_a) + cross(r_CM, frame_a.f);
     annotation(Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-100, 30}, {-3, -31}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.HorizontalCylinder, fillColor = {0, 127, 255}, radius = 10), Text(extent = {{150, -100}, {-150, -70}}, lineColor = {0, 0, 0}, textString = "m=%m"), Text(extent = {{-150, 110}, {150, 70}}, textString = "%name", lineColor = {0, 0, 255}), Ellipse(extent = {{-20, 60}, {100, -60}}, lineColor = {0, 24, 48}, fillPattern = FillPattern.Sphere, fillColor = {0, 127, 255})}), Documentation(info = "<HTML>
-       <p>
-       <b>Rigid body</b> with mass and inertia tensor.
-       All parameter vectors have to be resolved in frame_a.
-       The <b>inertia tensor</b> has to be defined with respect to a
-       coordinate system that is parallel to frame_a with the
-       origin at the center of mass of the body.
-       </p>
-       <p>
-       By default, this component is visualized by a <b>cylinder</b> located
-       between frame_a and the center of mass and by a <b>sphere</b> that has
-       its center at the center of mass. If the cylinder length is smaller as
-       the radius of the sphere, e.g., since frame_a is located at the
-       center of mass, the cylinder is not displayed. Note, that
-       the animation may be switched off via parameter animation = <b>false</b>.
-       </p>
-       <p>
-       <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Body.png\" ALT=\"Parts.Body\">
-       </p>
-       
-       <p>
-       <b>States of Body Components</b>
-       </p>
-       <p>
-       Every body has potential states. If possible a tool will select
-       the states of joints and not the states of bodies because this is
-       usually the most efficient choice. In this case the position, orientation,
-       velocity and angular velocity of frame_a of the body will be computed
-       by the component that is connected to frame_a. However, if a body is moving
-       freely in space, variables of the body have to be used as states. The potential
-       states of the body are:
-       </p>
-       <ul>
-       <li> The <b>position vector</b> frame_a.r_0 from the origin of the
-            world frame to the origin of frame_a of the body, resolved in
-            the world frame and the <b>absolute velocity</b> v_0 of the origin of
-            frame_a, resolved in the world frame (= der(frame_a.r_0)).
-       </li>
-       <li> If parameter <b>useQuaternions</b> in the \"Advanced\" menu
-            is <b>true</b> (this is the default), then <b>4 quaternions</b>
-            are potential states. Additionally, the coordinates of the
-            absolute angular velocity vector of the
-            body are 3 potential states.<br>
-            If <b>useQuaternions</b> in the \"Advanced\" menu
-            is <b>false</b>, then <b>3 angles</b> and the derivatives of
-            these angles are potential states. The orientation of frame_a
-            is computed by rotating the world frame along the axes defined
-            in parameter vector \"sequence_angleStates\" (default = {1,2,3}, i.e.,
-            the Cardan angle sequence) around the angles used as potential states.
-            For example, the default is to rotate the x-axis of the world frame
-            around angles[1], the new y-axis around angles[2] and the new z-axis
-            around angles[3], arriving at frame_a.
+        <p>
+        <b>Rigid body</b> with mass and inertia tensor.
+        All parameter vectors have to be resolved in frame_a.
+        The <b>inertia tensor</b> has to be defined with respect to a
+        coordinate system that is parallel to frame_a with the
+        origin at the center of mass of the body.
+        </p>
+        <p>
+        By default, this component is visualized by a <b>cylinder</b> located
+        between frame_a and the center of mass and by a <b>sphere</b> that has
+        its center at the center of mass. If the cylinder length is smaller as
+        the radius of the sphere, e.g., since frame_a is located at the
+        center of mass, the cylinder is not displayed. Note, that
+        the animation may be switched off via parameter animation = <b>false</b>.
+        </p>
+        <p>
+        <IMG src=\"modelica://Modelica/Resources/Images/Mechanics/MultiBody/Body.png\" ALT=\"Parts.Body\">
+        </p>
+        
+        <p>
+        <b>States of Body Components</b>
+        </p>
+        <p>
+        Every body has potential states. If possible a tool will select
+        the states of joints and not the states of bodies because this is
+        usually the most efficient choice. In this case the position, orientation,
+        velocity and angular velocity of frame_a of the body will be computed
+        by the component that is connected to frame_a. However, if a body is moving
+        freely in space, variables of the body have to be used as states. The potential
+        states of the body are:
+        </p>
+        <ul>
+        <li> The <b>position vector</b> frame_a.r_0 from the origin of the
+             world frame to the origin of frame_a of the body, resolved in
+             the world frame and the <b>absolute velocity</b> v_0 of the origin of
+             frame_a, resolved in the world frame (= der(frame_a.r_0)).
         </li>
-       </ul>
-       <p>
-       The quaternions have the slight disadvantage that there is a
-       non-linear constraint equation between the 4 quaternions.
-       Therefore, at least one non-linear equation has to be solved
-       during simulation. A tool might, however, analytically solve this
-       simple constraint equation. Using the 3 angles as states has the
-       disadvantage that there is a singular configuration in which a
-       division by zero will occur. If it is possible to determine in advance
-       for an application class that this singular configuration is outside
-       of the operating region, the 3 angles might be used as potential
-       states by setting <b>useQuaternions</b> = <b>false</b>.
-       </p>
-       <p>
-       In text books about 3-dimensional mechanics often 3 angles and the
-       angular velocity are used as states. This is not the case here, since
-       3 angles and their derivatives are used as potential states
-       (if useQuaternions = false). The reason
-       is that for real-time simulation the discretization formula of the
-       integrator might be \"inlined\" and solved together with the body equations.
-       By appropriate symbolic transformation the performance is
-       drastically increased if angles and their
-       derivatives are used as states, instead of angles and the angular
-       velocity.
-       </p>
-       <p>
-       Whether or not variables of the body are used as states is usually
-       automatically selected by the Modelica translator. If parameter
-       <b>enforceStates</b> is set to <b>true</b> in the \"Advanced\" menu,
-       then body variables are forced to be used as states according
-       to the setting of parameters \"useQuaternions\" and
-       \"sequence_angleStates\".
-       </p>
-       </HTML>"));
+        <li> If parameter <b>useQuaternions</b> in the \"Advanced\" menu
+             is <b>true</b> (this is the default), then <b>4 quaternions</b>
+             are potential states. Additionally, the coordinates of the
+             absolute angular velocity vector of the
+             body are 3 potential states.<br>
+             If <b>useQuaternions</b> in the \"Advanced\" menu
+             is <b>false</b>, then <b>3 angles</b> and the derivatives of
+             these angles are potential states. The orientation of frame_a
+             is computed by rotating the world frame along the axes defined
+             in parameter vector \"sequence_angleStates\" (default = {1,2,3}, i.e.,
+             the Cardan angle sequence) around the angles used as potential states.
+             For example, the default is to rotate the x-axis of the world frame
+             around angles[1], the new y-axis around angles[2] and the new z-axis
+             around angles[3], arriving at frame_a.
+         </li>
+        </ul>
+        <p>
+        The quaternions have the slight disadvantage that there is a
+        non-linear constraint equation between the 4 quaternions.
+        Therefore, at least one non-linear equation has to be solved
+        during simulation. A tool might, however, analytically solve this
+        simple constraint equation. Using the 3 angles as states has the
+        disadvantage that there is a singular configuration in which a
+        division by zero will occur. If it is possible to determine in advance
+        for an application class that this singular configuration is outside
+        of the operating region, the 3 angles might be used as potential
+        states by setting <b>useQuaternions</b> = <b>false</b>.
+        </p>
+        <p>
+        In text books about 3-dimensional mechanics often 3 angles and the
+        angular velocity are used as states. This is not the case here, since
+        3 angles and their derivatives are used as potential states
+        (if useQuaternions = false). The reason
+        is that for real-time simulation the discretization formula of the
+        integrator might be \"inlined\" and solved together with the body equations.
+        By appropriate symbolic transformation the performance is
+        drastically increased if angles and their
+        derivatives are used as states, instead of angles and the angular
+        velocity.
+        </p>
+        <p>
+        Whether or not variables of the body are used as states is usually
+        automatically selected by the Modelica translator. If parameter
+        <b>enforceStates</b> is set to <b>true</b> in the \"Advanced\" menu,
+        then body variables are forced to be used as states according
+        to the setting of parameters \"useQuaternions\" and
+        \"sequence_angleStates\".
+        </p>
+        </HTML>"));
   end Body;
 
   model RealFingerContact
