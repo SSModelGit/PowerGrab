@@ -1,0 +1,116 @@
+#1
+char Aclass(3,11)
+Atrajectory
+1.1
+
+char name(32,39)
+time
+_block_jacobian_check_tol
+_cs_rel_tol
+_cs_step_size
+_events_default_tol
+_events_tol_factor
+_nle_solver_default_tol
+_nle_solver_max_residual_scaling_factor
+_nle_solver_min_residual_scaling_factor
+_nle_solver_min_tol
+_nle_solver_regularization_tolerance
+_nle_solver_step_limit_factor
+_nle_solver_tol_factor
+_block_solver_experimental_mode
+_cs_experimental_mode
+_cs_solver
+_iteration_variable_scaling
+_log_level
+_nle_solver_max_iter
+_residual_equation_scaling
+_block_jacobian_check
+_enforce_bounds
+_nle_brent_ignore_error
+_nle_solver_check_jac_cond
+_nle_solver_use_last_integrator_step
+_nle_solver_use_nominals_as_fallback
+_rescale_after_singular_jac
+_rescale_each_step
+_runtime_log_to_file
+_use_Brent_in_1d
+_use_jacobian_equilibration
+_use_newton_for_brent
+
+char description(32,11)
+Time in [s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int dataInfo(32,4)
+0 1 0 -1 # time
+1 2 0 -1 # _block_jacobian_check_tol
+1 3 0 -1 # _cs_rel_tol
+1 4 0 -1 # _cs_step_size
+1 5 0 -1 # _events_default_tol
+1 6 0 -1 # _events_tol_factor
+1 7 0 -1 # _nle_solver_default_tol
+1 8 0 -1 # _nle_solver_max_residual_scaling_factor
+1 9 0 -1 # _nle_solver_min_residual_scaling_factor
+1 10 0 -1 # _nle_solver_min_tol
+1 11 0 -1 # _nle_solver_regularization_tolerance
+1 12 0 -1 # _nle_solver_step_limit_factor
+1 13 0 -1 # _nle_solver_tol_factor
+1 14 0 -1 # _block_solver_experimental_mode
+1 15 0 -1 # _cs_experimental_mode
+1 16 0 -1 # _cs_solver
+1 17 0 -1 # _iteration_variable_scaling
+1 18 0 -1 # _log_level
+1 19 0 -1 # _nle_solver_max_iter
+1 20 0 -1 # _residual_equation_scaling
+1 21 0 -1 # _block_jacobian_check
+1 22 0 -1 # _enforce_bounds
+1 23 0 -1 # _nle_brent_ignore_error
+1 24 0 -1 # _nle_solver_check_jac_cond
+1 25 0 -1 # _nle_solver_use_last_integrator_step
+1 26 0 -1 # _nle_solver_use_nominals_as_fallback
+1 27 0 -1 # _rescale_after_singular_jac
+1 28 0 -1 # _rescale_each_step
+1 29 0 -1 # _runtime_log_to_file
+1 30 0 -1 # _use_Brent_in_1d
+1 31 0 -1 # _use_jacobian_equilibration
+1 32 0 -1 # _use_newton_for_brent
+
+float data_1(2,32)
+0.00000000000000E+00 1.00000000000000E-06 1.00000000000000E-06 1.00000000000000E-03 1.00000000000000E-10 1.00000000000000E-04 1.00000000000000E-10 1.00000000000000E+10 1.00000000000000E-10 1.00000000000000E-12 -1.00000000000000E+00 1.00000000000000E+01 1.00000000000000E-04 0.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 3.00000000000000E+00 1.00000000000000E+02 1.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00
+1.00000000000000E+00         1.00000000000000E-06 1.00000000000000E-06 1.00000000000000E-03 1.00000000000000E-10 1.00000000000000E-04 1.00000000000000E-10 1.00000000000000E+10 1.00000000000000E-10 1.00000000000000E-12 -1.00000000000000E+00 1.00000000000000E+01 1.00000000000000E-04 0.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 3.00000000000000E+00 1.00000000000000E+02 1.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00 0.00000000000000E+00 1.00000000000000E+00
+
+float data_2(4,1)                            
+ 0.00000000000000E+00
+ 3.43225906488250E-05
+ 3.43260229078899E-01
+ 1.00000000000000E+00

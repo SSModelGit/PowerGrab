@@ -1,0 +1,9 @@
+within PowerGrabStructure.BoneStructure.Finger.Basic.Joints.Interfaces;
+partial model RestrainedRevolute "Interface for Restrained Revolute Joint"
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a
+    annotation (Placement(transformation(extent={{-116,-16},{-84,16}})));
+  Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b
+    annotation (Placement(transformation(extent={{84,-16},{116,16}})));
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)));
+end RestrainedRevolute;
