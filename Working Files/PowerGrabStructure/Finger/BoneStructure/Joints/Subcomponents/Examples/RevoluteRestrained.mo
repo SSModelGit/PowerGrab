@@ -2,9 +2,8 @@ within PowerGrabStructure.Finger.BoneStructure.Joints.Subcomponents.Examples;
 model RevoluteRestrained
   extends
     PowerGrabStructure.Finger.BoneStructure.Joints.Subcomponents.Interfaces.RestrainedRevolute;
-  Modelica.Mechanics.MultiBody.Joints.Revolute revolute(useAxisFlange = true,
-    phi(                                                                      start =     phi_0_restrained,                   fixed =     stateSelect),
-                                                                                                            n = axisRotation,                          cylinderLength = 0.001, cylinderDiameter = 0.001) annotation(Placement(visible = true, transformation(origin = {37.108, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  Modelica.Mechanics.MultiBody.Joints.Revolute revolute(useAxisFlange = true,                               n = axisRotation,                          cylinderLength = 0.001, cylinderDiameter = 0.001,
+    phi(start=phi_0_restrained, fixed=true))                                                                                                                                                             annotation(Placement(visible = true, transformation(origin = {37.108, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Components.ElastoBacklash elastoBacklash(d = d, c = c, b = totalBacklashAngle, phi_rel0 = 0) annotation(Placement(visible = true, transformation(origin = {24.323, 25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.Rotational.Components.Disc disc(deltaPhi = brakePlacementAngle) annotation(Placement(visible = true, transformation(origin = {-14.096, 25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Modelica.SIunits.Angle totalBacklashAngle = theta_2 - theta_1;

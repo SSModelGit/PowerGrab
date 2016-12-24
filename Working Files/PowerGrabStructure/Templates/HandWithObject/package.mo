@@ -29,8 +29,8 @@ package HandWithObject
         origin={105,27.5},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));
-  replaceable PowerGrabStructure.Finger.Templates.FingerContact leftMostFinger
-    if fourth annotation (Placement(visible=true, transformation(
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact leftMostFinger if
+       fourth annotation (Placement(visible=true, transformation(
         origin={97.998,-14.643},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));

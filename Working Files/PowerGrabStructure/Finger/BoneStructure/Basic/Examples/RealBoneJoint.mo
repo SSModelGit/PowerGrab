@@ -1,14 +1,18 @@
 within PowerGrabStructure.Finger.BoneStructure.Basic.Examples;
 model RealBoneJoint
   extends PowerGrabStructure.Finger.BoneStructure.Basic.Templates.BoneJoint(
-    redeclare Joints.Examples.OneDegreeJoint joint,
+    redeclare Joints.Examples.OneDegreeJoint joint(
+      phi_0_restrained=phi_0_restrained,
+      theta_1=-0.087266462599716,
+      theta_2=1.5882496193148),
     IFingerBone(
       r=r_IFingerBone,
       r_shape=r_shape_IFingerBone,
       color={155,0,0},
       diameter=diameterIFingerBone,
       animation=true,
-      r_0(fixed=false)),
+      r_0(fixed=false),
+      density=1750),
     OFingerExtension(
       r=r_OFingerBone,
       r_shape=r_shape_OFingerBone,
@@ -16,7 +20,8 @@ model RealBoneJoint
       color={255,255,0},
       diameter=diameterOFingerBone,
       animation=true,
-      specularCoefficient=1),
+      specularCoefficient=1,
+      density=1750),
     fixedTranslation1(r={-r_OFingerBone[1]*0.5,-diameterOFingerBone*0.25,0}),
     revolute1(
       animation=false,

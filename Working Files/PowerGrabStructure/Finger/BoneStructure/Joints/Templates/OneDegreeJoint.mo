@@ -10,7 +10,7 @@ equation
       color={95,95,95},
       thickness=0.5));
   connect(restrainedRevolute.frame_b, frame_b) annotation (Line(
-      points={{4,0},{52,0},{52,0},{100,0}},
+      points={{4,0},{52,0},{100,0}},
       color={95,95,95},
       thickness=0.5));
   connect(restrainedRevolute.flange_b, flange_b1) annotation (Line(points={
