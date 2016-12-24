@@ -5,7 +5,7 @@ model RealBoneDoubleJoint
     PowerGrabStructure.Finger.BoneStructure.Basic.Templates.DoubleBoneJoint(
     redeclare
       PowerGrabStructure.Finger.Muscle.Subcomponents.Examples.MagnitudeMuscle
-      magnitudeMuscle1,
+      magnitudeMuscle1(f_max=25),
     redeclare
       PowerGrabStructure.Finger.Muscle.Subcomponents.Examples.LineMuscle
       dirMuscle,
@@ -14,7 +14,7 @@ model RealBoneDoubleJoint
       dirMuscle1,
     redeclare
       PowerGrabStructure.Finger.Muscle.Subcomponents.Examples.MagnitudeMuscle
-      magnitudeMuscle,
+      magnitudeMuscle(f_max=25),
     redeclare
       PowerGrabStructure.Finger.Muscle.Subcomponents.Examples.LineMuscle
       dirMuscle2,
@@ -23,14 +23,18 @@ model RealBoneDoubleJoint
       dirMuscle3,
     redeclare
       PowerGrabStructure.Finger.BoneStructure.Joints.Examples.TwoDegreeJoint
-      twoDegreeJoint,
+      twoDegreeJoint(
+      sidetheta_limits={-0.78539816339745,0.78539816339745},
+      normtheta_limits={-0.087266462599716,1.5882496193148},
+      phi0={phi_0_doubleJoint,phi_0_regularJoint}),
     IFingerBone(
       r=r_IFingerBone,
       r_shape=r_shape_IFingerBone,
       color={155,0,0},
       diameter=diameterIFingerBone,
       animation=true,
-      r_0(fixed=false)),
+      r_0(fixed=false),
+      density=1750),
     OFingerExtension(
       r=r_OFingerBone,
       r_shape=r_shape_OFingerBone,
@@ -38,7 +42,8 @@ model RealBoneDoubleJoint
       color={255,255,0},
       diameter=diameterOFingerBone,
       animation=true,
-      specularCoefficient=1),
+      specularCoefficient=1,
+      density=1750),
     fixedTranslation1(r={-r_OFingerBone[1]*0.5,-diameterOFingerBone*0.25,0}),
     revolute1(
       animation=false,

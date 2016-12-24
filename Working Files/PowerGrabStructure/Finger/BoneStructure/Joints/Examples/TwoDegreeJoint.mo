@@ -12,7 +12,7 @@ model TwoDegreeJoint "Joint with two degrees of freedom"
       theta_1=normtheta_limits[1],
       theta_2=normtheta_limits[2],
       phi_0_restrained=phi0[2]));
-  parameter Modelica.SIunits.Angle sidetheta_limits[2] = {0,0};
-  parameter Modelica.SIunits.Angle normtheta_limits[2] = {0,0};
-  parameter Modelica.SIunits.Angle phi0[2]={0,0};
+  parameter Modelica.SIunits.Angle sidetheta_limits[2] = {0,0} "In order of lower then upper";
+  parameter Modelica.SIunits.Angle normtheta_limits[2] = {0,0} "In order of lower then upper";
+  parameter Modelica.SIunits.Angle phi0[2]={0,0} "In order of Side joint, Forwards joint";
 end TwoDegreeJoint;
