@@ -2,15 +2,6 @@ within PowerGrabStructure.Examples.Finger;
 model RealFingerContact
   import PowerGrabStructure;
   extends PowerGrabStructure.Templates.Finger.FingerContact(
-    proximalPhalangeSurfaceContactOrientation(
-                     r={-fingerLength[2]/4,fingerStructure.diameterOboneCDistal*
-          0.75,0}),
-    middlePhalangeSurfaceContactOrientation(
-                      r={-fingerLength[3]/4,fingerStructure.diameterOboneMDistal*
-          0.75,0}),
-    distalPhalangeSurfaceContactOrientation(
-                      r={-fingerLength[4]/2,fingerStructure.diameterOboneFDistal*
-          0.75,0}),
     redeclare PowerGrabStructure.Muscle.Examples.FingerMuscleLineArray
       anteriorMuscles(
       maxFDistal=fMuscle_max,
@@ -91,9 +82,11 @@ model RealFingerContact
       bufferRange=bufferRange,
       delta=delta,
       v0Mag=v0Mag,
-      v2delta=v2delta));
+      v2delta=v2delta), fixedTranslation2(r = {-fingerLength[4] / 2, diameter * 0.75, 0}, animation = false),
+      fixedTranslation1(r = {-fingerLength[3] / 4, diameter * 0.75, 0}, animation = false),
+      fixedTranslation(r = {-fingerLength[2] / 4, diameter * 0.75, 0}, animation = false));
   parameter Modelica.SIunits.Angle phiSide0 annotation(Dialog(group = "Initial values"));
-  parameter Modelica.SIunits.Length fingerLength[4] = {0.5, 0.5, 0.5, 0.5} "Length of bone from Palm, Proximal, Middle, and Distal";
+  parameter Modelica.SIunits.Length fingerLength[4] "Length of bone from Palm, Proximal, Middle, and Distal";
   parameter Modelica.SIunits.Distance threshold = 0.75 "radius of contact sphere";
   parameter Modelica.SIunits.TranslationalSpringConstant k = 5000 "Stiffness of contact spring";
   parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 5000 "Damping constant";

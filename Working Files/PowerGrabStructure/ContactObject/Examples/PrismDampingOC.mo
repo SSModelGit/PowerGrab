@@ -11,7 +11,7 @@ model PrismDampingOC
   parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping(final min = 0) = 500 "Buffer zone's damping constant";
   Modelica.Mechanics.Translational.Sources.Position position annotation(Placement(visible = true, transformation(origin = {11.732, -65}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Sensors.Distance lMag(animation = false) annotation(Placement(visible = true, transformation(origin = {-0, 5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  Components.NonLinearSpringDamper spring(
+  NonLinearSpringDamper spring(
     s_unstretched=threshold,
     fMagDesired=true,
     animation=false) annotation (Placement(visible=true, transformation(
@@ -40,7 +40,7 @@ model PrismDampingOC
   parameter Modelica.SIunits.Length delta;
   parameter Modelica.SIunits.Velocity v0Mag = 5;
   parameter Modelica.SIunits.Velocity v2delta = 0.1;
-  Components.NonLinearSpringDamper skinBuffer(
+  NonLinearSpringDamper skinBuffer(
     animation=false,
     fMagDesired=true,
     s_unstretched=threshold + bufferRange) annotation (Placement(visible=true,
