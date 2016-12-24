@@ -5,7 +5,8 @@ model TwoDegreeJoint "Joint with two degrees of freedom"
       useAxisFlange=useAxisFlange,
       theta_1=sidetheta_limits[1],
       theta_2=sidetheta_limits[2],
-      phi_0_restrained=phi0[1]),              redeclare
+      phi_0_restrained=phi0[1],
+      axisRotation={0,1,0}),                  redeclare
       Subcomponents.Examples.RevoluteRestrained restrainedRevolute1(
       useAxisFlange=useAxisFlange,
       theta_1=normtheta_limits[1],

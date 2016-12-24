@@ -11,9 +11,8 @@ model PrismDampingOC
   parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping(final min = 0) = 500 "Buffer zone's damping constant";
   Modelica.Mechanics.Translational.Sources.Position position annotation(Placement(visible = true, transformation(origin = {11.732, -65}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Sensors.Distance lMag(animation = false) annotation(Placement(visible = true, transformation(origin = {-0, 5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  NonLinearSpringDamper spring(
+  NonLinearSpringDamper contactResistance(
     s_unstretched=threshold,
-    fMagDesired=true,
     animation=false) annotation (Placement(visible=true, transformation(
         origin={-0,57.91},
         extent={{-10,-10},{10,10}},
@@ -21,7 +20,8 @@ model PrismDampingOC
   Modelica.Mechanics.MultiBody.Visualizers.FixedShape fixedShape(height = 2 * threshold, length = 2 * threshold, r_shape = {-threshold, 0, 0}, shapeType = "sphere", width = 2 * threshold, animation = true) annotation(Placement(visible = true, transformation(origin = {0, 86.994}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Sensors.RelativePosition relativePosition(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.frame_b) annotation(Placement(visible = true, transformation(origin = {-46.768, -25}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Joints.Prismatic prismatic(
-  s(                                                      fixed =   false),useAxisFlange = true, animation = false) annotation(Placement(visible = true, transformation(origin={61.951,
+  s(                                                      fixed =   false),useAxisFlange = true, animation = false)
+    "Vector along the bone"                                                                                         annotation(Placement(visible = true, transformation(origin={61.951,
             -1.936},                                                                                                                                                                               extent = {{10, -10}, {-10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Sensors.RelativePosition lVec(resolveInFrame = Modelica.Mechanics.MultiBody.Types.ResolveInFrameAB.world) annotation(Placement(visible = true, transformation(origin = {5, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.SIunits.Length lHat[3];
@@ -42,7 +42,6 @@ model PrismDampingOC
   parameter Modelica.SIunits.Velocity v2delta = 0.1;
   NonLinearSpringDamper skinBuffer(
     animation=false,
-    fMagDesired=true,
     s_unstretched=threshold + bufferRange) annotation (Placement(visible=true,
         transformation(
         origin={0,26.587},
@@ -59,16 +58,19 @@ equation
           -19.032},{7.625,-19.032},{7.625,19.032},{10.85,19.032}}));
   connect(relativePosition.frame_b, prismatic.frame_a) annotation(Line(visible = true, origin = {46.277, -13.468}, points={{-83.045,
           -11.532},{28.686,-11.532},{28.686,11.532},{25.674,11.532}}));
-  connect(spring.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 27.987}, points={{-29.851,
-          29.923},{8.875,29.923},{8.875,-29.923},{12.1,-29.923}}));
+  connect(contactResistance.frame_b, prismatic.frame_b) annotation (Line(
+      visible=true,
+      origin={39.851,27.987},
+      points={{-29.851,29.923},{8.875,29.923},{8.875,-29.923},{12.1,-29.923}}));
   connect(lMag.frame_b, prismatic.frame_b) annotation(Line(visible = true, origin = {39.851, 1.532}, points={{-29.851,
           3.468},{8.875,3.468},{8.875,-3.468},{12.1,-3.468}}));
   contact = lMag.distance <= threshold;
   fContact = abs(lMag.distance - threshold) <= delta;
   bContact = lMag.distance - threshold <= bufferRange;
-  spring.k = smooth(1, noEvent(if contact then k else 0));
+  contactResistance.k = smooth(1, noEvent(if contact then k else 0));
   skinBuffer.k = smooth(1, noEvent(if bContact then bufferEffect else 0));
-  spring.d = smooth(0, noEvent(if contact then dampingCoefficient else 0));
+  contactResistance.d = smooth(0, noEvent(if contact then dampingCoefficient
+     else 0));
   skinBuffer.d = smooth(0, noEvent(if bContact then bufferDamping else 0));
   position.s_ref = max(min(boneLength, -relativePosition.r_rel[1]), 0);
   lHat = lVec.r_rel / lMag.distance;
@@ -87,7 +89,7 @@ equation
       points={{-10,86.994},{-100,86.994},{-100,0}},
       color={95,95,95},
       thickness=0.5));
-  connect(spring.frame_a, frame_contact) annotation (Line(
+  connect(contactResistance.frame_a, frame_contact) annotation (Line(
       points={{-10,57.91},{-100,57.91},{-100,0}},
       color={95,95,95},
       thickness=0.5));

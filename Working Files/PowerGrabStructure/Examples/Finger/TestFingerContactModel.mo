@@ -7,7 +7,7 @@ model TestFingerContactModel
       mu=testMu,
       delta=testDelta[1],
       k=500,
-      phiSide0=0,
+      phiSide0=0.01,
       bufferRange=testDelta[2],
       diameter=0.2,
       bufferEffect=25,
