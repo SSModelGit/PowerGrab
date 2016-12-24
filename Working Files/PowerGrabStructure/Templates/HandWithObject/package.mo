@@ -1,13 +1,13 @@
 within PowerGrabStructure.Templates;
 package HandWithObject
   replaceable partial model HandContact
-    replaceable PowerGrabStructure.Templates.Finger.FingerContact middleMostFinger
-    annotation (Placement(visible=true, transformation(
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact
+    middleMostFinger annotation (Placement(visible=true, transformation(
         origin={-46.326,57.203},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));
-    replaceable PowerGrabStructure.Templates.Finger.FingerContact opposable if second
-    annotation (Placement(visible=true, transformation(
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact opposable if
+    second annotation (Placement(visible=true, transformation(
         origin={-21.326,-77.797},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));
@@ -23,19 +23,19 @@ package HandWithObject
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation2(r = {-0.03, 0, -0.05}) if fourth annotation(Placement(visible = true, transformation(origin = {35.347, -9.643000000000001}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation4(n = {0, 0, 1}, angle = 90) if fourth annotation(Placement(visible = true, transformation(origin = {65.34699999999999, -9.643000000000001}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation5(n = {1, 0, 0}, angle = -20) if fifth annotation(Placement(visible = true, transformation(origin = {65.34699999999999, -49.643}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    replaceable
-    PowerGrabStructure.Templates.Finger.FingerContact middleLeftFinger if third
-    annotation (Placement(visible=true, transformation(
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact
+    middleLeftFinger if third annotation (Placement(visible=true,
+        transformation(
         origin={105,27.5},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));
-    replaceable PowerGrabStructure.Templates.Finger.FingerContact leftMostFinger if fourth
-    annotation (Placement(visible=true, transformation(
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact leftMostFinger
+    if fourth annotation (Placement(visible=true, transformation(
         origin={97.998,-14.643},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));
-    replaceable PowerGrabStructure.Templates.Finger.FingerContact middleRight if fifth
-    annotation (Placement(visible=true, transformation(
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact middleRight if
+    fifth annotation (Placement(visible=true, transformation(
         origin={97.998,-56.5},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));

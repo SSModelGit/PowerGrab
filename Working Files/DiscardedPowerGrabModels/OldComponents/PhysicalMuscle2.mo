@@ -5,9 +5,9 @@ model PhysicalMuscle2
   Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b_p "frame connecting to the muscle on the posterior of the finger" annotation(Placement(visible = true, transformation(origin = {140, -90}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {90, -80}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a1 annotation(Placement(visible = true, transformation(origin = {-139, 20}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-90, 74}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b1 annotation(Placement(visible = true, transformation(origin = {141, 20}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {90, 76}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
-  PowerGrabStructure.ContactObject.NonLinearSpringDamper nonLinearSpringDamper(
-      d=d_front, s_unstretched=freeLength_anterior) annotation (Placement(
-        visible=true, transformation(
+  PowerGrabStructure.ContactObject.Components.NonLinearSpringDamper
+    nonLinearSpringDamper(d=d_front, s_unstretched=freeLength_anterior)
+    annotation (Placement(visible=true, transformation(
         origin={-55,20},
         extent={{-10,-10},{10,10}},
         rotation=0)));
@@ -23,8 +23,9 @@ model PhysicalMuscle2
   Modelica.Mechanics.MultiBody.Sensors.Distance distance annotation(Placement(visible = true, transformation(origin = {30, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Blocks.Math.Add add annotation(Placement(visible = true, transformation(origin = {55, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
   Modelica.Mechanics.MultiBody.Forces.LineForceWithMass lineForceWithMass annotation(Placement(visible = true, transformation(origin = {100, 66.895}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PowerGrabStructure.ContactObject.NonLinearSpringDamper nonLinearSpringDamper1
-    (d=d_posterior) annotation (Placement(visible=true, transformation(
+  PowerGrabStructure.ContactObject.Components.NonLinearSpringDamper
+    nonLinearSpringDamper1(d=d_posterior) annotation (Placement(visible=true,
+        transformation(
         origin={45,-70},
         extent={{10,-10},{-10,10}},
         rotation=0)));

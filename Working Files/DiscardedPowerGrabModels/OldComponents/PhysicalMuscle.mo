@@ -8,8 +8,9 @@ model PhysicalMuscle
   Modelica.Mechanics.MultiBody.Interfaces.Frame_a frame_a1 annotation(Placement(visible = true, transformation(origin = {-140, -40}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {-90, 74}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Interfaces.Frame_b frame_b1 annotation(Placement(visible = true, transformation(origin = {140, -40}, extent = {{-16, -16}, {16, 16}}, rotation = 0), iconTransformation(origin = {90, 76}, extent = {{-16, -16}, {16, 16}}, rotation = 0)));
   Modelica.Blocks.Math.Product product annotation(Placement(visible = true, transformation(origin = {-28.222, 12.347}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PowerGrabStructure.ContactObject.NonLinearSpringDamper nonLinearSpringDamper(
-      d=d_front) annotation (Placement(visible=true, transformation(
+  PowerGrabStructure.ContactObject.Components.NonLinearSpringDamper
+    nonLinearSpringDamper(d=d_front) annotation (Placement(visible=true,
+        transformation(
         origin={0,-40},
         extent={{-10,-10},{10,10}},
         rotation=0)));

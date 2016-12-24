@@ -5,11 +5,11 @@ partial model FingerStructure
             45.75},                                                                                                                                                                  extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Parts.FixedTranslation posteriorBase(r = {0, 0, 0}, animation = false) annotation(Placement(visible = true, transformation(origin={-117.948,
             -39.75},                                                                                                                                                                   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  replaceable Subcomponents.Basic.Templates.BoneJoint boneJoint
+  replaceable Basic.Templates.BoneJoint boneJoint
     annotation (Placement(transformation(extent={{64,-10},{84,10}})));
-  replaceable Subcomponents.Basic.Templates.DoubleBoneJoint doubleBoneJoint
+  replaceable Basic.Templates.DoubleBoneJoint doubleBoneJoint
     annotation (Placement(transformation(extent={{-74,-10},{-54,10}})));
-  replaceable Subcomponents.Basic.Templates.BoneJoint boneJoint1
+  replaceable Basic.Templates.BoneJoint boneJoint1
     annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
 equation
   connect(anteriorBase.frame_a, frame_7A) annotation (Line(

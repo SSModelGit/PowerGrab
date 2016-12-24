@@ -6,9 +6,9 @@ model ObjectLFConnection
   parameter Modelica.SIunits.TranslationalSpringConstant k = 5000;
   Boolean contact;
   Modelica.Mechanics.MultiBody.Sensors.Distance deltaX annotation(Placement(visible = true, transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PowerGrabStructure.ContactObject.NonLinearSpringDamper nonLinearSpringDamper(
-      s_unstretched=threshold) annotation (Placement(visible=true,
-        transformation(
+  PowerGrabStructure.ContactObject.Components.NonLinearSpringDamper
+    nonLinearSpringDamper(s_unstretched=threshold) annotation (Placement(
+        visible=true, transformation(
         origin={0,55},
         extent={{-10,-10},{10,10}},
         rotation=0)));

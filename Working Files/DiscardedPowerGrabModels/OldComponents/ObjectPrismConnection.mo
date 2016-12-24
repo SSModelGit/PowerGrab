@@ -9,9 +9,9 @@ model ObjectPrismConnection
   parameter Modelica.SIunits.TranslationalDampingConstant dampingCoefficient(final min = 0) = 5000 "Damping constant";
   Modelica.Mechanics.Translational.Sources.Position position annotation(Placement(visible = true, transformation(origin = {12.261, -35}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   Modelica.Mechanics.MultiBody.Sensors.Distance deltaX annotation(Placement(visible = true, transformation(origin = {0, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  PowerGrabStructure.ContactObject.NonLinearSpringDamper nonLinearSpringDamper(
-      s_unstretched=threshold) annotation (Placement(visible=true,
-        transformation(
+  PowerGrabStructure.ContactObject.Components.NonLinearSpringDamper
+    nonLinearSpringDamper(s_unstretched=threshold) annotation (Placement(
+        visible=true, transformation(
         origin={0,55},
         extent={{-10,-10},{10,10}},
         rotation=0)));
