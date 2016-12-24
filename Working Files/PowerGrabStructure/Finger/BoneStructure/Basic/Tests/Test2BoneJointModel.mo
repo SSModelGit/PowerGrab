@@ -1,5 +1,6 @@
 within PowerGrabStructure.Finger.BoneStructure.Basic.Tests;
-model Test1BoneJointModel
+model Test2BoneJointModel
+
   Examples.RealBoneJoint realBoneJoint(
     r_IFingerBone={0.02,0,0},
     diameterIFingerBone=0.018,
@@ -28,12 +29,26 @@ model Test1BoneJointModel
     annotation (Placement(transformation(extent={{4,-30},{24,-50}})));
   Muscle.Subcomponents.Examples.MagnitudeMuscle anteriorMuscle(f_max=25)
     annotation (Placement(transformation(extent={{-52,60},{-32,80}})));
-  Muscle.Subcomponents.Examples.MagnitudeMuscle posteriorMuscle(f_max=100)
+  Muscle.Subcomponents.Examples.MagnitudeMuscle posteriorMuscle(f_max=25)
     annotation (Placement(transformation(extent={{-48,-76},{-28,-56}})));
-  Modelica.Blocks.Sources.Constant zeroValue(k=0)
-    annotation (Placement(transformation(extent={{-148,30},{-128,50}})));
-  Modelica.Blocks.Sources.Constant anteriorUpperMuscleActuationPercentConstant(
-      k=1) annotation (Placement(transformation(extent={{-126,60},{-106,80}})));
+  Modelica.Blocks.Sources.Pulse anteriorPulse1(period=2, nperiod=2)
+    annotation (Placement(transformation(extent={{-158,22},{-138,42}})));
+  Modelica.Blocks.Sources.Pulse posteriorPulse1(
+    period=3,
+    nperiod=1,
+    startTime=2.75)
+    annotation (Placement(transformation(extent={{-138,-50},{-118,-30}})));
+  Modelica.Blocks.Sources.Step anteriorPulse2(startTime=5)
+    annotation (Placement(transformation(extent={{-158,62},{-138,82}})));
+  Modelica.Blocks.Math.Add anteriorSignal
+    annotation (Placement(transformation(extent={{-106,56},{-86,76}})));
+  Modelica.Blocks.Sources.Pulse posteriorPulse2(
+    period=1,
+    nperiod=1,
+    startTime=4.75)
+    annotation (Placement(transformation(extent={{-138,-84},{-118,-64}})));
+  Modelica.Blocks.Math.Add posteriorSignal
+    annotation (Placement(transformation(extent={{-90,-66},{-70,-46}})));
 equation
   connect(world.frame_b, componentPlacement.frame_a) annotation (Line(
       points={{-70,0},{-60,0},{-50,0}},
@@ -99,18 +114,26 @@ equation
   connect(posteriorUpperMuscleConnection.muscleMagnitude, posteriorMuscle.fMagnitude)
     annotation (Line(points={{14,-49.5987},{10,-49.5987},{10,-66.5908},{-27.315,
           -66.5908}}, color={0,0,127}));
-  connect(zeroValue.y, posteriorMuscle.forcePValue) annotation (Line(points={{
-          -127,40},{-102,40},{-102,-66.5685},{-46.6807,-66.5685}}, color={0,0,
-          127}));
-  connect(anteriorUpperMuscleActuationPercentConstant.y, anteriorMuscle.forcePValue)
-    annotation (Line(points={{-105,70},{-60,70},{-60,69.4315},{-50.6807,69.4315}},
-        color={0,0,127}));
   connect(anteriorMuscle.fMagnitude, anteriorLowerMuscleConnection.muscleMagnitude)
     annotation (Line(points={{-31.315,69.4092},{-31.315,49.7046},{-14,49.7046},
           {-14,29.5987}}, color={0,0,127}));
   connect(posteriorMuscle.fMagnitude, posteriorLowerMuscleConnection.muscleMagnitude)
     annotation (Line(points={{-27.315,-66.5908},{-27.315,-49.2954},{-14,
           -49.2954},{-14,-29.5987}}, color={0,0,127}));
+
+  connect(anteriorPulse2.y, anteriorSignal.u1)
+    annotation (Line(points={{-137,72},{-122,72},{-108,72}}, color={0,0,127}));
+  connect(anteriorPulse1.y, anteriorSignal.u2) annotation (Line(points={{-137,
+          32},{-128,32},{-128,60},{-108,60}}, color={0,0,127}));
+  connect(anteriorMuscle.forcePValue, anteriorSignal.y) annotation (Line(points
+        ={{-50.6807,69.4315},{-68,69.4315},{-68,66},{-85,66}}, color={0,0,127}));
+  connect(posteriorPulse1.y, posteriorSignal.u1) annotation (Line(points={{-117,
+          -40},{-104,-40},{-104,-50},{-92,-50}}, color={0,0,127}));
+  connect(posteriorPulse2.y, posteriorSignal.u2) annotation (Line(points={{-117,
+          -74},{-104,-74},{-104,-62},{-92,-62}}, color={0,0,127}));
+  connect(posteriorMuscle.forcePValue, posteriorSignal.y) annotation (Line(
+        points={{-46.6807,-66.5685},{-58,-66.5685},{-58,-56},{-69,-56}}, color=
+          {0,0,127}));
   annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
         coordinateSystem(preserveAspectRatio=false)));
-end Test1BoneJointModel;
+end Test2BoneJointModel;
