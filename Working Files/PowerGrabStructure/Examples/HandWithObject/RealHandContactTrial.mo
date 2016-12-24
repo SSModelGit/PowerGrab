@@ -54,7 +54,9 @@ model RealHandContactTrial
     second=false,
     third=false,
     fourth=false,
-    fifth=false, bodyShape.r_0.fixed = false);
+    fifth=false,
+    bodyShape(r_0(
+                 fixed =               false)));
   parameter Modelica.SIunits.Length mFinger = 0.204;
   parameter Modelica.SIunits.Length iFinger = 0.175;
   parameter Modelica.SIunits.Length rFinger = 0.188;
