@@ -8,14 +8,14 @@ model TestFingerContactModel
           mFinger*0.147058824},
       mu=mu,
       delta=delta[1],
-      k=500,
       phiSide0=0,
       bufferRange=delta[2],
       diameter=0.02,
       bufferEffect=25,
       v2delta=0.01,
       v0Mag=1,
-      bufferDamping=15) annotation (Placement(visible=true, transformation(
+      bufferDamping=15,
+    k=5000)             annotation (Placement(visible=true, transformation(
       origin={85.674,35.203},
       extent={{-12.5,-12.5},{12.5,12.5}},
       rotation=0)));
@@ -42,7 +42,7 @@ model TestFingerContactModel
   parameter Modelica.SIunits.Length threshold = 0.0375;
   parameter Real mu = 0.01;
   parameter Modelica.SIunits.Length delta[2] = {0.01, 0.015} "In order of: delta of friction, buffer range";
-  parameter Modelica.SIunits.Position object_x[3] = {-0.06, 0.06, -0.01};
+  parameter Modelica.SIunits.Position object_x[3] = {-0.06, 0.06, 0};
 equation
   connect(fixedTranslation.frame_b,bodyShape. frame_a) annotation(Line(visible = true, origin={47.994,
           -68.752},                                                                                                 points = {{-35.994, 0.002}, {10.994, 0.002}, {10.994, -0.003}, {14.006, -0.003}}));
@@ -78,10 +78,9 @@ equation
           -50.377},                                                                                                     points = {{-13.494, 18.377}, {3.494, 18.377}, {3.494, -18.378}, {6.506, -18.378}}));
   connect(world.frame_b,fixedRotation. frame_a) annotation(Line(visible = true, origin={-6.626,
           -22},                                                                                         points = {{-13.502, -20}, {3.496, -20}, {3.496, 20}, {6.509, 20}}));
-  connect(zero.y, middleMostFinger.anteriorInput[4]) annotation (Line(points={{
-          -19.714,33},{31.143,33},{31.143,40.9006},{83.8438,40.9006}}, color={0,
+  connect(zero.y, middleMostFinger.anteriorInput[4]) annotation (Line(points={{-19.714,
+          33},{31.143,33},{31.143,40.9006},{83.8438,40.9006}}, color={0,0,127}));
+  connect(zero.y, middleMostFinger.posteriorInput[4]) annotation (Line(points={{
+          -19.714,33},{31.143,33},{31.143,31.4236},{83.9366,31.4236}}, color={0,
           0,127}));
-  connect(zero.y, middleMostFinger.posteriorInput[4]) annotation (Line(points={
-          {-19.714,33},{31.143,33},{31.143,31.4236},{83.9366,31.4236}}, color={
-          0,0,127}));
 end TestFingerContactModel;
