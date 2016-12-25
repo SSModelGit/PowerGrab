@@ -36,7 +36,6 @@ equation
   connect(world.frame_b,fixedRotation. frame_a) annotation(Line(visible = true, origin={-26.626,
           20},                                                                                          points={{-13.502,
           -20},{3.496,-20},{4.509,-20}}));
-
   connect(zero.y, middleMostFinger.anteriorInput[4]) annotation (Line(points={{
           -19.714,33},{24.143,33},{24.143,38.9006},{67.8438,38.9006}}, color={0,
           0,127}));

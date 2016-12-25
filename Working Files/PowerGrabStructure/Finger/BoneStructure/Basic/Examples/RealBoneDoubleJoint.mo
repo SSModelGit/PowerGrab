@@ -80,8 +80,8 @@ model RealBoneDoubleJoint
   parameter Boolean closedDoubleJoint = true "Results in an open loop run when false" annotation(Dialog(tab = "Advanced", group = "Parameters"));
   parameter Boolean closedRegularJoint = true "Results in an open loop run when false" annotation(Dialog(tab = "Advanced", group = "Parameters"));
   parameter Boolean torD = true "True if direct torque on joint is desired" annotation(Dialog(tab = "Advanced", group = "Parameters"));
-  Modelica.Mechanics.Rotational.Components.SpringDamper springDamper(c=1000, d=
-        1000) annotation (Placement(transformation(extent={{-75,35},{-55,55}})));
+  Modelica.Mechanics.Rotational.Components.SpringDamper springDamper(c=5, d=15)
+    annotation (Placement(transformation(extent={{-75,35},{-55,55}})));
 equation
   connect(springDamper.flange_b, twoDegreeJoint.flange_a1) annotation (Line(
         points={{-55,45},{-30,45},{-30,20},{1.6971,20}}, color={0,0,0}));
