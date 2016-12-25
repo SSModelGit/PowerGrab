@@ -3,6 +3,16 @@ model RealHandContactTrial
   import PowerGrabStructure;
   extends PowerGrabStructure.Templates.HandWithObject.HandContact(
     redeclare PowerGrabStructure.Finger.Examples.RealFingerContact
+      middleRightFinger(
+      fingerLength={iFinger*0.342857143,iFinger*0.342857143,iFinger*0.171428571,
+          iFinger*0.142857143},
+      mu=mu,
+      delta=delta[1],
+      threshold=threshold,
+      k=500,
+      bufferRange=delta[2],
+      phiSide0=0),
+    redeclare PowerGrabStructure.Finger.Examples.RealFingerContact
       middleMostFinger(
       threshold=threshold,
       fingerLength={mFinger*0.343137255,mFinger*0.31372549,mFinger*0.196078431,
@@ -40,15 +50,6 @@ model RealHandContactTrial
       leftMostFinger(
       fingerLength={lFinger*0.337837838,lFinger*0.324324324,lFinger*0.168918919,
           lFinger*0.168918919},
-      mu=mu,
-      delta=delta[1],
-      threshold=threshold,
-      k=500,
-      bufferRange=delta[2],
-      phiSide0=0),
-    redeclare PowerGrabStructure.Finger.Examples.RealFingerContact middleRight(
-      fingerLength={iFinger*0.342857143,iFinger*0.342857143,iFinger*0.171428571,
-          iFinger*0.142857143},
       mu=mu,
       delta=delta[1],
       threshold=threshold,

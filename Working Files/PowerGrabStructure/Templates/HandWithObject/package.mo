@@ -14,7 +14,6 @@ package HandWithObject
     inner Modelica.Mechanics.MultiBody.World world(g = 0) annotation(Placement(visible = true, transformation(origin = {-162.128, -20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation(angle = 90, n = {0, 0, 1}) annotation(Placement(visible = true, transformation(origin = {-122.117, 20}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedTranslation fixedTranslation(r = object_x) annotation(Placement(visible = true, transformation(origin = {-130, -46.75}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Constant one(k = 1) annotation(Placement(visible = true, transformation(origin = {-167.617, 93.361}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Constant zero(k = 0) annotation(Placement(visible = true, transformation(origin = {-162.714, 55}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation2(angle = 180, n = {1, 0, 0}) if second annotation(Placement(visible = true, transformation(origin = {-97.996, -98.20699999999999}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation1(angle = 90, n = {0, 0, 1}, r = {-0.11, 0.04, 0.01}) if second annotation(Placement(visible = true, transformation(origin = {-66.32599999999999, -70.297}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
@@ -34,7 +33,7 @@ package HandWithObject
         origin={97.998,-14.643},
         extent={{-12.5,-12.5},{12.5,12.5}},
         rotation=0)));
-  replaceable PowerGrabStructure.Finger.Templates.FingerContact middleRight if
+  replaceable PowerGrabStructure.Finger.Templates.FingerContact middleRightFinger if
     fifth annotation (Placement(visible=true, transformation(
         origin={97.998,-56.5},
         extent={{-12.5,-12.5},{12.5,12.5}},
@@ -57,31 +56,65 @@ package HandWithObject
   equation
     connect(world.frame_b, fixedRotation10.frame_a) annotation(Line(visible = true, origin = {-20.788, -35}, points = {{-131.34, 15}, {42.776, 15}, {42.776, -15}, {45.788, -15}}));
     connect(fixedRotation10.frame_b, fixedRotation5.frame_a) annotation(Line(visible = true, origin = {52.254, -49.822}, points = {{-7.254, -0.178}, {2.081, -0.178}, {2.081, 0.179}, {3.093, 0.179}}));
-    connect(zero.y, middleRight.anteriorInput[4]) annotation(Line(visible = true, origin = {27.362, 1.349}, points = {{-179.076, 53.651}, {55.136, 53.651}, {55.136, -52.1514}, {68.8058, -52.1514}}, color = {0, 0, 127}));
-    connect(ramp2.y, middleRight.anteriorInput[3]) annotation(Line(visible = true, origin = {15.541, -23.651}, points = {{-214.541, 28.651}, {66.957, 28.651}, {66.957, -28.1514}, {80.6268, -28.1514}}, color = {0, 0, 127}));
-    connect(ramp1.y, middleRight.anteriorInput[2]) annotation(Line(visible = true, origin = {16.094, -6.151}, points = {{-212.88, 46.151}, {66.404, 46.151}, {66.404, -46.6514}, {80.0738, -46.6514}}, color = {0, 0, 127}));
-    connect(ramp.y, middleRight.anteriorInput[1]) annotation(Line(visible = true, origin = {16.006, 10.185}, points = {{-213.145, 62.487}, {66.492, 62.487}, {66.492, -63.9874}, {80.1618, -63.9874}}, color = {0, 0, 127}));
-    connect(zero.y, middleRight.posteriorInput[4]) annotation(Line(visible = true, origin = {27.386, -3.39}, points = {{-179.1, 58.39}, {55.112, 58.39}, {55.112, -56.8894}, {68.8746, -56.8894}}, color = {0, 0, 127}));
-    connect(zero.y, middleRight.posteriorInput[3]) annotation(Line(visible = true, origin = {27.386, -3.39}, points = {{-179.1, 58.39}, {55.112, 58.39}, {55.112, -57.8894}, {68.8746, -57.8894}}, color = {0, 0, 127}));
-    connect(zero.y, middleRight.posteriorInput[2]) annotation(Line(visible = true, origin = {27.386, -3.39}, points = {{-179.1, 58.39}, {55.112, 58.39}, {55.112, -58.8894}, {68.8746, -58.8894}}, color = {0, 0, 127}));
-    connect(zero.y, middleRight.posteriorInput[1]) annotation(Line(visible = true, origin = {27.386, -3.39}, points = {{-179.1, 58.39}, {55.112, 58.39}, {55.112, -59.8894}, {68.8746, -59.8894}}, color = {0, 0, 127}));
-    connect(one.y, opposable.posteriorInput[4]) annotation(Line(visible = true, origin = {-67.581, 34.549}, points={{-89.036,
-          58.812},{44.5176,58.812},{44.5176,-116.125}},                                                                                                                           color = {0, 0, 127}));
-    connect(one.y, middleMostFinger.anteriorInput[4]) annotation(Line(visible = true, origin = {-82.106, 77.381}, points = {{-74.511, 15.98}, {20.28, 15.98}, {20.28, -14.4804}, {33.9498, -14.4804}}, color = {0, 0, 127}));
-    connect(one.y, middleMostFinger.posteriorInput[4]) annotation(Line(visible = true, origin = {-82.083, 72.642}, points = {{-74.534, 20.719}, {20.257, 20.719}, {20.257, -19.2184}, {34.0196, -19.2184}}, color = {0, 0, 127}));
-    connect(one.y, middleLeftFinger.anteriorInput[4]) annotation(Line(visible = true, origin = {31.388, 62.529}, points = {{-188.005, 30.832}, {58.112, 30.832}, {58.112, -29.3314}, {71.7818, -29.3314}}, color = {0, 0, 127}));
-    connect(one.y, middleLeftFinger.posteriorInput[4]) annotation(Line(visible = true, origin = {31.411, 57.791}, points = {{-188.028, 35.57}, {58.089, 35.57}, {58.089, -34.0704}, {71.8516, -34.0704}}, color = {0, 0, 127}));
+  connect(zero.y, middleRightFinger.anteriorInput[4]) annotation (Line(
+      visible=true,
+      origin={27.362,1.349},
+      points={{-179.076,53.651},{55.136,53.651},{55.136,-52.1514},{68.8058,-52.1514}},
+
+      color={0,0,127}));
+  connect(ramp2.y, middleRightFinger.anteriorInput[3]) annotation (Line(
+      visible=true,
+      origin={15.541,-23.651},
+      points={{-214.541,28.651},{66.957,28.651},{66.957,-28.1514},{80.6268,-28.1514}},
+
+      color={0,0,127}));
+  connect(ramp1.y, middleRightFinger.anteriorInput[2]) annotation (Line(
+      visible=true,
+      origin={16.094,-6.151},
+      points={{-212.88,46.151},{66.404,46.151},{66.404,-46.6514},{80.0738,-46.6514}},
+
+      color={0,0,127}));
+  connect(ramp.y, middleRightFinger.anteriorInput[1]) annotation (Line(
+      visible=true,
+      origin={16.006,10.185},
+      points={{-213.145,62.487},{66.492,62.487},{66.492,-63.9874},{80.1618,-63.9874}},
+
+      color={0,0,127}));
+  connect(zero.y, middleRightFinger.posteriorInput[4]) annotation (Line(
+      visible=true,
+      origin={27.386,-3.39},
+      points={{-179.1,58.39},{55.112,58.39},{55.112,-56.8894},{68.8746,-56.8894}},
+
+      color={0,0,127}));
+  connect(zero.y, middleRightFinger.posteriorInput[3]) annotation (Line(
+      visible=true,
+      origin={27.386,-3.39},
+      points={{-179.1,58.39},{55.112,58.39},{55.112,-57.8894},{68.8746,-57.8894}},
+
+      color={0,0,127}));
+  connect(zero.y, middleRightFinger.posteriorInput[2]) annotation (Line(
+      visible=true,
+      origin={27.386,-3.39},
+      points={{-179.1,58.39},{55.112,58.39},{55.112,-58.8894},{68.8746,-58.8894}},
+
+      color={0,0,127}));
+  connect(zero.y, middleRightFinger.posteriorInput[1]) annotation (Line(
+      visible=true,
+      origin={27.386,-3.39},
+      points={{-179.1,58.39},{55.112,58.39},{55.112,-59.8894},{68.8746,-59.8894}},
+
+      color={0,0,127}));
     connect(ramp2.y, middleLeftFinger.anteriorInput[3]) annotation(Line(visible = true, origin = {20.792, 18.349}, points = {{-219.792, -13.349}, {68.708, -13.349}, {68.708, 13.8486}, {82.3778, 13.8486}}, color = {0, 0, 127}));
     connect(ramp1.y, middleLeftFinger.anteriorInput[2]) annotation(Line(visible = true, origin = {21.346, 35.849}, points = {{-218.132, 4.151}, {68.154, 4.151}, {68.154, -4.6514}, {81.8238, -4.6514}}, color = {0, 0, 127}));
     connect(ramp.y, middleLeftFinger.anteriorInput[1]) annotation(Line(visible = true, origin = {21.258, 52.185}, points = {{-218.397, 20.487}, {68.242, 20.487}, {68.242, -21.9874}, {81.9118, -21.9874}}, color = {0, 0, 127}));
     connect(fixedRotation9.frame_b, middleLeftFinger.frame_a) annotation(Line(visible = true, origin = {127.154, 42.885}, points = {{11.128, 44.169}, {18.753, 44.169}, {18.753, -30.885}, {-24.3175, -30.885}, {-24.3175, -26.57}}));
     connect(fixedRotation3.frame_b, fixedRotation9.frame_a) annotation(Line(visible = true, origin = {105.339, 51.206}, points = {{-32.807, -35.849}, {9.931, -35.849}, {9.931, 35.848}, {12.943, 35.848}}));
-    connect(one.y, opposable.anteriorInput[4]) annotation(Line(visible = true, origin = {-67.643, 37.708}, points={{-88.974,
-          55.653},{44.4868,55.653},{44.4868,-109.807}},                                                                                                                          color = {0, 0, 127}));
-    connect(one.y, leftMostFinger.posteriorInput[4]) annotation(Line(visible = true, origin = {26.16, 36.719}, points = {{-182.777, 56.642}, {56.338, 56.642}, {56.338, -55.1414}, {70.1006, -55.1414}}, color = {0, 0, 127}));
-    connect(one.y, leftMostFinger.anteriorInput[4]) annotation(Line(visible = true, origin = {26.137, 41.458}, points = {{-182.754, 51.903}, {56.361, 51.903}, {56.361, -50.4034}, {70.0308, -50.4034}}, color = {0, 0, 127}));
     connect(fixedTranslation.frame_b, bodyShape.frame_a) annotation(Line(visible = true, origin = {-84.006, -46.752}, points = {{-35.994, 0.002}, {10.994, 0.002}, {10.994, -0.003}, {14.006, -0.003}}));
-    connect(bodyShape.frame_b, middleRight.frame_a4) annotation(Line(visible = true, origin = {7.306, -61.302}, points = {{-57.306, 14.547}, {-54.194, 14.547}, {-54.194, -10.698}, {82.8476, -10.698}, {82.8476, -7.698}}));
+  connect(bodyShape.frame_b, middleRightFinger.frame_a4) annotation (Line(
+      visible=true,
+      origin={7.306,-61.302},
+      points={{-57.306,14.547},{-54.194,14.547},{-54.194,-10.698},{82.8476,-10.698},
+          {82.8476,-7.698}}));
     connect(bodyShape.frame_b, opposable.frame_a4) annotation(Line(visible = true, origin = {-40.423, -74.08}, points = {{-9.577, 27.325}, {-6.464, 27.325}, {-6.464, -19.217}, {11.2526, -19.217}, {11.2526, -16.217}}));
     connect(bodyShape.frame_b, leftMostFinger.frame_a4) annotation(Line(visible = true, origin = {43.436, -40.218}, points = {{-93.436, -6.537}, {46.7176, -6.537}, {46.7176, 13.075}}));
     connect(bodyShape.frame_b, middleLeftFinger.frame_a4) annotation(Line(visible = true, origin = {48.104, -26.17}, points = {{-98.104, -20.585}, {49.0516, -20.585}, {49.0516, 41.17}}));
@@ -109,9 +142,18 @@ package HandWithObject
     connect(fixedRotation.frame_b, fixedRotation6.frame_a) annotation(Line(visible = true, origin = {-100.785, 35}, points = {{-11.332, -15}, {2.773, -15}, {2.773, 15}, {5.785, 15}}));
     connect(fixedTranslation.frame_b, springDamperParallel.frame_a) annotation(Line(visible = true, origin = {-115.506, -28.375}, points = {{-4.494, -18.375}, {-0.506, -18.375}, {-0.506, 18.375}, {5.506, 18.375}}));
     connect(world.frame_b, fixedTranslation.frame_a) annotation(Line(visible = true, origin = {-144.532, -33.375}, points = {{-7.596, 13.375}, {1.532, 13.375}, {1.532, -13.375}, {4.532, -13.375}}));
-    connect(bodyShape.frame_b, middleRight.frame_a1) annotation(Line(visible = true, origin = {50.124, -56.178}, points = {{-100.124, 9.423}, {32.374, 9.423}, {32.374, -9.422}, {35.374, -9.422}}));
-    connect(bodyShape.frame_b, middleRight.frame_a2) annotation(Line(visible = true, origin = {50.124, -51.627}, points = {{-100.124, 4.872}, {32.374, 4.872}, {32.374, -4.873}, {35.374, -4.873}}));
-    connect(bodyShape.frame_b, middleRight.frame_a3) annotation(Line(visible = true, origin = {50.163, -47.078}, points = {{-100.163, 0.323}, {32.335, 0.323}, {32.335, -0.322}, {35.4943, -0.322}}));
+  connect(bodyShape.frame_b, middleRightFinger.frame_a1) annotation (Line(
+      visible=true,
+      origin={50.124,-56.178},
+      points={{-100.124,9.423},{32.374,9.423},{32.374,-9.422},{35.374,-9.422}}));
+  connect(bodyShape.frame_b, middleRightFinger.frame_a2) annotation (Line(
+      visible=true,
+      origin={50.124,-51.627},
+      points={{-100.124,4.872},{32.374,4.872},{32.374,-4.873},{35.374,-4.873}}));
+  connect(bodyShape.frame_b, middleRightFinger.frame_a3) annotation (Line(
+      visible=true,
+      origin={50.163,-47.078},
+      points={{-100.163,0.323},{32.335,0.323},{32.335,-0.322},{35.4943,-0.322}}));
     connect(bodyShape.frame_b, leftMostFinger.frame_a1) annotation(Line(visible = true, origin = {50.124, -35.249}, points = {{-100.124, -11.506}, {32.374, -11.506}, {32.374, 11.506}, {35.374, 11.506}}));
     connect(bodyShape.frame_b, leftMostFinger.frame_a2) annotation(Line(visible = true, origin = {50.124, -30.699}, points = {{-100.124, -16.056}, {32.374, -16.056}, {32.374, 16.056}, {35.374, 16.056}}));
     connect(bodyShape.frame_b, leftMostFinger.frame_a3) annotation(Line(visible = true, origin = {50.163, -26.149}, points = {{-100.163, -20.606}, {32.335, -20.606}, {32.335, 20.606}, {35.4943, 20.606}}));
@@ -129,7 +171,11 @@ package HandWithObject
     connect(world.frame_b, fixedTranslation1.frame_a) annotation(Line(visible = true, origin = {-20.522, -2.322}, points = {{-131.606, -17.678}, {42.869, -17.678}, {42.869, 17.679}, {45.869, 17.679}}));
     connect(world.frame_b, fixedRotation1.frame_a) annotation(Line(visible = true, origin = {-96.783, -45.148}, points = {{-55.345, 25.148}, {17.444, 25.148}, {17.444, -25.149}, {20.457, -25.149}}));
     connect(world.frame_b, fixedRotation.frame_a) annotation(Line(visible = true, origin = {-138.626, 0}, points = {{-13.502, -20}, {3.496, -20}, {3.496, 20}, {6.509, 20}}));
-    connect(fixedRotation5.frame_b, middleRight.frame_a) annotation(Line(visible = true, origin = {85.792, -61.394}, points = {{-10.445, 11.751}, {-4.82, 11.751}, {-4.82, -8.606}, {10.0425, -8.606}, {10.0425, -6.291}}));
+  connect(fixedRotation5.frame_b, middleRightFinger.frame_a) annotation (Line(
+      visible=true,
+      origin={85.792,-61.394},
+      points={{-10.445,11.751},{-4.82,11.751},{-4.82,-8.606},{10.0425,-8.606},{
+          10.0425,-6.291}}));
     connect(zero.y, leftMostFinger.posteriorInput[3]) annotation(Line(visible = true, origin = {27.386, 17.539}, points = {{-179.1, 37.461}, {55.112, 37.461}, {55.112, -36.9614}, {68.8746, -36.9614}}, color = {0, 0, 127}));
     connect(zero.y, leftMostFinger.posteriorInput[2]) annotation(Line(visible = true, origin = {27.386, 17.539}, points = {{-179.1, 37.461}, {55.112, 37.461}, {55.112, -37.9614}, {68.8746, -37.9614}}, color = {0, 0, 127}));
     connect(zero.y, leftMostFinger.posteriorInput[1]) annotation(Line(visible = true, origin = {27.386, 17.539}, points = {{-179.1, 37.461}, {55.112, 37.461}, {55.112, -38.9614}, {68.8746, -38.9614}}, color = {0, 0, 127}));
@@ -139,6 +185,35 @@ package HandWithObject
     connect(fixedRotation4.frame_a, fixedTranslation2.frame_b) annotation(Line(visible = true, origin = {50.347, -9.643000000000001}, points = {{5, 0}, {-5, 0}}));
     connect(fixedTranslation1.frame_b, fixedRotation3.frame_a) annotation(Line(visible = true, origin = {48.939, 15.357}, points = {{-3.592, 0}, {3.593, 0}}));
     connect(fixedRotation1.frame_b, fixedRotation2.frame_a) annotation(Line(visible = true, origin = {-80.623, -83.934}, points = {{24.297, 13.637}, {31.922, 13.637}, {31.922, 0.637}, {-30.385, 0.637}, {-30.385, -14.273}, {-27.373, -14.273}}));
+  connect(zero.y, middleMostFinger.anteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-100,55},{-100,62.9006},{-48.1562,62.9006}}, color={0,0,
+          127}));
+  connect(zero.y, middleMostFinger.posteriorInput[4]) annotation (Line(points={
+          {-151.714,55},{-100,55},{-100,53.4236},{-48.0634,53.4236}}, color={0,
+          0,127}));
+  connect(zero.y, middleLeftFinger.anteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-25,55},{-25,33.1976},{103.17,33.1976}}, color={0,0,127}));
+  connect(zero.y, middleLeftFinger.posteriorInput[4]) annotation (Line(points={
+          {-151.714,55},{-25,55},{-25,23.7206},{103.263,23.7206}}, color={0,0,
+          127}));
+  connect(zero.y, leftMostFinger.anteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-30,55},{-30,-8.9454},{96.1678,-8.9454}}, color={0,0,
+          127}));
+  connect(zero.y, leftMostFinger.posteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-30,55},{-30,-18.4224},{96.2606,-18.4224}}, color={0,0,
+          127}));
+  connect(zero.y, middleRightFinger.anteriorInput[4]) annotation (Line(points={
+          {-151.714,55},{-30,55},{-30,-50.8024},{96.1678,-50.8024}}, color={0,0,
+          127}));
+  connect(zero.y, middleRightFinger.posteriorInput[4]) annotation (Line(points=
+          {{-151.714,55},{-30,55},{-30,-60.2794},{96.2606,-60.2794}}, color={0,
+          0,127}));
+  connect(zero.y, opposable.anteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-90,55},{-90,-72.0994},{-23.1562,-72.0994}}, color={0,0,
+          127}));
+  connect(zero.y, opposable.posteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-90,55},{-90,-81.5764},{-23.0634,-81.5764}}, color={0,0,
+          127}));
     annotation(experiment(StopTime = 15.0, Interval = 0.1, Algorithm = "cvodes"), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
   end HandContact;
 end HandWithObject;

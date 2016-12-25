@@ -40,7 +40,7 @@ model TestFingerContactModel
   Modelica.Blocks.Sources.Ramp ramp2(duration=0)      annotation(Placement(visible = true, transformation(origin={-78,-17},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Modelica.SIunits.Length mFinger = 0.204;
   parameter Modelica.SIunits.Length threshold = 0.0375;
-  parameter Real mu = 10;
+  parameter Real mu = 1;
   parameter Modelica.SIunits.Length delta[2] = {0.01, 0.015} "In order of: delta of friction, buffer range";
   parameter Modelica.SIunits.Position object_x[3] = {-0.06, 0.06, -0.02};
 equation
