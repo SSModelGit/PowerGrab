@@ -7,7 +7,6 @@ model TestFingerContactModel
       fingerLength={mFinger*0.343137255,mFinger*0.31372549,mFinger*0.196078431,
           mFinger*0.147058824},
       mu=mu,
-      delta=delta[1],
       phiSide0=0,
       bufferRange=delta[2],
       diameter=0.02,
@@ -15,7 +14,8 @@ model TestFingerContactModel
       v2delta=0.01,
       v0Mag=1,
       bufferDamping=15,
-    k=5000)             annotation (Placement(visible=true, transformation(
+    k=5000,
+    delta=delta[1])     annotation (Placement(visible=true, transformation(
       origin={85.674,35.203},
       extent={{-12.5,-12.5},{12.5,12.5}},
       rotation=0)));
@@ -40,7 +40,7 @@ model TestFingerContactModel
   Modelica.Blocks.Sources.Ramp ramp2(duration=0)      annotation(Placement(visible = true, transformation(origin={-78,-17},   extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   parameter Modelica.SIunits.Length mFinger = 0.204;
   parameter Modelica.SIunits.Length threshold = 0.0375;
-  parameter Real mu = 0.01;
+  parameter Real mu = 1;
   parameter Modelica.SIunits.Length delta[2] = {0.01, 0.015} "In order of: delta of friction, buffer range";
   parameter Modelica.SIunits.Position object_x[3] = {-0.06, 0.06, 0};
 equation
