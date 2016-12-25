@@ -73,11 +73,11 @@ equation
   position.s_ref = max(min(boneLength, -relativePosition.r_rel[1]), 0);
   lHat = lVec.r_rel / lMag.distance;
   v2 = rV.v_rel - rV.v_rel * lHat * lHat;
-  v2Hat = v2 / (v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2 + 0.1);
+  v2Hat = v2 / (sqrt(v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2 + 0.1));
   v2Mag = sqrt(v2[1] ^ 2 + v2[2] ^ 2 + v2[3] ^ 2 + 0.1);
   mu0 = smooth(0, noEvent(if fContact then mu else 0));
   checkProjection = v2Hat * lHat;
-  fPrism.force = -mu0 * min(skinBuffer.y, 50) * v2Hat * min(smooth(0, noEvent(if v2Mag > v2delta then v2Mag - v2delta else 0)), v0Mag - v2delta);
+  fPrism.force = mu0 * min(skinBuffer.y, 50) * v2Hat * min(smooth(0, noEvent(if v2Mag > v2delta then v2Mag - v2delta else 0)), v0Mag - v2delta);
   fSphere.force = -fPrism.force;
   connect(fSphere.frame_b, frame_contact) annotation (Line(
       points={{-107.719,38.229},{-107.719,19.1145},{-100,19.1145},{-100,0}},
