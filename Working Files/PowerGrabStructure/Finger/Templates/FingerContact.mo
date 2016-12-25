@@ -42,40 +42,40 @@ equation
   connect(posteriorInput[3], posteriorMuscles.perCDistal) annotation(Line(points={{260,
           4.866},{205,4.866},{205,-36.3577},{166,-36.3577}},                                                                                       color = {0, 0, 127}));
   connect(anteriorMuscles.frame_1, fingerStructure.frame_1A) annotation(Line(points={{-98,
-          54.47},{-92,54.47},{-92,53.8763},{-73.8642,53.8763}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          54.47},{-92,54.47},{-92,64.0516},{-85.037,64.0516}},                                                                                           color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorMuscles.frame_2, fingerStructure.frame_2A) annotation(Line(points={{-98,
-          37.13},{-93,37.13},{-93,37},{-74,37}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          37.13},{-93,37.13},{-93,43.8},{-85.2,43.8}},                                                                                    color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorMuscles.frame_3, fingerStructure.frame_3A) annotation(Line(points={{-98,
-          20.3},{-92,20.3},{-92,19.8997},{-73.8899,19.8997}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          20.3},{-92,20.3},{-92,23.2796},{-85.0678,23.2796}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorMuscles.frame_4, fingerStructure.frame_4A) annotation(Line(points={{-98,
-          3.53375},{-92,3.53375},{-92,2.99745},{-74.0028,2.99745}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          3.53375},{-92,3.53375},{-92,2.99694},{-85.2034,2.99694}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorMuscles.frame_5, fingerStructure.frame_5A) annotation(Line(points={{-98,
-          -12.8954},{-92,-12.8954},{-92,-13.9898},{-73.9888,-13.9898}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          -12.8954},{-92,-12.8954},{-92,-17.3878},{-85.1866,-17.3878}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorMuscles.frame_6, fingerStructure.frame_6A) annotation(Line(points={{-98,
-          -29.4275},{-91,-29.4275},{-91,-30.8831},{-73.8717,-30.8831}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          -29.4275},{-91,-29.4275},{-91,-37.6597},{-85.046,-37.6597}},                                                                                           color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorMuscles.frame_7, fingerStructure.frame_7A) annotation(Line(points={{-98,-46},
-          {-98,-53},{-73.8017,-53},{-73.8017,-47.8194}},                                                                                               color = {95, 95, 95}, thickness = 0.5));
+          {-98,-53},{-84.962,-53},{-84.962,-57.9833}},                                                                                                 color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_1, fingerStructure.frame_1P) annotation(Line(points={{64,
-          52.47},{57,52.47},{57,54.0871},{38.0957,54.0871}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          52.47},{57,52.47},{57,64.3046},{49.3148,64.3046}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_2, fingerStructure.frame_2P) annotation(Line(points={{64,
-          35.13},{56,35.13},{56,37},{38.1041,37}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          35.13},{56,35.13},{56,43.8},{49.3249,43.8}},                                                                                      color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_3, fingerStructure.frame_3P) annotation(Line(points={{64,18.3},
-          {56,18.3},{56,19.9231},{37.9155,19.9231}},                                                                                                color = {95, 95, 95}, thickness = 0.5));
+          {56,18.3},{56,23.3077},{49.0986,23.3077}},                                                                                                color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_4, fingerStructure.frame_4P) annotation(Line(points={{64,
-          1.53375},{58,1.53375},{58,2.74543},{37.7205,2.74543}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          1.53375},{58,1.53375},{58,2.69451},{48.8646,2.69451}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_5, fingerStructure.frame_5P) annotation(Line(points={{64,
-          -14.8954},{56,-14.8954},{56,-14.0557},{37.9389,-14.0557}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          -14.8954},{56,-14.8954},{56,-17.4668},{49.1266,-17.4668}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_6, fingerStructure.frame_6P) annotation(Line(points={{64,
-          -31.4275},{56,-31.4275},{56,-31.1572},{38,-31.1572}},                                                                                          color = {95, 95, 95}, thickness = 0.5));
+          -31.4275},{56,-31.4275},{56,-37.9887},{49.2,-37.9887}},                                                                                        color = {95, 95, 95}, thickness = 0.5));
   connect(posteriorMuscles.frame_7, fingerStructure.frame_7P) annotation(Line(points={{64,-48},
-          {58,-48},{58,-48},{37.8049,-48}},                                                                                               color = {95, 95, 95}, thickness = 0.5));
+          {58,-48},{58,-58.2},{48.9659,-58.2}},                                                                                           color = {95, 95, 95}, thickness = 0.5));
   connect(frame_a, fingerStructure.frame_a) annotation(Line(points={{-139,-92},
-          {-30,-92},{-30,-43.75},{-27.3333,-43.75}},                                                                               color = {95, 95, 95}, thickness = 0.5));
+          {-30,-92},{-30,-53.1},{-29.2,-53.1}},                                                                                    color = {95, 95, 95}, thickness = 0.5));
   connect(anteriorInput[4], fingerStructure.sideAnterior) annotation(Line(points={{-265,
-          15.948},{-264,15.948},{-264,56},{-32,56},{-32,24.25},{-29.4119,24.25}},                                                                                            color = {0, 0, 127}));
+          15.948},{-264,15.948},{-264,56},{-32,56},{-32,28.5},{-31.6942,28.5}},                                                                                              color = {0, 0, 127}));
   connect(posteriorInput[4], fingerStructure.sidePosterior) annotation(Line(points={{260,
-          14.866},{260,14},{262,14},{262,-66},{0,-66},{0,-17.3889},{-29.2975,
-          -17.3889}},                                                                                                                                                                             color = {0, 0, 127}));
+          14.866},{260,14},{262,14},{262,-66},{0,-66},{0,-21.4667},{-31.557,
+          -21.4667}},                                                                                                                                                                             color = {0, 0, 127}));
   connect(objectConnection.frame_object, fixedTranslation2.frame_b) annotation(Line(points = {{-172, 128.1}, {-128, 128.1}, {-128, 128.311}, {-85, 128.311}}, color = {95, 95, 95}, thickness = 0.5));
   connect(objectConnection1.frame_object, fixedTranslation1.frame_b) annotation(Line(points = {{-202, 104.1}, {-148, 104.1}, {-148, 105}, {-92.404, 105}}, color = {95, 95, 95}, thickness = 0.5));
   connect(frame_a1, objectConnection2.frame_contact) annotation(Line(points = {{-241, 77}, {-215.5, 77}, {-215.5, 80}, {-192, 80}}, color = {95, 95, 95}, thickness = 0.5));
@@ -83,15 +83,15 @@ equation
   connect(frame_a3, objectConnection.frame_contact) annotation(Line(points = {{-245, 128}, {-218.5, 128}, {-192, 128}}, color = {95, 95, 95}, thickness = 0.5));
   connect(frame_a2, objectConnection1.frame_contact) annotation(Line(points = {{-244, 104}, {-222, 104}, {-222, 104}}, color = {95, 95, 95}, thickness = 0.5));
   connect(fixedTranslation2.frame_a, fingerStructure.frame_1A) annotation(Line(points={{-65,
-          128.311},{-65,95.1555},{-73.8642,95.1555},{-73.8642,53.8763}},                                                                                            color = {95, 95, 95}, thickness = 0.5));
+          128.311},{-65,95.1555},{-85.037,95.1555},{-85.037,64.0516}},                                                                                              color = {95, 95, 95}, thickness = 0.5));
   connect(fixedTranslation1.frame_a, fingerStructure.frame_3A) annotation(Line(points={{-72.404,
-          105},{-72.404,90},{-72,90},{-72,74},{-90,74},{-90,24},{-73.8899,24},{
-          -73.8899,19.8997}},                                                                                                                                                                             color = {95, 95, 95}, thickness = 0.5));
+          105},{-72.404,90},{-72,90},{-72,74},{-90,74},{-90,24},{-85.0678,24},{
+          -85.0678,23.2796}},                                                                                                                                                                             color = {95, 95, 95}, thickness = 0.5));
   connect(fixedTranslation.frame_a, fingerStructure.frame_5A) annotation(Line(points={{-133,82},
-          {-92,82},{-92,-18},{-73.9888,-18},{-73.9888,-13.9898}},                                                                                                  color = {95, 95, 95}, thickness = 0.5));
+          {-92,82},{-92,-18},{-85.1866,-18},{-85.1866,-17.3878}},                                                                                                  color = {95, 95, 95}, thickness = 0.5));
   connect(frame_a4, objectConnection3.frame_contact) annotation(Line(points = {{-257, -61}, {-244.5, -61}, {-244.5, -62}, {-232, -62}}, color = {95, 95, 95}, thickness = 0.5));
   connect(objectConnection3.frame_object, fingerStructure.frame_7A) annotation(Line(points={{-212,
-          -61.9},{-150,-61.9},{-150,-47.8194},{-73.8017,-47.8194}},                                                                                                  color = {95, 95, 95}, thickness = 0.5));
+          -61.9},{-150,-61.9},{-150,-57.9833},{-84.962,-57.9833}},                                                                                                   color = {95, 95, 95}, thickness = 0.5));
   annotation(Icon(coordinateSystem(extent = {{-125, -125}, {125, 125}}, preserveAspectRatio = false, initialScale = 0.1, grid = {25, 25}), graphics={  Polygon(visible = true, origin = {-11.122, -85.083}, fillColor = {0, 0, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, points = {{-38.878, -26.42}, {13.483, -26.42}, {34.272, 25.083}, {-8.878, 27.757}}), Polygon(visible = true, origin = {11.791, -38.344}, fillColor = {0, 128, 255},
             fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, points = {{-31.791, -21.656}, {11.359, -21.656}, {20.178, 38.344}, {-21.791, 38.344}}), Polygon(visible = true, origin = {11.3, 30}, fillColor = {102, 204, 255},

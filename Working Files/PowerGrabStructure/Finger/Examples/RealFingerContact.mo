@@ -98,6 +98,6 @@ model RealFingerContact
   parameter Modelica.SIunits.Length bufferRange = 0.1 annotation(Dialog(tab = "Friction", group = "Parameters"));
   parameter Modelica.SIunits.TranslationalDampingConstant bufferDamping = 15 annotation(Dialog(tab = "Friction", group = "Parameters"));
   parameter Modelica.SIunits.Length diameter = 0.02;
-  parameter Modelica.SIunits.Force fMuscle_max = 50;
+  parameter Modelica.SIunits.Force fMuscle_max = 25;
   parameter Modelica.SIunits.Angle initialRotations[3] = {0, 0, 0} "In the order of: far distal phalange, middle phalange, and proximal phalange" annotation(Dialog(group = "Initial values"));
 end RealFingerContact;
