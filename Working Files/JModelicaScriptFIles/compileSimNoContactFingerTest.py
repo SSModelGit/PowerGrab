@@ -6,7 +6,7 @@ from pymodelica import compile_fmu
 from pyfmi import load_fmu
 
 cname = 'PowerGrabStructure.Finger.Tests.TestFingerNoContactModel'
-fname = 'Documents/GitHub/Working Files/PowerGrabStructure'
+fname = 'PowerGrab/WorkingFiles/PowerGrabStructure'
 fmu_name = compile_fmu(cname, fname)
 testF = load_fmu(fmu_name)
 
