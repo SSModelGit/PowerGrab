@@ -1,6 +1,7 @@
 within PowerGrabStructure.Templates;
 package HandWithObject
   replaceable partial model HandContact
+
   replaceable PowerGrabStructure.Finger.Templates.FingerContact
     middleMostFinger annotation (Placement(visible=true, transformation(
         origin={-46.326,57.203},
@@ -42,13 +43,29 @@ package HandWithObject
     Modelica.Mechanics.MultiBody.Parts.BodyShape bodyShape(r = {0.01, 0, 0}, r_CM = {0, 0, 0}, m = 0.01, r_0(fixed = true, start = object_x)) annotation(Placement(visible = true, transformation(origin = {-60, -46.755}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation6(n = {1, 0, 0}, angle = 0) annotation(Placement(visible = true, transformation(origin = {-85, 50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation7(angle = 45, n = {1, 0, 0}) if fourth annotation(Placement(visible = true, transformation(origin = {67.408, -35}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Ramp ramp(duration = 2, startTime = 5, height = 0.2) annotation(Placement(visible = true, transformation(origin = {-208.139, 72.672}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Ramp ramp1(duration = 2, startTime = 3, height = 0.6) annotation(Placement(visible = true, transformation(origin = {-207.786, 40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    Modelica.Blocks.Sources.Ramp ramp2(duration = 0.01) annotation(Placement(visible = true, transformation(origin = {-210, 5}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Sources.Ramp DistalPhalangeActuation(
+      duration=2,
+      startTime=5,
+      height=0.2) annotation (Placement(visible=true, transformation(
+          origin={-208.139,72.672},
+          extent={{-10,-10},{10,10}},
+          rotation=0)));
+    Modelica.Blocks.Sources.Ramp MiddlePhalangeActuation(
+      duration=2,
+      startTime=3,
+      height=0.6) annotation (Placement(visible=true, transformation(
+          origin={-207.786,40},
+          extent={{-10,-10},{10,10}},
+          rotation=0)));
+    Modelica.Blocks.Sources.Ramp ProximalPhalangeActuation(duration=0.01)
+      annotation (Placement(visible=true, transformation(
+          origin={-210,5},
+          extent={{-10,-10},{10,10}},
+          rotation=0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation8(angle = 0, n = {0, 1, 0}) if second annotation(Placement(visible = true, transformation(origin = {-65, -95}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation9(angle = 30, n = {1, 0, 0}) if third annotation(Placement(visible = true, transformation(origin = {128.282, 87.054}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Mechanics.MultiBody.Parts.FixedRotation fixedRotation10(angle = 90, n = {0, 0, 1}, r = {0, 0, 0.022}) if fifth annotation(Placement(visible = true, transformation(origin = {35, -50}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-    parameter Modelica.SIunits.Position object_x[3] = {-0.06, 0.06, -0.01};
+    parameter Modelica.SIunits.Position object_x[3];
     parameter Boolean second = true;
     parameter Boolean third = true;
     parameter Boolean fourth = true;
@@ -60,53 +77,74 @@ package HandWithObject
       visible=true,
       origin={27.362,1.349},
       points={{-179.076,53.651},{55.136,53.651},{55.136,-52.1514},{68.8058,-52.1514}},
-
       color={0,0,127}));
-  connect(ramp2.y, middleRightFinger.anteriorInput[3]) annotation (Line(
-      visible=true,
-      origin={15.541,-23.651},
-      points={{-214.541,28.651},{66.957,28.651},{66.957,-28.1514},{80.6268,-28.1514}},
 
-      color={0,0,127}));
-  connect(ramp1.y, middleRightFinger.anteriorInput[2]) annotation (Line(
-      visible=true,
-      origin={16.094,-6.151},
-      points={{-212.88,46.151},{66.404,46.151},{66.404,-46.6514},{80.0738,-46.6514}},
+    connect(ProximalPhalangeActuation.y, middleRightFinger.anteriorInput[3])
+      annotation (Line(
+        visible=true,
+        origin={15.541,-23.651},
+        points={{-214.541,28.651},{66.957,28.651},{66.957,-28.1514},{80.6268,-28.1514}},
+        color={0,0,127}));
 
-      color={0,0,127}));
-  connect(ramp.y, middleRightFinger.anteriorInput[1]) annotation (Line(
-      visible=true,
-      origin={16.006,10.185},
-      points={{-213.145,62.487},{66.492,62.487},{66.492,-63.9874},{80.1618,-63.9874}},
+    connect(MiddlePhalangeActuation.y, middleRightFinger.anteriorInput[2])
+      annotation (Line(
+        visible=true,
+        origin={16.094,-6.151},
+        points={{-212.88,46.151},{66.404,46.151},{66.404,-46.6514},{80.0738,-46.6514}},
+        color={0,0,127}));
 
-      color={0,0,127}));
+    connect(DistalPhalangeActuation.y, middleRightFinger.anteriorInput[1])
+      annotation (Line(
+        visible=true,
+        origin={16.006,10.185},
+        points={{-213.145,62.487},{66.492,62.487},{66.492,-63.9874},{80.1618,-63.9874}},
+        color={0,0,127}));
+
   connect(zero.y, middleRightFinger.posteriorInput[4]) annotation (Line(
       visible=true,
       origin={27.386,-3.39},
       points={{-179.1,58.39},{55.112,58.39},{55.112,-56.8894},{68.8746,-56.8894}},
-
       color={0,0,127}));
+
   connect(zero.y, middleRightFinger.posteriorInput[3]) annotation (Line(
       visible=true,
       origin={27.386,-3.39},
       points={{-179.1,58.39},{55.112,58.39},{55.112,-57.8894},{68.8746,-57.8894}},
-
       color={0,0,127}));
+
   connect(zero.y, middleRightFinger.posteriorInput[2]) annotation (Line(
       visible=true,
       origin={27.386,-3.39},
       points={{-179.1,58.39},{55.112,58.39},{55.112,-58.8894},{68.8746,-58.8894}},
-
       color={0,0,127}));
+
   connect(zero.y, middleRightFinger.posteriorInput[1]) annotation (Line(
       visible=true,
       origin={27.386,-3.39},
       points={{-179.1,58.39},{55.112,58.39},{55.112,-59.8894},{68.8746,-59.8894}},
-
       color={0,0,127}));
-    connect(ramp2.y, middleLeftFinger.anteriorInput[3]) annotation(Line(visible = true, origin = {20.792, 18.349}, points = {{-219.792, -13.349}, {68.708, -13.349}, {68.708, 13.8486}, {82.3778, 13.8486}}, color = {0, 0, 127}));
-    connect(ramp1.y, middleLeftFinger.anteriorInput[2]) annotation(Line(visible = true, origin = {21.346, 35.849}, points = {{-218.132, 4.151}, {68.154, 4.151}, {68.154, -4.6514}, {81.8238, -4.6514}}, color = {0, 0, 127}));
-    connect(ramp.y, middleLeftFinger.anteriorInput[1]) annotation(Line(visible = true, origin = {21.258, 52.185}, points = {{-218.397, 20.487}, {68.242, 20.487}, {68.242, -21.9874}, {81.9118, -21.9874}}, color = {0, 0, 127}));
+
+    connect(ProximalPhalangeActuation.y, middleLeftFinger.anteriorInput[3])
+      annotation (Line(
+        visible=true,
+        origin={20.792,18.349},
+        points={{-219.792,-13.349},{68.708,-13.349},{68.708,13.8486},{82.3778,13.8486}},
+        color={0,0,127}));
+
+    connect(MiddlePhalangeActuation.y, middleLeftFinger.anteriorInput[2])
+      annotation (Line(
+        visible=true,
+        origin={21.346,35.849},
+        points={{-218.132,4.151},{68.154,4.151},{68.154,-4.6514},{81.8238,-4.6514}},
+        color={0,0,127}));
+
+    connect(DistalPhalangeActuation.y, middleLeftFinger.anteriorInput[1])
+      annotation (Line(
+        visible=true,
+        origin={21.258,52.185},
+        points={{-218.397,20.487},{68.242,20.487},{68.242,-21.9874},{81.9118,-21.9874}},
+        color={0,0,127}));
+
     connect(fixedRotation9.frame_b, middleLeftFinger.frame_a) annotation(Line(visible = true, origin = {127.154, 42.885}, points = {{11.128, 44.169}, {18.753, 44.169}, {18.753, -30.885}, {-24.3175, -30.885}, {-24.3175, -26.57}}));
     connect(fixedRotation3.frame_b, fixedRotation9.frame_a) annotation(Line(visible = true, origin = {105.339, 51.206}, points = {{-32.807, -35.849}, {9.931, -35.849}, {9.931, 35.848}, {12.943, 35.848}}));
     connect(fixedTranslation.frame_b, bodyShape.frame_a) annotation(Line(visible = true, origin = {-84.006, -46.752}, points = {{-35.994, 0.002}, {10.994, 0.002}, {10.994, -0.003}, {14.006, -0.003}}));
@@ -121,18 +159,72 @@ package HandWithObject
     connect(bodyShape.frame_b, middleMostFinger.frame_a4) annotation(Line(visible = true, origin = {-50.423, 6.92}, points = {{0.423, -53.675}, {3.536, -53.675}, {3.536, 34.783}, {-3.7474, 34.783}, {-3.7474, 37.783}}));
     connect(fixedRotation8.frame_b, opposable.frame_a) annotation(Line(visible = true, origin = {-33.993, -92.994}, points = {{-21.007, -2.006}, {10.5035, -2.006}, {10.5035, 4.012}}));
     connect(fixedRotation2.frame_b, fixedRotation8.frame_a) annotation(Line(visible = true, origin = {-79.755, -96.60299999999999}, points = {{-8.241, -1.604}, {1.743, -1.604}, {1.743, 1.603}, {4.755, 1.603}}));
-    connect(ramp2.y, leftMostFinger.anteriorInput[3]) annotation(Line(visible = true, origin = {15.541, -2.723}, points = {{-214.541, 7.723}, {66.957, 7.723}, {66.957, -7.2224}, {80.6268, -7.2224}}, color = {0, 0, 127}));
-    connect(ramp1.y, leftMostFinger.anteriorInput[2]) annotation(Line(visible = true, origin = {16.094, 14.777}, points = {{-212.88, 25.223}, {66.404, 25.223}, {66.404, -25.7224}, {80.0738, -25.7224}}, color = {0, 0, 127}));
-    connect(ramp.y, leftMostFinger.anteriorInput[1]) annotation(Line(visible = true, origin = {16.006, 31.113}, points = {{-213.145, 41.559}, {66.492, 41.559}, {66.492, -43.0584}, {80.1618, -43.0584}}, color = {0, 0, 127}));
-    connect(ramp2.y, opposable.anteriorInput[3]) annotation(Line(visible = true, origin = {-73.952, -34.3}, points = {{-125.048, 39.3}, {37.126, 39.3}, {37.126, -38.7994}, {50.7958, -38.7994}}, color = {0, 0, 127}));
-    connect(ramp1.y, opposable.anteriorInput[2]) annotation(Line(visible = true, origin = {-73.399, -16.8}, points = {{-123.387, 56.8}, {36.573, 56.8}, {36.573, -57.2994}, {50.2428, -57.2994}}, color = {0, 0, 127}));
-    connect(ramp.y, opposable.anteriorInput[1]) annotation(Line(visible = true, origin = {-73.48699999999999, -0.464}, points = {{-123.652, 73.136}, {36.661, 73.136}, {36.661, -74.6354}, {50.3308, -74.6354}}, color = {0, 0, 127}));
+    connect(ProximalPhalangeActuation.y, leftMostFinger.anteriorInput[3])
+      annotation (Line(
+        visible=true,
+        origin={15.541,-2.723},
+        points={{-214.541,7.723},{66.957,7.723},{66.957,-7.2224},{80.6268,-7.2224}},
+        color={0,0,127}));
+
+    connect(MiddlePhalangeActuation.y, leftMostFinger.anteriorInput[2])
+      annotation (Line(
+        visible=true,
+        origin={16.094,14.777},
+        points={{-212.88,25.223},{66.404,25.223},{66.404,-25.7224},{80.0738,-25.7224}},
+        color={0,0,127}));
+
+    connect(DistalPhalangeActuation.y, leftMostFinger.anteriorInput[1])
+      annotation (Line(
+        visible=true,
+        origin={16.006,31.113},
+        points={{-213.145,41.559},{66.492,41.559},{66.492,-43.0584},{80.1618,-43.0584}},
+        color={0,0,127}));
+
+    connect(ProximalPhalangeActuation.y, opposable.anteriorInput[3]) annotation (
+        Line(
+        visible=true,
+        origin={-73.952,-34.3},
+        points={{-125.048,39.3},{37.126,39.3},{37.126,-38.7994},{50.7958,-38.7994}},
+        color={0,0,127}));
+
+    connect(MiddlePhalangeActuation.y, opposable.anteriorInput[2]) annotation (
+        Line(
+        visible=true,
+        origin={-73.399,-16.8},
+        points={{-123.387,56.8},{36.573,56.8},{36.573,-57.2994},{50.2428,-57.2994}},
+        color={0,0,127}));
+
+    connect(DistalPhalangeActuation.y, opposable.anteriorInput[1]) annotation (
+        Line(
+        visible=true,
+        origin={-73.48699999999999,-0.464},
+        points={{-123.652,73.136},{36.661,73.136},{36.661,-74.6354},{50.3308,-74.6354}},
+        color={0,0,127}));
+
     connect(zero.y, opposable.posteriorInput[3]) annotation(Line(visible = true, origin = {-65.947, 8.975}, points = {{-85.767, 46.025}, {42.8836, 46.025}, {42.8836, -91.5514}}, color = {0, 0, 127}));
     connect(zero.y, opposable.posteriorInput[2]) annotation(Line(visible = true, origin = {-65.947, 8.975}, points = {{-85.767, 46.025}, {42.8836, 46.025}, {42.8836, -92.5514}}, color = {0, 0, 127}));
     connect(zero.y, opposable.posteriorInput[1]) annotation(Line(visible = true, origin = {-65.947, 8.975}, points = {{-85.767, 46.025}, {42.8836, 46.025}, {42.8836, -93.5514}}, color = {0, 0, 127}));
-    connect(ramp2.y, middleMostFinger.anteriorInput[3]) annotation(Line(visible = true, origin = {-92.702, 33.2}, points = {{-106.298, -28.2}, {30.876, -28.2}, {30.876, 28.7006}, {44.5458, 28.7006}}, color = {0, 0, 127}));
-    connect(ramp1.y, middleMostFinger.anteriorInput[2]) annotation(Line(visible = true, origin = {-92.149, 50.7}, points = {{-104.637, -10.7}, {30.323, -10.7}, {30.323, 10.2006}, {43.9928, 10.2006}}, color = {0, 0, 127}));
-    connect(ramp.y, middleMostFinger.anteriorInput[1]) annotation(Line(visible = true, origin = {-92.237, 67.036}, points = {{-104.902, 5.636}, {30.411, 5.636}, {30.411, -7.1354}, {44.0808, -7.1354}}, color = {0, 0, 127}));
+    connect(ProximalPhalangeActuation.y, middleMostFinger.anteriorInput[3])
+      annotation (Line(
+        visible=true,
+        origin={-92.702,33.2},
+        points={{-106.298,-28.2},{30.876,-28.2},{30.876,28.7006},{44.5458,28.7006}},
+        color={0,0,127}));
+
+    connect(MiddlePhalangeActuation.y, middleMostFinger.anteriorInput[2])
+      annotation (Line(
+        visible=true,
+        origin={-92.149,50.7},
+        points={{-104.637,-10.7},{30.323,-10.7},{30.323,10.2006},{43.9928,10.2006}},
+        color={0,0,127}));
+
+    connect(DistalPhalangeActuation.y, middleMostFinger.anteriorInput[1])
+      annotation (Line(
+        visible=true,
+        origin={-92.237,67.036},
+        points={{-104.902,5.636},{30.411,5.636},{30.411,-7.1354},{44.0808,-7.1354}},
+        color={0,0,127}));
+
     connect(zero.y, middleMostFinger.posteriorInput[3]) annotation(Line(visible = true, origin = {-80.857, 53.462}, points = {{-70.857, 1.538}, {19.031, 1.538}, {19.031, -1.0384}, {32.7936, -1.0384}}, color = {0, 0, 127}));
     connect(zero.y, middleMostFinger.posteriorInput[2]) annotation(Line(visible = true, origin = {-80.857, 53.462}, points = {{-70.857, 1.538}, {19.031, 1.538}, {19.031, -2.0384}, {32.7936, -2.0384}}, color = {0, 0, 127}));
     connect(zero.y, middleMostFinger.posteriorInput[1]) annotation(Line(visible = true, origin = {-80.857, 53.462}, points = {{-70.857, 1.538}, {19.031, 1.538}, {19.031, -3.0384}, {32.7936, -3.0384}}, color = {0, 0, 127}));
@@ -193,8 +285,8 @@ package HandWithObject
           0,127}));
   connect(zero.y, middleLeftFinger.anteriorInput[4]) annotation (Line(points={{
           -151.714,55},{-25,55},{-25,33.1976},{103.17,33.1976}}, color={0,0,127}));
-  connect(zero.y, middleLeftFinger.posteriorInput[4]) annotation (Line(points={
-          {-151.714,55},{-25,55},{-25,23.7206},{103.263,23.7206}}, color={0,0,
+  connect(zero.y, middleLeftFinger.posteriorInput[4]) annotation (Line(points={{
+          -151.714,55},{-25,55},{-25,23.7206},{103.263,23.7206}},  color={0,0,
           127}));
   connect(zero.y, leftMostFinger.anteriorInput[4]) annotation (Line(points={{
           -151.714,55},{-30,55},{-30,-8.9454},{96.1678,-8.9454}}, color={0,0,
