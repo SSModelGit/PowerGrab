@@ -7,7 +7,7 @@ from pyfmi import load_fmu
 
 cname = 'PowerGrabStructure.Finger.Tests.TestFingerContactModel'
 fname = 'Documents/GitHub/Working Files/PowerGrabStructure'
-fmu_name = compile_fmu(cname, fname, jvm_args='-Xmx5g')
+fmu_name = compile_fmu(cname, fname)
 testF = load_fmu(fmu_name)
 
 #testF.set('middleMostFinger.fingerStructure.doubleBoneJoint.springDamper.c',0.01);

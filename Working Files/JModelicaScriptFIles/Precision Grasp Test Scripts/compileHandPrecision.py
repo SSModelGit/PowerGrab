@@ -7,4 +7,4 @@ from pyfmi import load_fmu
 
 cname = 'PowerGrabStructure.Examples.HandWithObject.RealHandContactTrialPrecision'
 fname = 'Documents/GitHub/Working Files/PowerGrabStructure'
-fmu_name = compile_fmu(cname, fname, jvm_args='-Xmx3g')
+fmu_name = compile_fmu(cname, fname, jvm_args='-Xmx5g')
