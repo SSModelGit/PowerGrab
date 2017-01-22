@@ -64,7 +64,7 @@ model RealHandContactTrialPrehensile
                  fixed =               false)),
     world(                                      animateGravity =       false, animateWorld =       true),
     springDamperParallel(                                                                                animation =                      false),
-    fixedRotation1(r={-0.10,0.04,0.01}), object_x = {-0.06, 0.1, 0});
+    fixedRotation1(r={-0.10,0.04,0.01}), object_x = {-0.06, 0.075, 0});
   final parameter Modelica.SIunits.Length mFinger = 0.204;
   final parameter Modelica.SIunits.Length iFinger = 0.175;
   final parameter Modelica.SIunits.Length rFinger = 0.188;
